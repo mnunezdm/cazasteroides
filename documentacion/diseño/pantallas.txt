@@ -1,0 +1,17 @@
+Pantallas!
+
+1)  Login -> DONE
+2)  Registro -> DONE
+3)  Splash Screen
+4)  Home -> DONE
+    4a) Perfil -> A MEDIAS
+    4b) Observaciones
+        4bI)   Mis Observaciones
+        4bII)  Observaciones globales
+    4c) Ranking de los mejores observadores
+    4d) Notificaciones
+5)  Realizar Observacion
+6)  Enviar Nueva Observacion
+7)  Editar perfil
+8)  Estadisticas globales y personales
+9)  Acerca de
