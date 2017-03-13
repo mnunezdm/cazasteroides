@@ -1,0 +1,17 @@
+#s-a17356c1-5c46-4525-8beb-cac87198f9d4 #s-Titulo {
+  -ms-filter: ;
+  filter: ;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+#jim-container .ui-page {
+  overflow-x: hidden;
+}
+.non_jim_mobile #simulation {
+  overflow-x: hidden;
+}
+#s-a17356c1-5c46-4525-8beb-cac87198f9d4 > #loadMark {
+  width: 1px;
+  visibility: hidden;
+  display: none;
+}

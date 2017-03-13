@@ -1,0 +1,15 @@
+#t-67b92904-8878-4926-a40e-8d7723101a04 > #backgroundBox {
+  background-color: #FAFAFA;
+  background-image: none;
+  position: absolute;
+}
+#t-67b92904-8878-4926-a40e-8d7723101a04 > #alignmentBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#t-67b92904-8878-4926-a40e-8d7723101a04 > #loadMark {
+  width: 1px;
+  visibility: hidden;
+  display: none;
+}
