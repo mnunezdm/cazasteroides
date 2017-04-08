@@ -6,14 +6,12 @@ El CrowdSourcing es una tecnica que se basa en la colaboracion abierta y distrib
 
 El CrowdSourcing puede resultar muy útil cuando se aplica a temas donde la certeza ofrecida por una maquina no permita obtener soluciones. Este es el caso del reconocimiento de asteroides en images captadas por telescopios.
 
-El CrowdSourcing, segun Geiger & Schader en.... se puede dividir en 4 categorias:
+El CrowdSourcing, segun Geiger & Schader en *CrowdSourcing Information Systems*, se puede dividir en 4 categorias:
 
-+ Crowdsolving: Buscan una respuesta heterogenea global entre una gran cantidad de respuestas de un gran colectivo. Se suelen utilizar para encontrar respuestas a problemas complicados.
-+ Crowdcreation: Usuarios trabajan en comun para ofrecer informacion. Como puede ser Wikipedia o Youtube
-+ Crowdrating: Sistema basado en votos, la solucion aparece por la homogeniedad de los votos. Fue utilizado por la NASA en su aplicacion Clickworkers, utilizada para detectar crateres en asteroides
-+ Crowdprocessing: modelo que se caracterizado por la realizacion de trabajos por distintas personas, que dos personas realicen el mismo trabajo y obtengan el mismo resultado añade veracidad a la prueba. La union de todos los resultados es la solucion final. Un ejemplo de esto lo podemos encontrar en Galaxy Zoo.
-
-En nuestro caso los tipos a los que mas se asemejaria nuestro CrowdSourcing seria el crowdrating.
++ **Crowdsolving**: Buscan una respuesta heterogenea global entre una gran cantidad de respuestas de un gran colectivo. Se suelen utilizar para encontrar respuestas a problemas complicados.
++ **Crowdcreation**: Usuarios trabajan en comun para ofrecer informacion. Como puede ser Wikipedia o Youtube
++ **Crowdrating**: Sistema basado en votos, la solucion aparece por la homogeniedad de los votos. Fue utilizado por la NASA en su aplicacion Clickworkers, utilizada para detectar crateres en asteroides
++ **Crowdprocessing**: modelo que se caracterizado por la realizacion de trabajos por distintas personas, que dos personas realicen el mismo trabajo y obtengan el mismo resultado añade veracidad a la prueba. La union de todos los resultados es la solucion final. Un ejemplo de esto lo podemos encontrar en Galaxy Zoo.
 
 El CrowdSourcing depende de la gente que esta dispuesta a realizar tareas gratis (o por una pequeña compensacion economica). Ya que practicamente todos metodos de CrowdSourcing se basan completamente en la informacion suministrada por los crowdsourcees, mantenerlos motivados es la tarea mas importante para conseguir un buen sistema. 
 
@@ -48,22 +46,22 @@ no se va a tener en cuenta en este trabajo.
 
  Estos componentes serian los siguientes.
 
-+ Plataformas: Son los distintos sistemas sobre los que se va a desarrollar la aplicación y sobre los que se va a tener acceso.
-+ Mecánicas: son los componentes que forman el juego. Pueden ser tanto jugables como no.
-+ Dinámicas: definen como los jugadores interactuan con las mecánicas del juego.
-+ Estéticas: muestran como se tiene que sentir un usuario al realizar determinadas acciones.
-+ Comportamientos: patrones que se espera que los usuarios tengan al utilizar el sistema.
-+ Jugadores: Tipos de usuarios que va a haber en el sistema y sobre los que hay que desarrollar los comportamientos. Segun Richard Bartle en su libro Designing Virtual Worlds, en un juego, se suelen determinar 4 patrones distintos de usuarios, estos son:
-    + El ambicioso: busca ganar por encima de todo. Dando importancia a los rankings se mantienen a este tipo de usuarios, sobre todo si en ellos aparecen sus amigos o compañeros.
-    + El triunfador: tipo de jugador cuya principal motivacion es la de descubrir la mayor cantidad de contenido, obtener todos los logros y reconocimientos. Muy ligado al anterior tipo e jugador. 
-    + El sociable: su interes es social por encima de estrategico. Intenta compartir todos sus logros con el fin de aumentar su red de contactos. Le mantiene el poder relacionarse con los distintos jugadores.
-    + El explorador: jugador cuya motivacion es la autosuperacion, superar los desafios mas complejos o ser el primero en encontrar la solucion.
++ **Plataformas**: Son los distintos sistemas sobre los que se va a desarrollar la aplicación y sobre los que se va a tener acceso.
++ **Mecánicas**: son los componentes que forman el juego. Pueden ser tanto jugables como no.
++ **Dinámicas**: definen como los jugadores interactuan con las mecánicas del juego.
++ **Estéticas**: muestran como se tiene que sentir un usuario al realizar determinadas acciones.
++ **Comportamientos**: patrones que se espera que los usuarios tengan al utilizar el sistema.
++ **Jugadores**: Tipos de usuarios que va a haber en el sistema y sobre los que hay que desarrollar los comportamientos. Segun Richard Bartle en su libro Designing Virtual Worlds, en un juego, se suelen determinar 4 patrones distintos de usuarios, estos son:
+    + **El ambicioso**: busca ganar por encima de todo. Dando importancia a los rankings se mantienen a este tipo de usuarios, sobre todo si en ellos aparecen sus amigos o compañeros.
+    + **El triunfador**: tipo de jugador cuya principal motivacion es la de descubrir la mayor cantidad de contenido, obtener todos los logros y reconocimientos. Muy ligado al anterior tipo e jugador. 
+    + **El sociable**: su interes es social por encima de estrategico. Intenta compartir todos sus logros con el fin de aumentar su red de contactos. Le mantiene el poder relacionarse con los distintos jugadores.
+    + **El explorador**: jugador cuya motivacion es la autosuperacion, superar los desafios mas complejos o ser el primero en encontrar la solucion.
 
 ## Referencias
 
-+ http://www.gamkt.com/
-+ http://www.gamificación.com
-+ https://jboadac.com/2013/03/05/diferencia-entre-las-mecanicas-y-dinamicas-de-los-juegos-en-fidelizacion/
-+ http://justificaturespuesta.com/gamificación-7-claves-para-entender-que-es-y-como-funciona/
-+ http://noticias.iberestudios.com/que-es-gamificación/
-+ https://es.wikipedia.org/wiki/Ludificaci%C3%B3n
++ <http://www.gamkt.com/>
++ <http://www.gamificación.com>
++ <https://jboadac.com/2013/03/05/diferencia-entre-las-mecanicas-y-dinamicas-de-los-juegos-en-fidelizacion/>
++ <http://justificaturespuesta.com/gamificación-7-claves-para-entender-que-es-y-como-funciona/>
++ <http://noticias.iberestudios.com/que-es-gamificación/>
++ <https://es.wikipedia.org/wiki/Ludificaci%C3%B3n>
