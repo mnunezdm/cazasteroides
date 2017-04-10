@@ -61,10 +61,16 @@ Tras concretar estas tareas. Se han repartido durante todas las semanas teniendo
 
 ## Propuesta de Trabajo Original
 
-|  |  |
-| --- | --- |
-| **Título del trabajo** | Cazasteroides |
-| **Resumen general del trabajo** | Cazasteroides es un proyecto de ciencia ciudadana que consiste en la búsqueda y localización por parte de los usuarios de asteroides cercanos a la tierra, denominados NEAs (del inglés Near Earth Asteroids) o NEOs (Near Earth Objects).El alumno deberá gamificar la aplicación ya existente para de este modo incrementar la participación de los usuarios. Para ello hará uso de distintas técnicas de gamificación como sistemas de recompensas y desafíos entre jugadores. Por ejemplo, ranking de usuarios más rápidos, etc. Asimismo se permitirá a los usuarios publicar sus logros en redes sociales como Twitter y Facebook e invitar a nuevos usuarios.
-| **Lista de objetivos concretos** | Familiarizarse / documentarse sobre las técnicas de gamificación; Gamificar la aplicación Cazasteroides; Mostrar los resultados en tiempo real |
-| **Desglose de la dedicación total del trabajo en horas** | Estado del arte de juegos aplicados a ciencia ciudadana (20 horas); Análisis de la aplicación Cazasteroides (20 horas); Diseño de la aplicación (70 horas); Implementación de la aplicación (120 horas); Despliegue y pruebas (44 horas); Documentación (50 horas) |
-| **Conocimientos  recomendados para hacer el trabajo** | Tecnologías Web: CSS3, HTML5 y JavaScript; Desarrollo de aplicaciones móviles responsive multiplataforma, concretamente en Apache Cordova |
+|                                        |                                                                                                |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Título del trabajo**                 | Cazasteroides                                                                                  |
+| **Resumen general del trabajo**        | Cazasteroides es un proyecto de ciencia ciudadana que consiste en la búsqueda y localización por parte de los usuarios de asteroides cercanos a la tierra, denominados NEAs (del inglés Near Earth Asteroids) o NEOs (Near Earth Objects). El alumno deberá gamificar la aplicación ya existente para de este modo incrementar la participación de los usuarios. Para ello hará uso de distintas técnicas de gamificación como sistemas de recompensas y desafíos entre jugadores. Por ejemplo, ranking de usuarios más rápidos, etc. Asimismo se permitirá a los usuarios publicar sus logros en redes sociales como Twitter y Facebook e invitar a nuevos usuarios.
+| **Lista de objetivos concretos**       | Familiarizarse / documentarse sobre las técnicas de gamificación                               |
+|                                        | Gamificar la aplicación Cazasteroides                                                          |
+|                                        | Mostrar los resultados en tiempo real                                                          |
+| **Desglose de la dedicación en horas** | Estado del arte de juegos aplicados a ciencia ciudadana (20 horas)                             |
+|                                        | Análisis de la aplicación Cazasteroides (20 horas)                                             |
+|                                        | Diseño de la aplicación (70 horas); Implementación de la aplicación (120 horas)                |
+|                                        | Despliegue y pruebas (44 horas); Documentación (50 horas)                                      |
+| **Conocimientos  recomendados**        | Tecnologías Web: CSS3, HTML5 y JavaScript                                                      |
+|                                        | Desarrollo de aplicaciones móviles responsive multiplataforma, concretamente en Apache Cordova |
