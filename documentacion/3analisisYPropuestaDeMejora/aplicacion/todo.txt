@@ -1,0 +1,25 @@
+Pantallas!
+TODO logo!!!!!!!
+
+1)  Login						-> HECHO
+    TODO: dialogo he olvidado mi contraseña
+2)  Registro					-> HECHO
+3)  Splash Screen				-> hECHO
+4)  Home						-> HECHO
+    4a) Perfil					-> HECHO
+    4b) Interacciones			-> HECHO
+        4bI)   Observaciones	-> HECHO
+        4bII)  Votaciones		-> HECHO
+    4c) Votaciones				-> HECHO
+    4d) Rankings				-> HECHO
+5)	Carga Observacion 			-> HECHO
+6)  Realizar Observacion		-> HECHO
+7)  Datos Observacion Propia	-> A MEDIAS
+    TODO: añadir tarjeta de ranking
+8)	Datos Observacion No Propia	->
+9)  Editar Perfil				-> 
+10) Estadisticas				-> HECHO
+11) Acerca de					-> 
+12) Ayuda						->
+13) Configuracion				->
+
