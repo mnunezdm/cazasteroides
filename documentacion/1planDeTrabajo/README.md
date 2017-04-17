@@ -26,9 +26,41 @@ El código del proyecto se encuentra alojado en BitBucket, una implementación d
 Toda la documentación va a estar alojada en una carpeta compartida en Google Drive que permitirá a los supervisores del proyecto llevar un control regular del trabajo, además de que permite realizar comentarios y ofrece un sencillo control de versiones.
 
 Como metodología se va a seguir un desarrollo ágil. Como ahora mismo no se sigue una metodología de este tipo se va a llevar a cabo una transición. Destacando las siguientes métodos a seguir:
-Reuniones semanales para ver cual ha sido el avance.
-Ramas: se trabajará en distintas ramas lo que permitirá trabajar en distintos elementos sin que unos alteren al resto.
-Sprints: Se marcarán objetivos a corto plazo de los requisitos más importantes intentando solo trabajar en una funcionalidad a la vez. Esto lo realizaremos mediante features (bifurcaciones de la rama principal). Cuando se termine una funcionalidad esta se unirá a la rama de desarrollo y se cerrará (si fuera necesario).
+
++ **Reuniones semanales** en las que analizar el avance realizado.
++ **Ramas**: se trabajará en distintas ramas lo que permitirá trabajar en distintos elementos sin que unos alteren al resto.
++ **Sprints**: Se marcarán objetivos a corto plazo de los requisitos más importantes intentando solo trabajar en una funcionalidad a la vez. Esto lo realizaremos mediante features (bifurcaciones de la rama principal). Cuando se termine una funcionalidad esta se unirá a la rama de desarrollo y se cerrará (si fuera necesario).
+
+## Lista de Objetivos
+
+La lista de objetivos propuestos para la realizacion de este trabajo es la siguiente.
+
++ Introducir sistema de karma para los usuarios
++ Mejorar el sistema de votaciones basandolo en funcion del karma
+    + Parámetros de búsqueda: filtros
+    + Algoritmos de IA (revisión por pares, …)
+        + Validación de respuestas
+        + Elección de la tarea a mostrar al usuario (en base al karma y a las características de la imagen)
++ Gamificación
+    + Insignias
+    + Proponer retos (lanzados por usuarios o administradores)
+    + Compartir URLs con las imágenes / puntuación / insignias en redes sociales
++ Dashboard: estadísticas (xx asteroides en las últimas horas…)
++ Añadir un menú: “Mis detecciones” 
++ Mejorar el perfil del usuario
++ Añadir un menú: “Acerca de”
++ Proceso de registro inestable
+    + Falla el password
+    + Da mensajes de error constantes (“Error connecting server…”)
++ Interfaz más atractiva
++ Mejorar el back-end del astrónomo:
+    + Nuevos estados (rechazado / pendiente / ).
+    + Añadir los nombres de usuarios 
+    + Hacer el informe al MPC
+    + Identificar automáticamente los asteroides ya conocidos
++ Posibilidad de trabajar offline con una imagen y no consumir datos
++ Hay que escribir la documentación del proyecto (arquitectura, …)
++ Instalar la aplicación en varios servidores del IAC
 
 ## Lista de Tareas
 
@@ -57,7 +89,7 @@ Tras concretar estas tareas. Se han repartido durante todas las semanas teniendo
 
 ## Diagrama de Gantt
 
-![Plan de Trabajo](planDeTrabajo.png?raw=true "Plan de Trabajo")
+![Plan de Trabajo](imgs/planDeTrabajo.png?raw=true "Plan de Trabajo")
 
 ## Propuesta de Trabajo Original
 
