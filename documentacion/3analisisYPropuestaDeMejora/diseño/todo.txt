@@ -1,0 +1,31 @@
+Pantallas!
+TODO: añadir dialogos
+TODO: implementar el boton atras
+TODO: implementar el boton home para rediseñar la aplicacion
+TODO: meter el acerca de en un menu
+TODO: añadir boton de ayuda en la barra superior
+TODO: añadir boton de feedback en la barra superior
+
+1)  Login						-> HECHO
+    TODO: dialogo he olvidado mi contraseña
+    TODO: dialogo comprobar login
+2)  Registro					-> HECHO
+    TODO: dialogo registrando
+3)  Splash Screen				-> A MEDIAS
+    TODO: añadir imagenes del fecyt y del gobieron de españa a la Splash Screen
+4)  Home						-> HECHO
+    4a) Perfil					-> HECHO
+    4b) Interacciones			-> HECHO
+        4bI)   Observaciones	-> HECHO
+        4bII)  Votaciones		-> HECHO
+    4c) Votaciones				-> HECHO
+    4d) Rankings				-> HECHO
+5)  Realizar Observacion		-> HECHO
+    TODO: añadir pantalla de carga
+6)  Enviar Nueva Observacion	-> A MEDIAS
+    TODO: añadir tarjeta de ranking
+    TODO: añadir puntuacion
+7)  Editar Perfil				-> 
+8)  Estadisticas				-> HECHO
+9)  Acerca de					-> 
+
