@@ -1,5 +1,13 @@
 # Estado del arte
 
+El Estado del Arte proviene del termino anglosajon State of Art (SoA). SoA se podria traducir de forma no literal al español como Tecnologia Punta. En este SoA se van a estudiar las distintas metodologias, asi como distintos ejemplos, sobre las que se van a sustentar las posteriores mejoras a implementar.
+
+En concreto se van a estudiar 4 metologias distintas, estas metodologias son, Crowdsourcing, Gamificacion, Games with a Purpose y Sistemas de Reputacion.
+
+Games with a Purpose, como mas adelante se va a ver en profundidad, es una union de las dos primeras metodologias. Con esto lo que conseguiremos sera conseguir una mejor experiencia de utilizacion, logrando asi aumentar el rendimiento del sistema.
+
+Mientras que los Sistemas de Reputacion van a ser utilizados para lograr el sistema de karma, que permitira, de forma resumida, dar mayor valor a las interacciones de los usuarios mas expertos.
+
 ## Crowdsourcing
 
 El Crowdsourcing es una técnica que se basa en la colaboración abierta y distribuida. Actualmente, muchas organizaciones usan el Crowdsourcing para externalizar distintas tareas.
@@ -127,6 +135,7 @@ En la Figura 10 podemos apreciar la pantalla de finalización de un mapeado con 
 
 ## Referencias
 
++ <https://es.wikipedia.org/wiki/Estado_del_arte>
 + <https://es.wikipedia.org/wiki/ReCAPTCHA>
 + <http://www.gamkt.com/>
 + <http://www.gamificación.com>
