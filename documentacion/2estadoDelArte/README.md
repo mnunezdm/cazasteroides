@@ -1,12 +1,12 @@
 # Estado del arte
 
-Estado del Arte proviene del termino anglosajon *State of Art* (a partir de ahora SoA). SoA se podría traducir de forma no literal al español como Tecnologia Punta. En este SoA se van a estudiar las distintas metodologías, así como distintos ejemplos, sobre las que se van a sustentar las posteriores mejoras a implementar.
+Estado del Arte proviene del termino anglosajón *State of Art* (a partir de ahora SoA). SoA se podría traducir de forma no literal al español como Tecnología Punta. En este SoA se van a estudiar las distintas metodologías, así como distintos ejemplos, sobre las que se van a sustentar las posteriores mejoras a implementar.
 
-En concreto se van a estudiar 4 metologías distintas, estas son, Crowdsourcing, Gamificación, Games with a Purpose y Sistemas de Reputación.
+En concreto se van a estudiar 4 metodologías distintas, estas son, *Crowdsourcing*, Gamificación, *Games with a Purpose* y Sistemas de Reputación.
 
-Games with a Purpose, como mas adelante se va a ver en profundidad, se podria resumir como la unión de las dos primeras metodologias. Con esto lo que conseguiremos será ofrecer una mejor experiencia de uso, logrando así aumentar el rendimiento del sistema.
+*Games with a Purpose*, como más adelante se va a ver en profundidad, se podría resumir como la unión de las dos primeras metodologías. Con esto lo que conseguiremos será ofrecer una mejor experiencia de uso, logrando así aumentar el rendimiento del sistema.
 
-Mientras tanto, con un Sistema de Reputacion, se va a conseguir implantar un sistema de karma, que permitirá, de forma resumida, dar mayor valor a las interacciones de los usuarios más expertos.
+Mientras tanto, con un Sistema de Reputación, se va a conseguir implantar un sistema de karma, que permitirá, de forma resumida, dar mayor valor a las interacciones de los usuarios más expertos.
 
 ## Crowdsourcing
 
@@ -95,7 +95,7 @@ Figura 3: Apitopia: Posición y puntuación total
 ![Figura 4: Apitopia: Ranking](imgs/Apetopia/2.png)
 Figura 4: Apitopia: Ranking
 
-La tarea escondida dentro de este juego es la de educar al ordenador sobre como las personas percibimos la diferencia entre los colores. Esto esta implementado en forma de portales. Cada cierta distancia aparece un muro de piedra y dos portales con distintos colores, el usuario tiene que pasar a través del que crea que más se parece al cielo. Esto se puede apreciar en la Figura 5.
+La tarea escondida dentro de este juego es la de educar al ordenador sobre como las personas percibimos la diferencia entre los colores. Esto está implementado en forma de portales. Cada cierta distancia aparece un muro de piedra y dos portales con distintos colores, el usuario tiene que pasar a través del que crea que más se parece al cielo. Esto se puede apreciar en la Figura 5.
 
 ![Figura 5: Apitopia: Puertas](imgs/Apetopia/4.png)
 Figura 5: Apitopia: Puertas
@@ -116,7 +116,7 @@ EteRNA es un juego gamificado cuyo fin es el de ayudar a los ordenadores a mejor
 No se necesita ningún tipo de conocimientos previos para utilizar este sistema ya que tiene un tutorial en los primeros niveles, tras esto, se podrán empezar a realizar experimentos reales, como podemos apreciar en la Figura 8.
 
 ![Figura 8: EteRNA: Pantalla Principal](imgs/EteRNA/1.png)
-Figura 8: EterRNA: Pantalla Principal
+Figura 8: EteRNA: Pantalla Principal
 
 Cuando completamos un nivel aparece un ranking según la puntuación obtenida, además de una pequeña tenemos un sistema de puntuación con rankings en cada nivel, cuando completamos un nivel tenemos un recordatorio sobre cómo se unen los distintos componentes del RNA, como se puede ver en la Figura 9.
 
@@ -144,33 +144,33 @@ Figura 10: Eyewire: Pantalla nivel completado
 
 ## Reputation Systems
 
-Los *Reputation Systems* o Sistemas de Reputacion son programas que permiten valorar a los usuarios segun las acciones que han realizado con el fin de otorgarles credibilidad a ellos mismos y por lo tanto a las acciones que realizan.
+Los *Reputation Systems* o Sistemas de Reputación son programas que permiten valorar a los usuarios según las acciones que han realizado con el fin de otorgarles credibilidad a ellos mismos y por lo tanto a las acciones que realizan.
 
-Los Sistemas de Reputacion actualmente son usados de la misma manera que los sistemas de gamificacion, además de para otras razones que veremos más adelante, y es muy comun verlos juntos. De la misma manera que en los sistemas gamificados se premia la cantidad de las aportaciones, en los sistemas de reputacion prima la calidad de estas. Esto quiere decir que en un sistema de reputacion realizar una aportacion erronea penalizaría al usuario mientras que en un sistema gamificado simplemente no aportaria nada.
+Los Sistemas de Reputación actualmente son usados de la misma manera que los sistemas de gamificación, además de para otras razones que veremos más adelante, y es muy común verlos juntos. De la misma manera que en los sistemas gamificados se premia la cantidad de las aportaciones, en los sistemas de reputación prima la calidad de estas. Esto quiere decir que en un sistema de reputación realizar una aportación errónea penalizaría al usuario mientras que en un sistema gamificado simplemente no aportaría nada.
 
-El objetivo de estos sistemas es asegurar un sistemas confiable esto se consigue asegurando que los componentes lo sean, por lo tanto, con un sistema donde se premie estas acciones; y además tengan mas valor las acciones realizadas por personas confiables se permitirá llegar a este sistema buscado.
+El objetivo de estos sistemas es asegurar un sistema confiable esto se consigue asegurando que los componentes lo sean, por lo tanto, con un sistema donde se premie estas acciones; y además tengan más valor las acciones realizadas por personas confiables se permitirá llegar a este sistema buscado.
 
 ### Componentes de los Sistemas de Reputación
 
-La reputacion en estos sistemas se puede obtener de distintas formas, como por ejemplo, segun indica la pagina feverbee, se pueden dividir en 7 distintas maneras. Todos estos componentes se pueden implementar en el mismo sistema, siempre y cuando esten correctamente utilizados. Los componentes son los siguientes:
+La reputación en estos sistemas se puede obtener de distintas formas, como, por ejemplo, según indica la página feverbee, se pueden dividir en 7 distintas maneras. Todos estos componentes se pueden implementar en el mismo sistema, siempre y cuando estén correctamente utilizados. Los componentes son los siguientes:
 
-+ **Por Niveles de Acceso**: dar distintos niveles (de cosas que pueden hacer) a distintos usuarios del sistema con el fin de eliminar tareas automaticas del sistema. Esta herramienta suele ser utilizada en comunidades, a modo de dar privilegios de moderador a usuarios permitiendoles eliminar contenido, bloquear usuarios etcetera.
++ **Por Niveles de Acceso**: dar distintos niveles (de cosas que pueden hacer) a distintos usuarios del sistema con el fin de eliminar tareas automáticas del sistema. Esta herramienta suele ser utilizada en comunidades, a modo de dar privilegios de moderador a usuarios permitiéndoles eliminar contenido, bloquear usuarios etcétera.
 + **Por Antigüedad**: premiar a los usuarios más antiguos del sistema, esto ayuda a mantener a los usuarios más antiguos.
-+ **Por Cantidad de Contribuciones**: premiar a cada una contribuciones, esto ayuda a que los usuarios sean mas activos, aunque esta herramienta, con el fin de evitar que se haga mal uso de ella, debe ser implementada junto a otras.
-+ **Por Calidad de Contribuciones**: herramienta principal de los sistemas de reputacion donde se premia a los usuarios por buenas contribuciones y se penaliza por malas.
-+ **Por Frecuencia**: realizar contribuciones de forma regular aumenta la reputacion.
-+ **Por Distinciones Especiales**: otorgar insignias positivas o negativas por acciones realizadas, estas acciones no deberian ser las relacionadas con las actividades principales del sistema, pues de eso ya se encarga la herramienta de Calidad de las Contribuciones vista anteriormente. En esta, una mala accion supondria una insignia que reste reputacion, como por ejemplo una disputa fuera de tono con otro usuario o violar las reglas del sistema; mientras que una buena otorgaria un distintivo que aporte reputacion, como podría ser una donación.
++ **Por Cantidad de Contribuciones**: premiar a cada contribución, esto ayuda a que los usuarios sean más activos, aunque esta herramienta, con el fin de evitar que se haga mal uso de ella, debe ser implementada junto a otras.
++ **Por Calidad de Contribuciones**: herramienta principal de los sistemas de reputación donde se premia a los usuarios por buenas contribuciones y se penaliza por malas.
++ **Por Frecuencia**: realizar contribuciones de forma regular aumenta la reputación.
++ **Por Distinciones Especiales**: otorgar insignias positivas o negativas por acciones realizadas, estas acciones no deberían ser las relacionadas con las actividades principales del sistema, pues de eso ya se encarga la herramienta de Calidad de las Contribuciones vista anteriormente. En esta, una mala acción supondría una insignia que reste reputación, como por ejemplo una disputa fuera de tono con otro usuario o violar las reglas del sistema; mientras que una buena otorgaría un distintivo que aporte reputación, como podría ser una donación.
 + **Por Ranking**: los resultados en los rankings añaden respeto.
 
 ### Ejemplos de Sistemas de Reputación
 
-+ **Portales de ventas**: es uno de los campos donde en mas porcentaje se usan sistemas de reputación. Resulta dificil encontrar un portal de eCommerce donde no se valore los articulos, vendedores o compradores. El fin de aplicar estas tecnicas varia segun donde se realice, por ejemplo:
-    + **En vendedores**: en portales como Aliexpress o eBay resulta imprescindible tener una alta reputacion, pues va muy ligada a las ventas que se obtienen, algo que refleja claramente esta postura es el comportamiento de los vendedores ante cualquier problema, donde proceden al reenvio o devolver el dinero con tal de no obtener una mala valoracion, y en el caso de no obtener las 5 estrellas, te escriben por privado preguntandote si has tenido algun problema.
-    + **En productos**: destacar las valoraciones de productos que tiene Amazon. Esta empresa, a los articulos con mayor valoracion se encarga ella misma de realizar la distribución y el servicio post venta, aumentando asi la visibilidad de ellos. Actualmente no creo que haya nadie que compre articulos de otras alternativas cuando Amazon Premium este disponible.
-    + **En compradores**: cobra la mayor importancia en portales de venta de segundamano donde los vendores quieran evitar en gran medida un fraude. Esto puede verse en sistemas como WallaPop.
-+ **Comunidades online**: otro de los capos donde resulta muy común añadir estos sistemas es en foros o comunidades. Como por ejemplo XDA, el mayor portal de desarrolladores moviles, donde por ejemplo, solo los usuarios expertos pueden comentar en distintos temas.
-+ **Motores de Busqueda**: todos los grandes motores de busqueda tienen complejos sistemas de *rankeo* donde premian, es decir, ordean en funcion de los valores obtenido de esta puntuación los resultados obtenidos.
-+ **Seguridad Online**: portales como TrustedSource, solucion ofrecida por Intel y McAffe, catalogan sitios segun su tipo y segun las vulnerabilidades que pueden tener.
++ **Portales de ventas**: es uno de los campos donde en más porcentaje se usan sistemas de reputación. Resulta difícil encontrar un portal de *eCommerce* donde no se valore los artículos, vendedores o compradores. El fin de aplicar estas técnicas varía según donde se realice, por ejemplo:
+    + **En vendedores**: en portales como Aliexpress o eBay resulta imprescindible tener una alta reputación, pues va muy ligada a las ventas que se obtienen, algo que refleja claramente esta postura es el comportamiento de los vendedores ante cualquier problema, donde proceden al reenvío o devolver el dinero con tal de no obtener una mala valoración, y en el caso de no obtener las 5 estrellas, te escriben por privado preguntándote si has tenido algún problema.
+    + **En productos**: destacar las valoraciones de productos que tiene Amazon. Esta empresa, a los artículos con mayor valoración se encarga ella misma de realizar la distribución y el servicio post venta, aumentando asi la visibilidad de ellos. Actualmente no creo que haya nadie que compre artículos de otras alternativas cuando Amazon Premium esté disponible.
+    + **En compradores**: cobra la mayor importancia en portales de venta de segunda mano donde los vendedores quieran evitar en gran medida un fraude. Esto puede verse en sistemas como WallaPop.
++ **Comunidades online**: otro de los capos donde resulta muy común añadir estos sistemas es en foros o comunidades. Como por ejemplo XDA, el mayor portal de desarrolladores móviles, donde, por ejemplo, solo los usuarios expertos pueden comentar en distintos temas.
++ **Motores de Búsqueda**: todos los grandes motores de búsqueda tienen complejos sistemas de *rankeo* donde premian, es decir, ordenan en función de los valores obtenido de esta puntuación los resultados obtenidos.
++ **Seguridad Online**: portales como TrustedSource, solución ofrecida por Intel y McAfee, catalogan sitios según su tipo y según las vulnerabilidades que pueden tener.
 
 ## Referencias
 
