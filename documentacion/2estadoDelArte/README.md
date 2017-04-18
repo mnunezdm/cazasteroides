@@ -1,12 +1,12 @@
 # Estado del arte
 
-El Estado del Arte proviene del termino anglosajon State of Art (SoA). SoA se podria traducir de forma no literal al español como Tecnologia Punta. En este SoA se van a estudiar las distintas metodologias, asi como distintos ejemplos, sobre las que se van a sustentar las posteriores mejoras a implementar.
+Estado del Arte proviene del termino anglosajon *State of Art* (a partir de ahora SoA). SoA se podría traducir de forma no literal al español como Tecnologia Punta. En este SoA se van a estudiar las distintas metodologías, así como distintos ejemplos, sobre las que se van a sustentar las posteriores mejoras a implementar.
 
-En concreto se van a estudiar 4 metologias distintas, estas metodologias son, Crowdsourcing, Gamificacion, Games with a Purpose y Sistemas de Reputacion.
+En concreto se van a estudiar 4 metologías distintas, estas son, Crowdsourcing, Gamificación, Games with a Purpose y Sistemas de Reputación.
 
-Games with a Purpose, como mas adelante se va a ver en profundidad, es una union de las dos primeras metodologias. Con esto lo que conseguiremos sera conseguir una mejor experiencia de utilizacion, logrando asi aumentar el rendimiento del sistema.
+Games with a Purpose, como mas adelante se va a ver en profundidad, se podria resumir como la unión de las dos primeras metodologias. Con esto lo que conseguiremos será ofrecer una mejor experiencia de uso, logrando así aumentar el rendimiento del sistema.
 
-Mientras que los Sistemas de Reputacion van a ser utilizados para lograr el sistema de karma, que permitira, de forma resumida, dar mayor valor a las interacciones de los usuarios mas expertos.
+Mientras tanto, con un Sistema de Reputacion, se va a conseguir implantar un sistema de karma, que permitirá, de forma resumida, dar mayor valor a las interacciones de los usuarios más expertos.
 
 ## Crowdsourcing
 
@@ -28,9 +28,9 @@ El Crowdsourcing, según Geiger & Schader en *Crowdsourcing Information Systems*
 + **Crowdrating**: Sistema basado en votos, la solución aparece por la homogeneidad de los votos. Fue utilizado por la NASA en su aplicación *Clickworkers*, utilizada para detectar cráteres en asteroides
 + **Crowdprocessing**: modelo que se caracterizado por la realización de trabajos por distintas personas, que dos personas realicen el mismo trabajo y obtengan el mismo resultado añade veracidad a la prueba. La unión de todos los resultados es la solución final. Un ejemplo de esto lo podemos encontrar en Galaxy Zoo.
 
-El Crowdsourcing depende de que la gente que esté dispuesta a realizar tareas gratis (o por una pequeña compensación económica). Ya que prácticamente todos los métodos de Crowdsourcing se basan completamente en la información suministrada por los *CrowdSourcees*, mantenerlos motivados es la tarea más importante para conseguir un buen sistema. 
+El Crowdsourcing depende de que la gente que esté dispuesta a realizar tareas gratis (o por una pequeña compensación económica). Ya que prácticamente todos los métodos de Crowdsourcing se basan completamente en la información suministrada por los *CrowdSourcees*, mantenerlos motivados es la tarea más importante para conseguir un buen sistema.
 
-El hecho de la auto superación, aprender cosas nuevas o simplemente el hecho de entretenerse suelen predominar a las originadas por el dinero o motivos sociales externos. El objetivo principal es diseñar un sistema que genere sensaciones positivas sobre el Crowdsourcing consiguiendo que quede perfectamente cohesionado. 
+El hecho de la auto superación, aprender cosas nuevas o simplemente el hecho de entretenerse suelen predominar a las originadas por el dinero o motivos sociales externos. El objetivo principal es diseñar un sistema que genere sensaciones positivas sobre el Crowdsourcing consiguiendo que quede perfectamente cohesionado.
 
 En la actualidad uno de los campos más estudiados para conseguir estos efectos ha sido el de la gamificación, es por ello que una de las mayores áreas donde se aplica esta sea el Crowdsourcing. Se ha detectado según una gran cantidad de estudios realizados sobre sistemas de Crowdsourcing, una relación directa entre la presencia de sistemas de gamificación y la implicación de los usuarios.
 
@@ -58,7 +58,7 @@ Una combinación de las dos técnicas vistas hasta este momento, *Crowdsourcing*
 
 Para la definición de los componentes de la gamificación se ha decidido seguir un modelo derivado del desarrollado por la empresa gamemarketing, el cual divide en 9 componentes el sistema. En el modelo de cazasteroides vamos a dividirlo en 6 componentes, pues son los que este trabajo requiere.
 
-Los cambios frente a este modelo, consistirían en la unión de las mecánicas y los componentes; la unión de comportamientos y dinámicas; y por último se han eliminado costes y beneficios pues 
+Los cambios frente a este modelo, consistirían en la unión de las mecánicas y los componentes; la unión de comportamientos y dinámicas; y por último se han eliminado costes y beneficios pues
 no se va a tener en cuenta en este trabajo.
 
 Estos componentes serían los siguientes.
@@ -70,15 +70,15 @@ Estos componentes serían los siguientes.
 + **Comportamientos**: patrones que se espera que los usuarios tengan al utilizar el sistema.
 + **Jugadores**: Tipos de usuarios que va a haber en el sistema y sobre los que hay que desarrollar los comportamientos. Según Richard Bartle en su libro *Designing Virtual Worlds*, en un juego, se suelen determinar 4 patrones distintos de usuarios, estos son:
     + **El ambicioso**: busca ganar por encima de todo. Dando importancia a los rankings se mantienen a este tipo de usuarios, sobre todo si en ellos aparecen sus amigos o compañeros.
-    + **El triunfador**: tipo de jugador cuya principal motivación es la de descubrir la mayor cantidad de contenido, obtener todos los logros y reconocimientos. Muy ligado al anterior tipo e jugador. 
-    + **El sociable**: su interés es social por encima de estratégico. Intenta compartir todos sus logros con el fin de aumentar su red de contactos. Le mantiene el poder relacionarse con los distintos jugadores.
+    + **El triunfador**: tipo de jugador cuya principal motivación es la de descubrir la mayor cantidad de contenido, obtener todos los logros y reconocimientos. Muy ligado al anterior tipo e jugador.
+        + **El sociable**: su interés es social por encima de estratégico. Intenta compartir todos sus logros con el fin de aumentar su red de contactos. Le mantiene el poder relacionarse con los distintos jugadores.
     + **El explorador**: jugador cuya motivación es la auto superación, superar los desafíos más complejos o ser el primero en encontrar la solución.
 
 ## Games With a Purpose
 
 *Games with a Purpose* (a partir de ahora GWAP) o *Human-Based Computation Games* es una técnica de Crowdsourcing gamificada. Fue propuesta en 2004 por Luis von Ahn con el juego llamado ESP. Este empresario guatemalteco es uno de los pioneros del Crowdsourcing, además del creador de *reCAPTCHA*, anteriormente mencionada, y *Duolingo*, una de las mayores plataformas para el estudio de idiomas.
 
-El fin de esta técnica es que las personas realicen el trabajo que los ordenadores no pueden realizar por si solos. Estas tareas son triviales para los humanos, pero complicadas para los ordenadores, por ejemplo, se pueden tratar de reconocimiento de formas o para la realización de estudios donde la interacción humana es requisito. Al utilizar esta técnica, las personas realizamos tareas simples las cuales, al unirlas forman algo mucho más grande. Pero el problema que tiene esta mentalidad es que los humanos necesitamos algún tipo de incentivo para realizar las tareas, aquí es donde entran en escena los juegos. La motivación principal de los GWAP es la de entretener por encima del interés de realizar tareas. Esto ayuda a que estos juegos puedan ser acogidos por una gran cantidad de personas.  
+El fin de esta técnica es que las personas realicen el trabajo que los ordenadores no pueden realizar por si solos. Estas tareas son triviales para los humanos, pero complicadas para los ordenadores, por ejemplo, se pueden tratar de reconocimiento de formas o para la realización de estudios donde la interacción humana es requisito. Al utilizar esta técnica, las personas realizamos tareas simples las cuales, al unirlas forman algo mucho más grande. Pero el problema que tiene esta mentalidad es que los humanos necesitamos algún tipo de incentivo para realizar las tareas, aquí es donde entran en escena los juegos. La motivación principal de los GWAP es la de entretener por encima del interés de realizar tareas. Esto ayuda a que estos juegos puedan ser acogidos por una gran cantidad de personas. 
 
 Los campos sobre los que se pueden aplicar estas técnicas son innumerables ya que es una técnica flexible que permite adaptarse a cualesquiera que sean las necesidades. En el siguiente punto veremos ejemplos de juegos donde se han utilizados estas técnicas.
 
@@ -88,20 +88,26 @@ Los campos sobre los que se pueden aplicar estas técnicas son innumerables ya q
 
 Apetopia es un juego desarrollado por la empresa Visual Computing. Este juego se trata del típico *endless runner* en el cual tendrás que ir avanzando recogiendo monedas, las cuales aumentan los puntos al igual que la distancia recorrida. Mientras tanto se deben ir esquivando los objetos que aparecen los cuales disminuyen la vida, mostrado en la Figura 2. Al finalizar el juego puedes introducir un nombre para que aparezca en el ranking global además de tu posición en este, Figura 3. Además, se puede ver el estado del ranking global, Figura 4.
 
-![Figura 2: Apitopia: Pantalla del juego](imgs/Apetopia/1.png) Figura 2: Apitopia: Pantalla del juego
-![Figura 3: Apitopia: Posición y puntuación total](imgs/Apetopia/2.png) Figura 3: Apitopia: Posición y puntuación total
-![Figura 4: Apitopia: Ranking](imgs/Apetopia/2.png) Figura 4: Apitopia: Ranking
+![Figura 2: Apitopia: Pantalla del juego](imgs/Apetopia/1.png)
+Figura 2: Apitopia: Pantalla del juego
+![Figura 3: Apitopia: Posición y puntuación total](imgs/Apetopia/2.png)
+Figura 3: Apitopia: Posición y puntuación total
+![Figura 4: Apitopia: Ranking](imgs/Apetopia/2.png)
+Figura 4: Apitopia: Ranking
 
 La tarea escondida dentro de este juego es la de educar al ordenador sobre como las personas percibimos la diferencia entre los colores. Esto esta implementado en forma de portales. Cada cierta distancia aparece un muro de piedra y dos portales con distintos colores, el usuario tiene que pasar a través del que crea que más se parece al cielo. Esto se puede apreciar en la Figura 5.
 
-![Figura 5: Apitopia: Puertas](imgs/Apetopia/4.png) Figura 5: Apitopia: Puertas
+![Figura 5: Apitopia: Puertas](imgs/Apetopia/4.png)
+Figura 5: Apitopia: Puertas
 
 #### ARTigo (Nuevo ESP)
 
 Siguiendo la estela del ESP, el primero GWAP, ARTigo es un juego de etiquetado de imágenes, se presenta una imagen en pantalla durante 60 segundos, al finalizar este tiempo se presenta una nueva. Durante este minuto, hay que añadir etiquetas, si el sistema la detecta como probable te otorga puntos, esto se puede ver en la Figura 6. Cuando finaliza la secuencia de imágenes aparecen los resultados finales y te dan una puntuación final y una posición en el ranking, Figura 7.
 
-![Figura 6: ARTigo: Pantalla del Juego](imgs/ARTigo/1.png) Figura 6: ARTigo: Pantalla del Juego
-![Figura 7: ARTigo: Pantalla de Rankings](imgs/ARTigo/2.png) Figura 7: ARTigo: Pantalla de Rankings
+![Figura 6: ARTigo: Pantalla del Juego](imgs/ARTigo/1.png)
+Figura 6: ARTigo: Pantalla del Juego
+![Figura 7: ARTigo: Pantalla de Rankings](imgs/ARTigo/2.png)
+Figura 7: ARTigo: Pantalla de Rankings
 
 #### EteRNA
 
@@ -109,11 +115,13 @@ EteRNA es un juego gamificado cuyo fin es el de ayudar a los ordenadores a mejor
 
 No se necesita ningún tipo de conocimientos previos para utilizar este sistema ya que tiene un tutorial en los primeros niveles, tras esto, se podrán empezar a realizar experimentos reales, como podemos apreciar en la Figura 8.
 
-![Figura 8: EteRNA: Pantalla Principal](imgs/EteRNA/1.png) Figura 8: EterRNA: Pantalla Principal
+![Figura 8: EteRNA: Pantalla Principal](imgs/EteRNA/1.png)
+Figura 8: EterRNA: Pantalla Principal
 
 Cuando completamos un nivel aparece un ranking según la puntuación obtenida, además de una pequeña tenemos un sistema de puntuación con rankings en cada nivel, cuando completamos un nivel tenemos un recordatorio sobre cómo se unen los distintos componentes del RNA, como se puede ver en la Figura 9.
 
-![Figura 9: EteRNA: Pantalla nivel completado](imgs/EteRNA/2.png) Figura 9: EterRNA: Pantalla nivel completado
+![Figura 9: EteRNA: Pantalla nivel completado](imgs/EteRNA/2.png)
+Figura 9: EterRNA: Pantalla nivel completado
 
 #### Eyewire
 
@@ -131,7 +139,38 @@ Esta aplicación posee el sistema de gamificación más completo de los que se h
 
 En la Figura 10 podemos apreciar la pantalla de finalización de un mapeado con las distintas dinámicas.
 
-![Figura 10: Eyewire: Pantalla nivel completado](imgs/Eyewire/1.png) Figura 10: Eyewire: Pantalla nivel completado
+![Figura 10: Eyewire: Pantalla nivel completado](imgs/Eyewire/1.png)
+Figura 10: Eyewire: Pantalla nivel completado
+
+## Reputation Systems
+
+Los *Reputation Systems* o Sistemas de Reputacion son programas que permiten valorar a los usuarios segun las acciones que han realizado con el fin de otorgarles credibilidad a ellos mismos y por lo tanto a las acciones que realizan.
+
+Los Sistemas de Reputacion actualmente son usados de la misma manera que los sistemas de gamificacion, además de para otras razones que veremos más adelante, y es muy comun verlos juntos. De la misma manera que en los sistemas gamificados se premia la cantidad de las aportaciones, en los sistemas de reputacion prima la calidad de estas. Esto quiere decir que en un sistema de reputacion realizar una aportacion erronea penalizaría al usuario mientras que en un sistema gamificado simplemente no aportaria nada.
+
+El objetivo de estos sistemas es asegurar un sistemas confiable esto se consigue asegurando que los componentes lo sean, por lo tanto, con un sistema donde se premie estas acciones; y además tengan mas valor las acciones realizadas por personas confiables se permitirá llegar a este sistema buscado.
+
+### Componentes de los Sistemas de Reputación
+
+La reputacion en estos sistemas se puede obtener de distintas formas, como por ejemplo, segun indica la pagina feverbee, se pueden dividir en 7 distintas maneras. Todos estos componentes se pueden implementar en el mismo sistema, siempre y cuando esten correctamente utilizados. Los componentes son los siguientes:
+
++ **Por Niveles de Acceso**: dar distintos niveles (de cosas que pueden hacer) a distintos usuarios del sistema con el fin de eliminar tareas automaticas del sistema. Esta herramienta suele ser utilizada en comunidades, a modo de dar privilegios de moderador a usuarios permitiendoles eliminar contenido, bloquear usuarios etcetera.
++ **Por Antigüedad**: premiar a los usuarios más antiguos del sistema, esto ayuda a mantener a los usuarios más antiguos.
++ **Por Cantidad de Contribuciones**: premiar a cada una contribuciones, esto ayuda a que los usuarios sean mas activos, aunque esta herramienta, con el fin de evitar que se haga mal uso de ella, debe ser implementada junto a otras.
++ **Por Calidad de Contribuciones**: herramienta principal de los sistemas de reputacion donde se premia a los usuarios por buenas contribuciones y se penaliza por malas.
++ **Por Frecuencia**: realizar contribuciones de forma regular aumenta la reputacion.
++ **Por Distinciones Especiales**: otorgar insignias positivas o negativas por acciones realizadas, estas acciones no deberian ser las relacionadas con las actividades principales del sistema, pues de eso ya se encarga la herramienta de Calidad de las Contribuciones vista anteriormente. En esta, una mala accion supondria una insignia que reste reputacion, como por ejemplo una disputa fuera de tono con otro usuario o violar las reglas del sistema; mientras que una buena otorgaria un distintivo que aporte reputacion, como podría ser una donación.
++ **Por Ranking**: los resultados en los rankings añaden respeto.
+
+### Ejemplos de Sistemas de Reputación
+
++ **Portales de ventas**: es uno de los campos donde en mas porcentaje se usan sistemas de reputación. Resulta dificil encontrar un portal de eCommerce donde no se valore los articulos, vendedores o compradores. El fin de aplicar estas tecnicas varia segun donde se realice, por ejemplo:
+    + **En vendedores**: en portales como Aliexpress o eBay resulta imprescindible tener una alta reputacion, pues va muy ligada a las ventas que se obtienen, algo que refleja claramente esta postura es el comportamiento de los vendedores ante cualquier problema, donde proceden al reenvio o devolver el dinero con tal de no obtener una mala valoracion, y en el caso de no obtener las 5 estrellas, te escriben por privado preguntandote si has tenido algun problema.
+    + **En productos**: destacar las valoraciones de productos que tiene Amazon. Esta empresa, a los articulos con mayor valoracion se encarga ella misma de realizar la distribución y el servicio post venta, aumentando asi la visibilidad de ellos. Actualmente no creo que haya nadie que compre articulos de otras alternativas cuando Amazon Premium este disponible.
+    + **En compradores**: cobra la mayor importancia en portales de venta de segundamano donde los vendores quieran evitar en gran medida un fraude. Esto puede verse en sistemas como WallaPop.
++ **Comunidades online**: otro de los capos donde resulta muy común añadir estos sistemas es en foros o comunidades. Como por ejemplo XDA, el mayor portal de desarrolladores moviles, donde por ejemplo, solo los usuarios expertos pueden comentar en distintos temas.
++ **Motores de Busqueda**: todos los grandes motores de busqueda tienen complejos sistemas de *rankeo* donde premian, es decir, ordean en funcion de los valores obtenido de esta puntuación los resultados obtenidos.
++ **Seguridad Online**: portales como TrustedSource, solucion ofrecida por Intel y McAffe, catalogan sitios segun su tipo y segun las vulnerabilidades que pueden tener.
 
 ## Referencias
 
@@ -147,7 +186,8 @@ En la Figura 10 podemos apreciar la pantalla de finalización de un mapeado con 
 + <https://en.wikipedia.org/wiki/Human-based_computation_game>
 + <http://gameswithpurpose.org>
 + <https://www.cmu.edu/homepage/computing/2008/summer/games-with-a-purpose.shtml>
-* <http://apetopia.visual-computing.com>
-* <http://www.artigo.org/>
-* <http://www.eternagame.org/web/>
-* <http://eyewire.org>
++ <http://apetopia.visual-computing.com>
++ <http://www.artigo.org/>
++ <http://www.eternagame.org/web/>
++ <http://eyewire.org>
++ <https://www.feverbee.com/reputationsystems/>
