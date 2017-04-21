@@ -19,6 +19,7 @@ También es indispensable para la educación de las Inteligencias Artificiales b
 Un ejemplo a destacar de esto último se trata de *reCaptcha*. Los *captcha* son sistemas que utilizan las páginas web para evitar el tráfico de *bots* siguiendo el lema "Fácil para humanos, complicado para ordenadores". Un ejemplo de reCaptcha se puede apreciar en la Figura 1. Originalmente, la finalidad de estos sistemas era simplemente la anteriormente mencionado. En la actualidad, este sistema se utiliza además para el perfeccionamiento de sistemas ROC/*OCR* (Reconocimiento Óptico de Caracteres/*Optic Character Recognition*).
 
 ![Figura 1: Ejemplo de reCaptcha](imgs/recaptcha.png)
+
 Figura 1: Ejemplo de reCaptcha
 
 El Crowdsourcing, según Geiger & Schader en *Crowdsourcing Information Systems*, se puede dividir en 4 categorías:
@@ -89,15 +90,19 @@ Los campos sobre los que se pueden aplicar estas técnicas son innumerables ya q
 Apetopia es un juego desarrollado por la empresa Visual Computing. Este juego se trata del típico *endless runner* en el cual tendrás que ir avanzando recogiendo monedas, las cuales aumentan los puntos al igual que la distancia recorrida. Mientras tanto se deben ir esquivando los objetos que aparecen los cuales disminuyen la vida, mostrado en la Figura 2. Al finalizar el juego puedes introducir un nombre para que aparezca en el ranking global además de tu posición en este, Figura 3. Además, se puede ver el estado del ranking global, Figura 4.
 
 ![Figura 2: Apitopia: Pantalla del juego](imgs/Apetopia/1.png)
+
 Figura 2: Apitopia: Pantalla del juego
 ![Figura 3: Apitopia: Posición y puntuación total](imgs/Apetopia/2.png)
+
 Figura 3: Apitopia: Posición y puntuación total
 ![Figura 4: Apitopia: Ranking](imgs/Apetopia/2.png)
+
 Figura 4: Apitopia: Ranking
 
 La tarea escondida dentro de este juego es la de educar al ordenador sobre como las personas percibimos la diferencia entre los colores. Esto está implementado en forma de portales. Cada cierta distancia aparece un muro de piedra y dos portales con distintos colores, el usuario tiene que pasar a través del que crea que más se parece al cielo. Esto se puede apreciar en la Figura 5.
 
 ![Figura 5: Apitopia: Puertas](imgs/Apetopia/4.png)
+
 Figura 5: Apitopia: Puertas
 
 #### ARTigo (Nuevo ESP)
@@ -105,8 +110,10 @@ Figura 5: Apitopia: Puertas
 Siguiendo la estela del ESP, el primero GWAP, ARTigo es un juego de etiquetado de imágenes, se presenta una imagen en pantalla durante 60 segundos, al finalizar este tiempo se presenta una nueva. Durante este minuto, hay que añadir etiquetas, si el sistema la detecta como probable te otorga puntos, esto se puede ver en la Figura 6. Cuando finaliza la secuencia de imágenes aparecen los resultados finales y te dan una puntuación final y una posición en el ranking, Figura 7.
 
 ![Figura 6: ARTigo: Pantalla del Juego](imgs/ARTigo/1.png)
+
 Figura 6: ARTigo: Pantalla del Juego
 ![Figura 7: ARTigo: Pantalla de Rankings](imgs/ARTigo/2.png)
+
 Figura 7: ARTigo: Pantalla de Rankings
 
 #### EteRNA
@@ -116,11 +123,13 @@ EteRNA es un juego gamificado cuyo fin es el de ayudar a los ordenadores a mejor
 No se necesita ningún tipo de conocimientos previos para utilizar este sistema ya que tiene un tutorial en los primeros niveles, tras esto, se podrán empezar a realizar experimentos reales, como podemos apreciar en la Figura 8.
 
 ![Figura 8: EteRNA: Pantalla Principal](imgs/EteRNA/1.png)
+
 Figura 8: EteRNA: Pantalla Principal
 
 Cuando completamos un nivel aparece un ranking según la puntuación obtenida, además de una pequeña tenemos un sistema de puntuación con rankings en cada nivel, cuando completamos un nivel tenemos un recordatorio sobre cómo se unen los distintos componentes del RNA, como se puede ver en la Figura 9.
 
 ![Figura 9: EteRNA: Pantalla nivel completado](imgs/EteRNA/2.png)
+
 Figura 9: EterRNA: Pantalla nivel completado
 
 #### Eyewire
@@ -140,6 +149,7 @@ Esta aplicación posee el sistema de gamificación más completo de los que se h
 En la Figura 10 podemos apreciar la pantalla de finalización de un mapeado con las distintas dinámicas.
 
 ![Figura 10: Eyewire: Pantalla nivel completado](imgs/Eyewire/1.png)
+
 Figura 10: Eyewire: Pantalla nivel completado
 
 ## Reputation Systems
@@ -174,20 +184,48 @@ La reputación en estos sistemas se puede obtener de distintas formas, como, por
 
 ## Referencias
 
-+ <https://es.wikipedia.org/wiki/Estado_del_arte>
-+ <https://es.wikipedia.org/wiki/ReCAPTCHA>
-+ <http://www.gamkt.com/>
-+ <http://www.gamificación.com>
-+ <https://jboadac.com/2013/03/05/diferencia-entre-las-mecanicas-y-dinamicas-de-los-juegos-en-fidelizacion/>
-+ <http://justificaturespuesta.com/gamificación-7-claves-para-entender-que-es-y-como-funciona/>
-+ <http://noticias.iberestudios.com/que-es-gamificación/>
-+ <https://es.wikipedia.org/wiki/Ludificaci%C3%B3n>
-+ <http://www.theesa.com/wp-content/uploads/2016/04/Essential-Facts-2016.pdf>
-+ <https://en.wikipedia.org/wiki/Human-based_computation_game>
-+ <http://gameswithpurpose.org>
-+ <https://www.cmu.edu/homepage/computing/2008/summer/games-with-a-purpose.shtml>
-+ <http://apetopia.visual-computing.com>
-+ <http://www.artigo.org/>
-+ <http://www.eternagame.org/web/>
-+ <http://eyewire.org>
-+ <https://www.feverbee.com/reputationsystems/>
+(1) https://es.wikipedia.org/wiki/Estado_del_arte
+
+(2) https://es.wikipedia.org/wiki/Crowdsourcing
+
+(3) https://es.wikipedia.org/wiki/ReCAPTCHA
+
+(4) http://www.gamificación.com
+
+(5) http://www.prnewswire.com/news-releases/everyones-a-gamer---ieee-experts-predict-gaming-will-be-integrated-into-more-than-85-percent-of-daily-tasks-by-2020-247100431.html
+
+(6) http://www.gamkt.com/implementa/gamification-model-canvas/
+
+(7) https://jboadac.com/2013/03/05/diferencia-entre-las-mecanicas-y-dinamicas-de-los-juegos-en-fidelizacion/
+
+(8) http://justificaturespuesta.com/gamificación-7-claves-para-entender-que-es-y-como-funciona/
+
+(9) http://noticias.iberestudios.com/que-es-gamificación/
+
+(10) https://es.wikipedia.org/wiki/Ludificaci%C3%B3n
+
+(11) https://en.wikipedia.org/wiki/Human-based_computation_game
+
+(12) http://gameswithpurpose.org
+
+(13) https://www.cmu.edu/homepage/computing/2008/summer/games-with-a-purpose.shtml
+
+(14) http://apetopia.visual-computing.com
+
+(15) http://www.artigo.org/
+
+(16) http://www.eternagame.org/web/
+
+(17) http://eyewire.org
+
+(18) https://en.wikipedia.org/wiki/Reputation_system
+
+(19) https://www.feverbee.com/reputationsystems/
+
+## Bibliografia
+
+[1] https://pdfs.semanticscholar.org/e8c6/f13256b9423c67c59599b283cca868a5649e.pdf
+
+[2] http://ieeexplore.ieee.org/document/7427729/
+
+[3] http://www.theesa.com/wp-content/uploads/2016/04/Essential-Facts-2016.pdf

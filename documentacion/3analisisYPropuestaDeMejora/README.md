@@ -29,19 +29,19 @@ Para lograr esta mejor navegacion se ha decidido aumentar el numero de pantallas
 
 
 
-## Gamificacion
+## Sistema de Gamificación y Reputación
 
-Utilizando los componentes en la gamificación planteados anteriormente se van a desarrollar e implantar lo siguiente:
+Utilizando los conocimientos adquiridos al analizar las distintas tecnicas de gamificacion y reputacion vistas en el anterior capitulo (Estado del Arte) se ha decidido ampliar el actual sistema con el fin de lograr unos resultados más acordes. Los distintos apartados a desarrollar, asi como las mejoras planteadas se van a especificar a continuacion:
 
 ### Plataforma
 
-Las plataformas sobre las que se va a desarrollar nuestra aplicacion son:
-	
-+ **Navegador web / Smartphone**: donde esta la interfaz con la que el usuario interacciona
-+ **Redes Sociales**: Para aumentar el caracter social de la aplicacion.
+En estos momentos las plataformas donde esta integrado el sistema son solamente el propio servidor Node.js y el sistema operativo Android donde hay una aplicación funcional.
+
+Como propuesta de mejora para este apartado se propone que la aplicacion este disponible en los dos grandes sistemas operativos móviles. Ademas de lograr una mayor integracion con las Redes Sociales, convirtiendolas en fundamentales para el sistema.
 
 ### Mecanicas
 
+Actualmente las mecanicas de juego implementadas en el sistema son las 
 Las mecanicas de juego que se tiene pensado utilar son las siguientes.
 
 + **Puntuación**: actualmente ya se encuentra implantado aunque se le va a dar mayor complejidad.
@@ -71,8 +71,6 @@ En nuestro caso las distintas esteticas presentes son:
 + **Desafiante**: queremos que el usuario se esfuerce en superarse a si mismo y a los demas.
 + **Descubrimiento**: queremos que el usuario aprenda y explore un mundo que nunca haya visto.
 + **Expresivo**: queremos que el usuario se comunique con otros usuarios.
-
-### Jugadores
 
 ## Referencias
 
