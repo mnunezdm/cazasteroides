@@ -1,8 +1,15 @@
 # Analisis y Propuesta de Mejora
 
+Se va realizar un analisis del sistema actual y una propuesta de mejora. Se han propuesto una gran cantidad de cambios los cuales no se van a implementar todos en este Trabajo de Fin de Grado pero podrán servir como guia para trabajo posterior.
+
 ## Aplicacion
 
-Se ha realizado un rediseño de la aplicacion móvil siguiendo las guias de Material Design, una de las guias de diseño mas importantes que hay en la actualidad, desarrollada por Google. Este rediseño se debe a dos razones, la navegación aun siendo intuitiva no es la que mejor para este caso y por otro lado, la apariencia de la aplicacion no es de una aplicacion terminada.
+Se ha realizado un rediseño de la aplicacion siguiendo las guias de Material Design (1), guia desarrollada por Google. Estos patrones de diseño son, actualmente, una de las referencias más importantes para el desarrollo de UI (User Interface, Interfaz de Usuario).
+
+Este rediseño se debe a dos razones fundamentales:
+
++ Actualmente, la interfaz de la aplicacion se podria considerar como poco vistosa y anticuada.
++ La navegación en la aplicacion aun siendo intuitiva no es la que mejor para este caso.
 
 ### Navegacion
 
@@ -27,7 +34,9 @@ Para lograr esta mejor navegacion se ha decidido aumentar el numero de pantallas
 
 ### Apariencia
 
+Utilizando la aplicacion Justinmind se ha realizado un prototipo de alto nivel con el rediseño propuesto. Este diseño se encuentra incluido en a carpeta ./aplicacion/prototipo y puede ser accedido y probado abriendo el fichero index.html incluido dentro de esa carpeta.
 
+// TODO
 
 ## Sistema de Gamificación y Reputación
 
@@ -37,18 +46,17 @@ Utilizando los conocimientos adquiridos al analizar las distintas tecnicas de ga
 
 En estos momentos las plataformas donde esta integrado el sistema son solamente el propio servidor Node.js y el sistema operativo Android donde hay una aplicación funcional.
 
-Como propuesta de mejora para este apartado se propone que la aplicacion este disponible en los dos grandes sistemas operativos móviles. Ademas de lograr una mayor integracion con las Redes Sociales, convirtiendolas en fundamentales para el sistema.
+Como propuesta de mejora para este apartado se propone que la aplicacion este disponible en los dos grandes sistemas operativos móviles, Android e iOS. Ademas de lograr una mayor integracion con las Redes Sociales, convirtiendolas en fundamentales para conseguir la parte social de este sistema.
 
 ### Mecanicas
 
-Actualmente las mecanicas de juego implementadas en el sistema son las 
-Las mecanicas de juego que se tiene pensado utilar son las siguientes.
+Las mecanicas de juego propuestas para Cazasteroides son las siguientes.
 
-+ **Puntuación**: actualmente ya se encuentra implantado aunque se le va a dar mayor complejidad.
-+ **Karma**: un sistema de reputacion que aumentaria del mismo modo que la puntuacion. Nunca se reduce este nivel. Otorga mayor importancia al usuario, haciendo que sus acciones tengo mayor relevancia que la del resto de usuarios.
++ **Puntuación**: actualmente ya se encuentra implantado.
++ **Karma**: un sistema de reputacion que aumentaria del mismo modo que la puntuacion. Nunca se reduce este nivel. Una mayor descripcion de esta mecanica se encuentra en el apartado Amplicaciones al final de este capitulo.
 + **Insignias**: distintas medallas que obtendrian los usuarios de distintas maneras.
 + **Retos**: misiones que los usuarios pueden lanzar a otros.
-+ **Premios** reales: en el caso de cazasteroides, se va a permitir utilizar los puntos obtenidos para canjearlos por tiempo de operacion de la red de telescopios Gloria.
++ **Premios reales**: en el caso de cazasteroides, se va a permitir utilizar los puntos obtenidos para canjearlos por tiempo de operacion de la red de telescopios Gloria, esta caracteristica tambien se encuentra incluida.
 + **Clasificaciones**: al igual que el sistema de puntuacion, ya se encuentra implementando y se va a rediseñar para incrementar la informacion que aportan.
 
 ### Dinamicas
@@ -72,12 +80,22 @@ En nuestro caso las distintas esteticas presentes son:
 + **Descubrimiento**: queremos que el usuario aprenda y explore un mundo que nunca haya visto.
 + **Expresivo**: queremos que el usuario se comunique con otros usuarios.
 
+## Ampliaciones
+
+### Karma
+
+El sistema de Karma, el cual se encuentra en el punto de Mecanicas. Este Karma se trata de un Sistema de Reputacion analizado en el capitulo del estado del arte.
+
+Como ya vimos, lo que se pretende conseguir con estos sistemas de reputacion es premiar a los mejores jugadores dandoles mayor poder en el sistema. Con esto, lo que se pretende expresar, es que las observaciones de los usuarios con mayor nivel de karma van tener mayor importancia, las votaciones mayor relevancia y las imagenes a mostrar van a tener mayor dificultad, permitiendoles asi, conseguir mas puntos.
+
+Este sistema de Karma va a ser una de las partes de mayor importancia en la implementación de este trabajo de fin de grado.
+
 ## Referencias
 
-+ Justinmind por la aplicacion de prototipado
-+ Google por las guias de diseño de Material Design
-+ Google por Material Design Icons 
-+ FlatIcon 
++ https://material.io/
++ https://www.justinmind.com/
++ https://github.com/google/material-design-icons
++ http://www.flaticon.com/
 	+ Ranking: Freepik
 	+ Telecope: Freepik
 	+ Meteor: Nikita Golubev
