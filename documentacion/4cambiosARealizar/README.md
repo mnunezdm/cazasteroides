@@ -1,6 +1,6 @@
 # Cambios a Realizar
 
-Este capítulo va a constar de toda la documentación de la implementación que voy a realizar en el sistema.
+Este capítulo va a constar de toda la documentación de la implementación que se va a realizar en este trabajo en el sistema.
 
 ## Algoritmos
 
@@ -20,9 +20,7 @@ Actualmente, para el cálculo de esta puntuación se utiliza el siguiente, el cu
 2. **Orden en la detección** (**30%**): El primero en detectar un candidato tendrá la máxima puntuación.
 3. **Probabilidad de encontrar un asteroide en el campo** (**10%**): (se calcula a partir de la latitud eclíptica del campo). Hay un header PROBA con ese valor. Para campos donde la probabilidad de encontrar un asteroide sea alta los puntos serán menos.
 4. **Brillo o magnitud del asteroide** (**10%**): Si el brillo del asteroide es alto tendrá menos puntos que la detección de asteroides débiles. Al final del apartado coloco los detalles para calcular la magnitud de un asteroide a partir del máximo de luz.
-5. **Seeing o fwhm** (**10%**): Existirá un parámetro en el header llamado FWHM que indicará el grado de turbulencia o “seeing” de la noche. Detectar un asteroide con mal seeing debería tener más puntos que con una buena noche.
-
-// TODO explicar más esto
+5. **Seeing o FWHM** (**10%**): Existirá un parámetro en el header llamado FWHM que indicará el grado de turbulencia o “seeing” de la noche. Detectar un asteroide con mal seeing debería tener más puntos que con una buena noche.
 
 La ecuación final sumando todas las entradas es la siguiente Ecuación 1.
 
@@ -58,11 +56,11 @@ ImagenAMostrar = selección (eliminado (filtrado (Nivel, evaluación (todasLasIm
 
 Ecuación 3: Pseudocódigo de un EFES.
 
-Para este caso, se ha decido diseñar el EFES que se puede apreciar en la Imagen 2.
+Para este caso, se ha decido diseñar el EFES que se puede apreciar en el Diagrama 1.
 
-![Imagen 2: Proceso de selección de una imagen](imgs/diagramaProcesoSeleccion.png)
+![Diagrama 1: Proceso de selección de una imagen](imgs/diagramaProcesoSeleccion.png)
 
-Imagen 2: Proceso de selección de una imagen. Generada con la aplicación Draw.io
+Diagrama 1: Proceso de selección de una imagen. Generado con la aplicación Draw.io
 
 1. **Evaluación, Cálculo de la Dificultad**: en esta primera fase se evaluarán las imágenes según una serie de parámetros configurables.
 2. **Filtrado, Clasificación según la Dificultad**: en este método, y utilizando el valor obtenido de la fase anterior, clasificaremos todas las imágenes en distintos niveles. Estos niveles servirán para que los usuarios puedan acceder de forma rápida a ellos, ya que estas clasificaciones estarán cacheadas y no tendrán que ser calculados cada vez que un usuario requiera una nueva imagen. Estas dos fases van a ser ampliadas a continuación.
@@ -91,18 +89,71 @@ Para la selección de las imágenes a filtrar se ha decidido catalogar las imág
 
 En este caso se ha decidido utilizar 3 niveles de dificultad para las imágenes:
 
-+ **Baja**: aquí tendremos las imágenes más fáciles, comprenderían imágenes entre un nivel de dificultad 0 y un nivel de dificultad 30.
++ **Baja**: aquí tendremos las imágenes más fáciles, comprenderían imágenes entre un nivel de dificultad 0 y 
+un nivel de dificultad 30.
 + **Media**: en esta categoría se encontrarían imágenes más complicadas que las anteriores, se encontrarían entre un nivel de dificultad 30 y 70.
 + **Alta**: en esta última categoría se encontrarían las imágenes más complicadas que hay en el sistema. Tendríamos dificultades de 70 en adelante.
 
 Pero, tendremos 5 niveles de clasificación, esto se debe a que se van a incluir dos categorías intermedias donde se van a mostrar imágenes de dos niveles. Estas son: **Baja-Media**, y **Media-Alta**.
 
-Se ha decidido hacer una distribución equitativa de los niveles de karma con los niveles de clasificación de las imágenes por lo que tendríamos una distribución de 10 niveles de karma por categoría. 
+Se ha decidido hacer una distribución equitativa de los niveles de karma con los niveles de clasificación de las imágenes por lo que tendríamos una distribución de 10 niveles de karma por categoría.
 
 ### Algoritmo para la Validación de la Observación
 
-// TODO
+Este algoritmo va a ser utilizado para determinar cuándo una imagen debe cambiar del estado "En votación" al estado "En comprobación". Actualmente, como está pensado el sistema, es que un astrónomo debe confirmar que la observación pueda ser correcta para enviarla al MPC (Minor Planet Center) el encargado de finalmente comprobar si la observación es correcta.
 
-## Referencias
+Para liberar la carga humana en la mayor parte posible, se ha decidido plantear un algoritmo que, en función de las votaciones, cambie el estado de las observaciones avisando al astrónomo de cuándo debe comprobarla él. Además, utilizaremos el sistema de karma anteriormente planteado para ponderar las votaciones en función de la experiencia del usuario que ha votado. Las nuevas observaciones realizadas por otros usuarios en el mismo lugar equivaldrían a votaciones positivas.
 
-1. <https://es.wikipedia.org/wiki/Seeing>
+Además, ya que vamos a tener votaciones positivas y negativas, este algoritmo debería ser capaz también de rechazar las observaciones.
+
+Para cambiar el estado de la observación, se va a necesitar imponer un mínimo de votaciones, ya que, si no introdujésemos ningún mínimo, el sistema cambiaría este estado con la primera votación.
+
+Por último, en las observaciones con un alto nivel de votaciones y donde no se pueda sacar un resultado claro, el sistema también cambiara el estado de la observación para que el astrónomo pueda evaluarla.
+
+#### Diagrama
+
+Por lo tanto, aplicando todas las condiciones anteriormente descritas, se ha realizado el Diagrama 2 donde se describen los distintos estados que puede tener el algoritmo.
+
+![Diagrama 2: Estados Algoritmo de Validación](imgs/diagramaValidacion.png)
+
+Diagrama 2: Estados Algoritmo de Validación. Generado con la aplicación Draw.io
+
+#### Parámetros y constantes
+
+Este algoritmo dependerá de distintas variables y constantes, las cuales o estarán configuradas en el servidor o serán obtenidas como parámetro de entrada. Estos valores son:
+
++ Constantes
+    + NúmeroMínimo: será el número mínimo de votaciones que se van a tener que realizar para que se pueda cambiar el estado.
+    + NúmeroMáximo: será el número máximo de votaciones que se van a realizar, en cuanto se alcance esta cifra se actualizara el estado de la observación.
+    + LímiteInferior: será el valor de certeza, a partir del cual se rechazará automáticamente una votación.
+    + LímiteSuperior: será el valor de certeza a partir del cual se aprobará automáticamente una votación.
++ Parámetros de entrada
+    + Observación: se pasará la imagen sobre la que se ha realizado la observación. Dentro de este objeto se van a utilizar los siguientes campos.
+        + NúmeroDeVotaciones
+        + PuntuaciónNegativa
+        + PuntuaciónPositiva
+    + KarmaUsuario: el nivel del karma del usuario que ha realizado la votación.
+    + TipoDeVoto: puede ser Positivo o Negativo.
+
+#### Movimientos
+
+Estos movimientos dependen de constantes y variables (en cursiva) que hemos visto anteriormente. Todos estos movimientos tendrán unos pasos comunes, y otros específicos según el tipo de movimiento.
+
+1. Se incrementará el _NúmeroDeVotaciones_.
+2. Se aumentará la _PuntuaciónPositiva_ o _PuntuaciónNegativa_ según el _KarmaUsuario_ del usuario.
+3. Se calculará la nueva _Certeza_ utilizando la Ecuación 4.
+4. Por último, y tras realizar los pasos específicos se actualizará en la base de datos todos los cambios.
+
+Certeza = (PuntuaciónPositiva - PuntuaciónNegativa) / (PuntuaciónPositiva + PuntuaciónNegativa)
+
+Ecuación 4: Calculo de la certeza de una observación.
+
+Los movimientos específicos según la transición son los siguientes:
+
++ **1:1**: este movimiento se va a producir siempre que se reciba una votación y el _NúmeroDeVotaciones_ sea menor de _NúmeroMínimo_.
++ **1:2**: este movimiento se va a producir cuando se reciba una votación y el _NúmeroDeVotaciones_ sea _NúmeroMínimo_.
++ **2:3**: en este movimiento el cual se puede producir por dos razones, se actualizará el estado de la observación a "Aprobada". Las razones son las siguientes:
+    + El _NúmeroDeVotaciones_ es igual al _NúmeroMáximo_ de votaciones.
+    + La _Certeza_ sea mayor que el _LímiteSuperior_.
++ **2:4**: este movimiento se producirá cuando la _Certeza_ sea menor del _LímiteInferior_. En este estado se actualizará el estado de la observación a "Rechazada"
++ **2:2**: este movimiento se va a producir siempre que no se pueda realizar ninguna de las 2 anteriores transiciones.
