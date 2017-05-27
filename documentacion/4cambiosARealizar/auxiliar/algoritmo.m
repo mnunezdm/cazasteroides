@@ -46,4 +46,3 @@ title('Observaciones hasta nivel');
 ylabel('Observaciones totales');
 xlabel('Niveles');
 
-
