@@ -7,8 +7,8 @@ class KarmaLevelProvider:
         levels and to classify user for its points '''
 
     def __init__(self, max_level, points_per_observation):
-        self.karma_data = self.__populate_points([], 1, 0, max_level)
         self.points_per_observation = points_per_observation
+        self.karma_data = self.__populate_points([], 1, 0, max_level)
 
     def __populate_points(self, karma_list, level, total_points, max_level):
         ''' Instantiates the points array '''
