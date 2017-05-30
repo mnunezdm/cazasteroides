@@ -1,0 +1,14 @@
+
+codigo/karma-server/Include/
+
+codigo/karma-server/Lib/
+
+codigo/karma-server/Scripts/
+
+codigo/karma-server/src/__pycache__/
+
+codigo/karma-server/pip-selfcheck\.json
+
+codigo/karma-server/src/Level/__pycache__/
+
+codigo/karma-server/src/ImageSelection/__pycache__/
