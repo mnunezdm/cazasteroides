@@ -1,5 +1,5 @@
 ''' KarmaServerImplementation '''
-from KarmaLevelProvider import KarmaLevelProvider
+from Level.KarmaLevelProvider import KarmaLevelProvider
 
 class KarmaServer:
     ''' Class for Server '''

@@ -1,11 +1,23 @@
 ''' Module for Karma Level Provider Class '''
 import operator
-from KarmaPointsCalculator import calculate_karma_item, calculate_rounded_observations
+from Level.KarmaPointsCalculator import calculate_karma_item, calculate_rounded_observations
 
-class KarmaLevelProvider:
-    ''' Karma Level Provider, has the methods to calculate the karma
+class KarmaLevelProviderAbstract:
+    ''' Karma Level Provider Abstract, has the methods to calculate the karma
         levels and to classify user for its points '''
 
+    def get_level_for_points(self, user_points):
+        ''' Returns the information for the karma level for the points passed '''
+        raise NotImplementedError('Abstract class, this method should have been implemented')
+
+    def get_general_info(self):
+        ''' Returns all Karma Data '''
+        raise NotImplementedError('Abstract class, this method should have been implemented')
+
+
+class KarmaLevelProvider(KarmaLevelProviderAbstract):
+    ''' Karma Level Provider, has the methods to calculate the karma
+        levels and to classify user for its points '''
     def __init__(self, max_level, points_per_observation):
         self.points_per_observation = points_per_observation
         self.karma_data = self.__populate_points([], 1, 0, max_level)
@@ -17,8 +29,7 @@ class KarmaLevelProvider:
         next_total_points = total_points + karma_item['points_to_next']
         if level < max_level:
             return self.__populate_points(karma_list, level + 1, next_total_points, max_level)
-        else:
-            return karma_list
+        return karma_list
 
     def get_level_for_points(self, user_points):
         next_level = self.__get_next_level(user_points)
@@ -39,6 +50,5 @@ class KarmaLevelProvider:
         return next_level
 
     def get_general_info(self):
-        ''' Returns all Karma Data '''
         return self.karma_data
         

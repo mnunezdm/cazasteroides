@@ -2,11 +2,10 @@
     has all the REST methods and a Karma Server instance'''
 from flask import Flask, jsonify, make_response
 from KarmaServer import KarmaServer
+from ConfigurationFile import MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION
+from Debugger import print_info, init_colors
 
 APP = Flask(__name__)
-MAX_LEVEL = 10
-POINTS_PER_OBSERVATION = 500
-SERVER = KarmaServer(MAX_LEVEL, POINTS_PER_OBSERVATION)
 
 # localhost:5000/v1.0/karma/<int:user_points>
 @APP.route('/v1.0/karma/<int:user_points>', methods=['GET'])
@@ -15,7 +14,7 @@ def get_user_info(user_points):
     try:
         result = SERVER.get_karma_for_points(user_points)
     except IndexError:
-        result = {"karma_level":MAX_LEVEL}
+        result = {"karma_level":MAX_KARMA_LEVEL}
     return jsonify(result)
 
 # localhost:5000/v1.0/karma/info>
@@ -44,4 +43,8 @@ def not_allowed(_):
 # Main Method
 
 if __name__ == '__main__':
-    APP.run(debug=True)
+    init_colors()
+    print_info('INFO', 'Initiating KarmaServer with {} levels, {} ppo'.format(
+        MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION))
+    SERVER = KarmaServer(MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION)
+    APP.run()
