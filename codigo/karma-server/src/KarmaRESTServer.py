@@ -1,20 +1,18 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, abort, request
 from KarmaServer import KarmaServer
-from ConfigurationFile import MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION
 from Debugger import print_info, init_colors
 
 APP = Flask(__name__)
+
+# API Endpoints
 
 # localhost:5000/v1.0/karma/<int:user_points>
 @APP.route('/v1.0/karma/<int:user_points>', methods=['GET'])
 def get_user_info(user_points):
     ''' Returns karma info for the points passed'''
-    try:
-        result = SERVER.get_karma_for_points(user_points)
-    except IndexError:
-        result = {"karma_level":MAX_KARMA_LEVEL}
+    result = SERVER.get_karma_for_points(user_points)
     return jsonify(result)
 
 # localhost:5000/v1.0/karma/info>
@@ -23,8 +21,27 @@ def get_general_info():
     ''' Returns all karma info '''
     return jsonify(SERVER.get_karma_general_info())
 
-# Error Handlers
+# localhost:5000/v1.0/karma/info>
+@APP.route('/v1.0/validate', methods=['POST'])
+def post_vote():
+    ''' Updates the info for the observation passed '''
+    request_data = request.get_json()
+    if not request_data:
+        abort(400)
+    vote_type = request_data['vote_type']
+    karma_level = request_data['karma_level']
+    observation_id = request_data['observation_id']
+    return jsonify(SERVER.post_vote(observation_id, karma_level, vote_type).serialize())
 
+@APP.route('/v1.0/validate/<string:observation_id>', methods=['GET'])
+def get_observation(observation_id):
+    ''' Returns the information for the id passed '''
+    observation = SERVER.get_observation_data(observation_id)
+    if not observation:
+        abort(404)
+    return jsonify(SERVER.get_observation_data(observation_id).serialize())
+
+# Error Handlers
 @APP.errorhandler(400)
 def bad_request(_):
     ''' Bad Request Handler '''
@@ -41,10 +58,8 @@ def not_allowed(_):
     return make_response(jsonify({'code':405, 'error':'Method not Allowed'}), 404)
 
 # Main Method
-
 if __name__ == '__main__':
     init_colors()
-    print_info('INFO', 'Initiating KarmaServer with {} levels, {} ppo'.format(
-        MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION))
-    SERVER = KarmaServer(MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION)
+    SERVER = KarmaServer()
+    print_info('INFO', 'Starting REST Server')
     APP.run()

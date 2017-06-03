@@ -12,3 +12,7 @@ codigo/karma-server/pip-selfcheck\.json
 codigo/karma-server/src/Level/__pycache__/
 
 codigo/karma-server/src/ImageSelection/__pycache__/
+
+\.vscode/
+
+codigo/karma-server/src/Validation/__pycache__/

@@ -1,6 +1,8 @@
 ''' Module for Karma Level Provider Class '''
 import operator
 from Level.KarmaPointsCalculator import calculate_karma_item, calculate_rounded_observations
+from Debugger import print_info, print_list
+
 
 class KarmaLevelProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to calculate the karma
@@ -21,6 +23,13 @@ class KarmaLevelProvider(KarmaLevelProviderAbstract):
     def __init__(self, max_level, points_per_observation):
         self.points_per_observation = points_per_observation
         self.karma_data = self.__populate_points([], 1, 0, max_level)
+        self.__print_info(max_level, points_per_observation)
+
+    @staticmethod
+    def __print_info(max_level, points_per_observation):
+        print_info('INFO', 'Initializing KarmaLevelProvider with:')
+        print_list('{} Maximum Karma Level'.format(max_level))
+        print_list('{} Points per Observation'.format(points_per_observation))
 
     def __populate_points(self, karma_list, level, total_points, max_level):
         ''' Instantiates the points array '''

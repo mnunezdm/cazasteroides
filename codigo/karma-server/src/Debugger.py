@@ -12,3 +12,7 @@ def print_info(message_type, message):
 def print_error(message):
     ''' Prints error message with type in red '''
     print(Fore.RED + '[ERROR] ' + Fore.RESET + message)
+
+def print_list(message):
+    ''' Prints message in a list '''
+    print('\t- ' + message)

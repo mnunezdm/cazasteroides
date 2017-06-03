@@ -1,6 +1,7 @@
 ''' Provides methods to calculate and format Karma Data '''
 from math import log
 
+
 def calculate_karma_item(level, total_points, points_per_observation):
     ''' Returns the karma item for the level and points passed '''
     points = __calculate_points(level)
