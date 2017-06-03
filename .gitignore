@@ -16,3 +16,7 @@ codigo/karma-server/src/ImageSelection/__pycache__/
 \.vscode/
 
 codigo/karma-server/src/Validation/__pycache__/
+
+codigo/karma-server/src/models/__pycache__/
+
+codigo/karma-server/src/providers/__pycache__/

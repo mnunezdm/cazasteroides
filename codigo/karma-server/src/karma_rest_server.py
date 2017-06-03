@@ -1,8 +1,8 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
 from flask import Flask, jsonify, make_response, abort, request
-from KarmaServer import KarmaServer
-from Debugger import print_info, init_colors
+from karma_server import KarmaServer
+from debugger import print_info, init_colors
 
 APP = Flask(__name__)
 
@@ -26,12 +26,11 @@ def get_general_info():
 def post_vote():
     ''' Updates the info for the observation passed '''
     request_data = request.get_json()
-    if not request_data:
-        abort(400)
-    vote_type = request_data['vote_type']
-    karma_level = request_data['karma_level']
-    observation_id = request_data['observation_id']
-    return jsonify(SERVER.post_vote(observation_id, karma_level, vote_type).serialize())
+    if request_data:
+        result = SERVER.post_vote(request_data)
+        if result:
+            return jsonify(result.serialize())
+    abort(400)
 
 @APP.route('/v1.0/validate/<string:observation_id>', methods=['GET'])
 def get_observation(observation_id):

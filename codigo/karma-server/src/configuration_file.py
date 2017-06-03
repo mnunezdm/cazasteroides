@@ -1,7 +1,7 @@
 ''' Configuration file, you can configure here all the system params '''
 
 MAX_KARMA_LEVEL = 10
-POINTS_PER_OBSERVATION = 500
+POINTS_PER_OBSERVATION = 100
 
 MINIMUM_VOTES = 3
 MAXIMUM_VOTES = 20

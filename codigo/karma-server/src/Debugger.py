@@ -16,3 +16,9 @@ def print_error(message):
 def print_list(message):
     ''' Prints message in a list '''
     print('\t- ' + message)
+
+def to_string_list(type_name, content):
+    ''' Returns a string with the type and content properly formated '''
+    return '\t- ' + Fore.CYAN + '{}'.format(type_name) + Fore.RESET + ':\t {} \n'.format(content)
+
+DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET

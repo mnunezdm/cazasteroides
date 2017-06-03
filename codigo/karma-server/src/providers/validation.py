@@ -1,10 +1,10 @@
 ''' Validation module for karma implementations '''
-from Validation.Observation import Observation
-from Debugger import print_info, print_list
+from models.observation import Observation
+from debugger import print_info, print_list
 
 class ValidationProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to validate and notify '''
-    def set_points(self, observation_id, karma_level, vote_type):
+    def set_points(self, observation_info, vote_info):
         ''' Updates observation data with the new vote '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
@@ -30,19 +30,19 @@ class ValidationProvider(ValidationProviderAbstract):
         print_list('{} lower limit'.format(self.lower_limit))
         print_list('{} upper limit'.format(self.upper_limit))
 
-    def set_points(self, observation_id, karma_level, vote_type):
-        observation = self.__get_observation_or_create_it(observation_id)
-        number_of_votes, certainty = observation.add_vote(karma_level, vote_type)
+    def set_points(self, observation_info, vote_info):
+        observation = self.__get_observation_or_create_it(observation_info)
+        number_of_votes, certainty = observation.add_vote(vote_info)
         if self.__check_if_change(observation, certainty, number_of_votes):
             print_info('OBS{}'.format(observation.observation_id),
                        'state changed to \'{}\''.format(observation.state))
-        observation.update_observation_in_db()
+        # TODO do something similar observation.update_observation_in_db()
         return observation
 
-    def __get_observation_or_create_it(self, observation_id):
-        observation = self.__get_observation(observation_id)
+    def __get_observation_or_create_it(self, observation_info):
+        observation = self.__get_observation(observation_info['observation_id'])
         if not observation:
-            observation = Observation(observation_id, 0, 0, self.database)
+            observation = Observation(observation_info)
             self.observations.append(observation)
         return observation
 
