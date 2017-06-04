@@ -1,6 +1,14 @@
+''' Votes Module '''
 from colorama import Fore
+from models import db
 
-class Votes:
+# class Votes:
+class Votes(db.Model):
+    __tablename__ = 'votes'
+    observation_id = db.Column(db.String(64), db.ForeignKey('observation.observation_id'), primary_key=True)
+    upvotes = db.Column(db.Integer)
+    downvotes = db.Column(db.Integer)
+
     ''' Votes class '''
     def __init__(self, json):
         self.upvotes = json['upvotes']

@@ -1,9 +1,11 @@
 ''' Observation module '''
-from debugger import to_string_list, DATA_TAG
+from debugger import DATA_TAG, to_string_list
 from models.position import Position
 from models.puntuation import Puntuation
 from models.votes import Votes
+from models import db, user_observations, User
 
+# class ObservationAbstract(db.Model):
 class ObservationAbstract:
     ''' Abstract class for Observations '''
     def add_vote(self, vote_info):
@@ -25,8 +27,20 @@ class ObservationAbstract:
         ''' Gets the value for the observation '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
-class Observation(ObservationAbstract):
+# class Observation(ObservationAbstract):
+class Observation(ObservationAbstract, db.Model):
     ''' Implementation of the Observation '''
+    observation_id = db.Column(db.String(64), primary_key=True)
+    state = db.Column(db.String(16))
+    image_id = db.Column(db.String(64), db.ForeignKey('image.image_id'))
+
+    votes = db.relationship('Votes', uselist=False, lazy='joined')
+    position = db.relationship('Position', uselist=False, lazy='joined')    
+    puntuation = db.relationship('Puntuation', uselist=False, lazy='joined')
+
+    users_who_voted = db.relationship('User', secondary=user_observations,
+                                      backref='Observation')
+
     def __init__(self, observation_info):
         self.observation_id = observation_info['observation_id']
         self.image_id = observation_info['image_id']
@@ -61,7 +75,8 @@ class Observation(ObservationAbstract):
         karma_level = vote_info['karma_level']
         number_of_votes = self.votes.add_vote(vote_type)
         certainty = self.puntuation.add_vote(vote_type, karma_level)
-        self.users_who_voted.append(vote_info['user_id'])
+        user = User(vote_info['user_id']) # TODO check before insert
+        self.users_who_voted.append(user)
         return number_of_votes, certainty
 
     def change_state(self, to_approved):
@@ -82,3 +97,17 @@ class Observation(ObservationAbstract):
             return 0.5
         if 'denyed' in self.state:
             return 0.10
+    
+    def update_in_database(self):
+        db.session.add(self)
+        db.session.commit()
+
+def get_observation_or_create_it(observation_info):
+    observation_id = observation_info['observation_id']
+    observation = get_observation(observation_id)
+    if not observation:
+        observation = Observation(observation_info)
+    return observation
+
+def get_observation(observation_id):
+    return db.session.query(Observation).filter(observation_id).first()

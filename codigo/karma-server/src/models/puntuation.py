@@ -1,8 +1,12 @@
 ''' Puntuation module '''
-
 from colorama import Fore
+from models import db
 
-class Puntuation:
+# class Puntuation:
+class Puntuation(db.Model):
+    observation_id = db.Column(db.Integer, db.ForeignKey('observation.observation_id'), primary_key=True)
+    positive = db.Column(db.Integer)
+    negative = db.Column(db.Integer)
     ''' Puntuation class '''
     def __init__(self, votes):
         self.positive = votes.upvotes

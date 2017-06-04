@@ -1,8 +1,12 @@
 ''' Position module '''
-
 from random import random
+from models import db
 
-class Position:
+class Position(db.Model):
+    observation_id = db.Column(db.String(64), db.ForeignKey('observation.observation_id'), primary_key=True)
+    x_position = db.Column(db.Integer)
+    y_position = db.Column(db.Integer)
+
     ''' Position Class '''
     def __init__(self, positon_data=None, x_position=0, y_position=0):
         if positon_data:
