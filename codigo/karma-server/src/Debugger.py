@@ -1,7 +1,7 @@
 ''' Helper for printing debug trace '''
 from colorama import Fore, init
 
-def init_colors():
+def init_terminal_colors():
     ''' Necessary for coloring terminal in windows '''
     init()
 

@@ -1,28 +1,43 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
-from flask import Flask, jsonify, make_response, abort, request
-from karma_server import KarmaServer
-from debugger import print_info, init_colors
+from sys import argv
+from flask import Flask, abort, jsonify, make_response, request
+from flask_migrate import Migrate
+from flask_script import Manager
 
-APP = Flask(__name__)
+from debugger import init_terminal_colors, print_error, print_info
+from karma_server import KarmaServer
+from models import db
+
+init_terminal_colors()
+
+if __name__ == '__main__':
+    print_error('Run from manage.py')
+    exit(1)
+
+app = Flask(__name__)
+app.config.from_object('config')
+manager = Manager(app)
+db.init_app(app)
+migrate = Migrate(app, db)
 
 # API Endpoints
 
 # localhost:5000/v1.0/karma/<int:user_points>
-@APP.route('/v1.0/karma/<int:user_points>', methods=['GET'])
+@app.route('/v1.0/karma/<int:user_points>', methods=['GET'])
 def get_user_info(user_points):
     ''' Returns karma info for the points passed'''
     result = SERVER.get_karma_for_points(user_points)
     return jsonify(result)
 
 # localhost:5000/v1.0/karma/info>
-@APP.route('/v1.0/karma/info', methods=['GET'])
+@app.route('/v1.0/karma/info', methods=['GET'])
 def get_general_info():
     ''' Returns all karma info '''
     return jsonify(SERVER.get_karma_general_info())
 
 # localhost:5000/v1.0/karma/info>
-@APP.route('/v1.0/validate', methods=['POST'])
+@app.route('/v1.0/validate', methods=['POST'])
 def post_vote():
     ''' Updates the info for the observation passed '''
     request_data = request.get_json()
@@ -32,7 +47,7 @@ def post_vote():
             return jsonify(result.serialize())
     abort(400)
 
-@APP.route('/v1.0/validate/<string:observation_id>', methods=['GET'])
+@app.route('/v1.0/validate/<string:observation_id>', methods=['GET'])
 def get_observation(observation_id):
     ''' Returns the information for the id passed '''
     observation = SERVER.get_observation_data(observation_id)
@@ -41,24 +56,26 @@ def get_observation(observation_id):
     return jsonify(SERVER.get_observation_data(observation_id).serialize())
 
 # Error Handlers
-@APP.errorhandler(400)
+@app.errorhandler(400)
 def bad_request(_):
     ''' Bad Request Handler '''
     return make_response(jsonify({'code':400, 'error': 'Bad Request'}), 400)
 
-@APP.errorhandler(404)
+@app.errorhandler(404)
 def not_found(_):
     ''' Not Found Handler '''
     return make_response(jsonify({'code':404, 'error': 'Not found'}), 404)
 
-@APP.errorhandler(405)
+@app.errorhandler(405)
 def not_allowed(_):
     ''' Not Allowed Handler '''
     return make_response(jsonify({'code':405, 'error':'Method not Allowed'}), 404)
 
-# Main Method
-if __name__ == '__main__':
-    init_colors()
-    SERVER = KarmaServer()
+def initiate_server():
+    server = KarmaServer()
     print_info('INFO', 'Starting REST Server')
-    APP.run()
+    return server
+
+# Main Method
+if len(argv) > 1 and 'runserver' in argv[1]:
+    SERVER = initiate_server()
