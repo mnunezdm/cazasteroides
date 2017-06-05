@@ -79,6 +79,7 @@ def calculate_rounded_observations(points, points_per_observation):
     return round(points/points_per_observation + 0.5)
 
 def __calculate_points(level):
+    ''' Calculates the points necessary to reach the passed level from the previous level '''
     value = round(log((level/3)+1) * 350)
     return __round_in_hundreds(value)
 

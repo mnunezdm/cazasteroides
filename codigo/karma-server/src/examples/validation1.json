@@ -1,0 +1,20 @@
+{
+    "vote_info": {
+        "user_id": 1,
+        "karma_level": 10,
+        "vote_type": false
+    },
+    "observation_info": {
+        "observation_id": "1",
+        "image_id": "1",
+        "votes": {
+            "upvotes":1,
+            "downvotes":1
+        },
+        "position": {
+            "x": 12,
+            "y": 15
+        }
+    }
+
+}

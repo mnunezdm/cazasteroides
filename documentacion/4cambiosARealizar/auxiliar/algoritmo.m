@@ -2,13 +2,13 @@
 n = 50;
 
 % ppo
-ppo = 500;
+ppo = 100;
 
 % nivel
 N = 0:n;
 
 % puntos por nivel
-ppn = log((N/3)+1) * 2000;
+ppn = log((N/3)+1) * 350;
 
 % observaciones por nivel
 opn = round(ppn/ppo);

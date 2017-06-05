@@ -122,11 +122,14 @@ Diagrama 2: Estados Algoritmo de Validación. Generado con la aplicación Draw.i
 
 Este algoritmo dependerá de distintas variables y constantes, las cuales o estarán configuradas en el servidor o serán obtenidas como parámetro de entrada. Estos valores son:
 
++ Variables
+    + Certeza: este valor variara entre -1 y 1 donde, cuando mas cerca esté este valor de -1 mayor seguridad habra de que esa observacion no va a ser valida. Mientras, cuanto mas cercano sea este valor del 1, mayor seguridad tendremos de que esa observacion va a ser valida. Por ultimo, los valores cercanos al 0 no tendremos ninguna certeza.
 + Constantes
     + NúmeroMínimo: será el número mínimo de votaciones que se van a tener que realizar para que se pueda cambiar el estado.
     + NúmeroMáximo: será el número máximo de votaciones que se van a realizar, en cuanto se alcance esta cifra se actualizara el estado de la observación.
-    + LímiteInferior: será el valor de certeza, a partir del cual se rechazará automáticamente una votación.
-    + LímiteSuperior: será el valor de certeza a partir del cual se aprobará automáticamente una votación.
+    + Límites: seran valores de certeza que serviran para determinar cuando se debe cambiar el estado de una votacion.
+        + LímiteInferior: será el valor de certeza, a partir del cual se rechazará automáticamente una votación.
+        + LímiteSuperior: será el valor de certeza a partir del cual se aprobará automáticamente una votación.
 + Parámetros de entrada
     + Observación: se pasará la imagen sobre la que se ha realizado la observación. Dentro de este objeto se van a utilizar los siguientes campos.
         + NúmeroDeVotaciones

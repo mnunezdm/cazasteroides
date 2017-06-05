@@ -20,3 +20,9 @@ codigo/karma-server/src/Validation/__pycache__/
 codigo/karma-server/src/models/__pycache__/
 
 codigo/karma-server/src/providers/__pycache__/
+
+codigo/karma-server/src/providers/imageselection/__pycache__/
+
+codigo/karma-server/src/app\.db
+
+codigo/karma-server/src/migrations/

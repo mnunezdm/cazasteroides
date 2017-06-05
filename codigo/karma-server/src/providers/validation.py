@@ -7,10 +7,6 @@ class ValidationProviderAbstract:
         ''' Updates observation data with the new vote '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
-    def get_observation_data(self, observation_id):
-        ''' Returns the data for the id passed '''
-        raise NotImplementedError('Abstract class, this method should have been implemented')
-
 class ValidationProvider(ValidationProviderAbstract):
     ''' Karma Level Provider Implementation, has the methods to validate and notify '''
     def __init__(self, minimum_votes, maximum_votes, lower_limit, upper_limit, database=None):

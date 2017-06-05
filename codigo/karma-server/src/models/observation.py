@@ -3,7 +3,8 @@ from debugger import DATA_TAG, to_string_list
 from models.position import Position
 from models.puntuation import Puntuation
 from models.votes import Votes
-from models import db, user_observations, User
+from models.user import User
+from models import db, user_observations
 
 # class ObservationAbstract(db.Model):
 class ObservationAbstract:
