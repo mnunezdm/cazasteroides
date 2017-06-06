@@ -4,7 +4,10 @@ from configuration_params import (LOWER_LIMIT, MAX_KARMA_LEVEL, MAXIMUM_VOTES,
                                   UPPER_LIMIT)
 from providers.validation import ValidationProvider
 from providers.level import KarmaLevelProvider
-from models.observation import get_observation_or_create_it, get_observation
+from content_resolver import get_or_create_it, get, update
+
+from models.observation import Observation
+from models.user import User
 
 class KarmaServer:
     ''' Class for Server '''
@@ -27,11 +30,18 @@ class KarmaServer:
     def post_vote(self, observation_data):
         ''' Updates the observation with the data passed, returns the observation updated '''
         observation_info = observation_data['observation_info']
-        observation = get_observation_or_create_it(observation_info)
+        observation = get_or_create_it(Observation, observation_info)
+
+        user_info = observation_data['user_info']
+        user = get_or_create_it(User, user_info)
+
         vote_info = observation_data['vote_info']
-        self.validation_provider.set_points(observation, vote_info)
+
+        self.validation_provider.set_points(observation, user, vote_info)
+        update(observation)
         return observation
 
-    def get_observation_data(self, observation_id):
+    @staticmethod
+    def get_observation_data(observation_id):
         ''' Returns the observation or nothing '''
-        return get_observation(observation_id)
+        return get(Observation, _id=observation_id).first()

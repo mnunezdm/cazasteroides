@@ -1,4 +1,7 @@
 ''' Evaluator of the EFES Algorithm '''
+from content_resolver import get_all, update
+from models.observation import Observation
+
 class ImageEvaluatorAbstract:
     ''' Abstract class for Image Evaluator '''
     def evaluate(self, images_list, observation_list):
@@ -7,17 +10,30 @@ class ImageEvaluatorAbstract:
 
 class ImageEvaluator(ImageEvaluatorAbstract):
     ''' Implementation of the Evaluator class '''
-    def evaluate(self, images_list, observation_list):
-        observation_list = []
-        for image in images_list:
-            observation_for_image = image.get_observations(observation_list)
-            self.__evaluate_image(images_list, observation_for_image)
+    def evaluate(self, observation_list):
+        observation_list = get_all(Observation)
+        for observation in observation_list:
+            self.__evaluate_observation(observation)
+        return observation_list
 
-    def __evaluate_image(self, image, observation_for_image):
-        probability = image.probability
-        fwhm = image.fwhm
-        observations_value = self.__observations_value(observation_for_image)
-        return probability + fwhm + observations_value
+    def __evaluate_observation(self, observation):
+        probability = observation.image.probability 
+        fwhm = observation.image.fwhm  * self.fwhm_multiplier
+        number_of_votes = observation.votes.number_of_votes()
+
+        probability_points = probability
+        fwhm = fwhm  * self.fwhm_multiplier
+        state = observation.state
+
+        return 1/probability + fwhm + 1/number_of_votes
+
+    def __get_multiplier_for_observation_state(self, state):
+        if 'pending' in state:
+            return 0.4
+        if 'denyed' in state:
+            return 0.1
+        if 'approved' in state:
+            return 0.7
 
     def __observations_value(self, observations):
         value = 0

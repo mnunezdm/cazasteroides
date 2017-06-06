@@ -1,6 +1,7 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
 from sys import argv
+
 from flask import Flask, abort, jsonify, make_response, request
 from flask_migrate import Migrate
 from flask_script import Manager
@@ -8,6 +9,8 @@ from flask_script import Manager
 from debugger import init_terminal_colors, print_error, print_info
 from karma_server import KarmaServer
 from models import db
+from models.image import Image
+from models.user import User
 
 init_terminal_colors()
 
@@ -23,21 +26,21 @@ migrate = Migrate(app, db)
 
 # API Endpoints
 
-# localhost:5000/v1.0/karma/<int:user_points>
-@app.route('/v1.0/karma/<int:user_points>', methods=['GET'])
+# localhost:5000/v1/karma/<int:user_points>
+@app.route('/v1/karma/<int:user_points>', methods=['GET'])
 def get_user_info(user_points):
     ''' Returns karma info for the points passed'''
     result = SERVER.get_karma_for_points(user_points)
     return jsonify(result)
 
-# localhost:5000/v1.0/karma/info>
-@app.route('/v1.0/karma/info', methods=['GET'])
+# localhost:5000/v1/karma/info>
+@app.route('/v1/karma/info', methods=['GET'])
 def get_general_info():
     ''' Returns all karma info '''
     return jsonify(SERVER.get_karma_general_info())
 
-# localhost:5000/v1.0/karma/info>
-@app.route('/v1.0/validate', methods=['POST'])
+# localhost:5000/v1/validate>
+@app.route('/v1/validate', methods=['POST'])
 def post_vote():
     ''' Updates the info for the observation passed '''
     request_data = request.get_json()
@@ -47,7 +50,8 @@ def post_vote():
             return jsonify(result.serialize())
     abort(400)
 
-@app.route('/v1.0/validate/<string:observation_id>', methods=['GET'])
+# localhost:5000/v1/validate/id>
+@app.route('/v1/validate/<string:observation_id>', methods=['GET'])
 def get_observation(observation_id):
     ''' Returns the information for the id passed '''
     observation = SERVER.get_observation_data(observation_id)

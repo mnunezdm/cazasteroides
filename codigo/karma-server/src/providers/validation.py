@@ -3,7 +3,7 @@ from debugger import print_info, print_list
 
 class ValidationProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to validate and notify '''
-    def set_points(self, observation, vote_info):
+    def set_points(self, observation, user, vote_info):
         ''' Updates observation data with the new vote '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
@@ -24,24 +24,25 @@ class ValidationProvider(ValidationProviderAbstract):
         print_list('{} lower limit'.format(self.lower_limit))
         print_list('{} upper limit'.format(self.upper_limit))
 
-    def set_points(self, observation, vote_info):
-        number_of_votes, certainty = observation.add_vote(vote_info)
-        if self.__check_if_change(observation, certainty, number_of_votes):
-            print_info('OBS{}'.format(observation.observation_id),
-                       'state changed to \'{}\''.format(observation.state))
-        observation.update_in_database()
+    def set_points(self, observation, user, vote_info):
+        if not observation.repeated_vote(user):
+            number_of_votes, certainty = observation.add_vote(vote_info, user)
+            change, approved = self.__check_if_change(observation, certainty, number_of_votes)
+            if change:
+                observation.change_state(approved=approved)
+            return True
 
     def __check_if_change(self, observation, certainty, number_of_votes):
-        ''' Checks if the observation can change its status, returns True if change '''
+        ''' Checks if the observation can change its status, returns True if change\n
+                return[0]: change\n
+                return[1]: to_approved '''
         if observation.get_notified():
-            return False
+            return False, False
         if number_of_votes >= self.maximum_votes:
-            observation.change_state(True)
-            return True
+            observation.change_state(approved=True)
+            return True, True
         if number_of_votes >= self.minimum_votes:
             if certainty < self.lower_limit:
-                observation.change_state(False)
-                return True
+                return True, False
             elif certainty > self.upper_limit:
-                observation.change_state(True)
-                return True
+                return True, True

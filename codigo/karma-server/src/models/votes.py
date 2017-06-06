@@ -4,8 +4,8 @@ from models import db
 
 # class Votes:
 class Votes(db.Model):
-    __tablename__ = 'votes'
-    observation_id = db.Column(db.String(64), db.ForeignKey('observation.observation_id'), primary_key=True)
+    observation_id = db.Column(db.String(64), db.ForeignKey('observation._id'),
+                                                            primary_key=True)
     upvotes = db.Column(db.Integer)
     downvotes = db.Column(db.Integer)
 

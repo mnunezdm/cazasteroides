@@ -1,10 +1,23 @@
 ''' module for user class '''
 from models import db, user_observations
 class User(db.Model):
-    ''' User class
-    ATTENTION!!! If migrate doesnt detect this class, move it to the __init__.py of this package '''
-    user_id = db.Column(db.Integer, primary_key=True)
-    observations = db.relationship('Observation', secondary=user_observations,
-                                   backref='User')
-    def __init__(self, user_id):
-        self.user_id = user_id
+    ''' User class '''
+    _id = db.Column(db.Integer, primary_key=True)
+    observations = db.relationship('Observation', secondary=user_observations, backref='User')
+
+    def __init__(self, user_info):
+        self._id = user_info['_id']
+
+    def serialize(self, only_id=True):
+        ''' Serializes the object, has two modes:\n
+        only_id = True => serializes only the id\n
+        only_id = False => serializes id + observations'''
+        if only_id:
+            return {
+                "_id": self._id
+            }
+        return {
+            "_id": self._id,
+            'observations': [observation.serialize(only_id=True)
+                             for observation in self.observations]
+        }

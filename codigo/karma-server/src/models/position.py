@@ -3,7 +3,8 @@ from random import random
 from models import db
 
 class Position(db.Model):
-    observation_id = db.Column(db.String(64), db.ForeignKey('observation.observation_id'),
+    ''' Observation Position implementation '''
+    observation_id = db.Column(db.String(64), db.ForeignKey('observation._id'),
                                primary_key=True)
     x_position = db.Column(db.Integer)
     y_position = db.Column(db.Integer)
@@ -18,7 +19,7 @@ class Position(db.Model):
             self.y_position = y_position
 
     def __str__(self):
-        return 'x:{}\ty{}'.format(self.x_position, self.y_position)
+        return 'x:{}\ty:{}'.format(self.x_position, self.y_position)
 
     def serialize(self):
         ''' Serializes object '''

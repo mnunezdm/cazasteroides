@@ -1,11 +1,13 @@
 {
+    "user_info": {
+        "_id": 2
+    },
     "vote_info": {
-        "user_id": 1,
         "karma_level": 10,
         "vote_type": false
     },
     "observation_info": {
-        "observation_id": "1",
+        "_id": "6",
         "image_id": "1",
         "votes": {
             "upvotes":1,
@@ -16,5 +18,4 @@
             "y": 15
         }
     }
-
 }
