@@ -11,6 +11,7 @@ from karma_server import KarmaServer
 from models import db
 from models.image import Image
 from models.user import User
+import time
 
 init_terminal_colors()
 
@@ -24,8 +25,20 @@ manager = Manager(app)
 db.init_app(app)
 migrate = Migrate(app, db)
 
-# API Endpoints
+@app.before_request
+def __start_timer():
+    global time_start
+    time_start = time.clock()*1000000
 
+@app.after_request
+def __end_time(response):
+    global time_start
+    time_end = time.clock()*1000000
+    elapsed = time_end - time_start
+    print('Request time {}ns'.format(int(round(elapsed))))
+    return response
+
+# API Endpoints
 # localhost:5000/v1/karma/<int:user_points>
 @app.route('/v1/karma/<int:user_points>', methods=['GET'])
 def get_user_info(user_points):
