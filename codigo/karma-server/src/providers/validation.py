@@ -46,3 +46,4 @@ class ValidationProvider(ValidationProviderAbstract):
                 return True, False
             elif certainty > self.upper_limit:
                 return True, True
+        return None, None
