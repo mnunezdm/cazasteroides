@@ -1,9 +1,18 @@
 ''' Observation module '''
+from enum import Enum
+
 from debugger import DATA_TAG, print_info, to_string_list
 from models import db, user_observations
 from models.position import Position
 from models.puntuation import Puntuation
 from models.votes import Votes
+
+class State(Enum):
+    ''' Enum class for states, observations can be in 3 states,
+    DENYED, APPROVED or PENDING (default) '''
+    DENYED = 'denyed'
+    APPROVED = 'approved'
+    PENDING = 'pending'
 
 # class ObservationAbstract(db.Model):
 class ObservationAbstract:
@@ -29,7 +38,7 @@ class ObservationAbstract:
 class Observation(ObservationAbstract, db.Model):
     ''' Implementation of the Observation '''
     _id = db.Column(db.String(64), primary_key=True)
-    state = db.Column(db.String(16))
+    state = db.Column(db.Enum(State))
 
     image_id = db.Column(db.String(64), db.ForeignKey('image._id'))
     votes = db.relationship('Votes', uselist=False, lazy='joined')
@@ -39,8 +48,7 @@ class Observation(ObservationAbstract, db.Model):
     users_who_voted = db.relationship('User', secondary=user_observations,
                                       backref='Observation')
 
-    difficulty = db.Column(db.Integer)
-    filter_tag = db.Column(db.Integer)
+    brightness = db.Column(db.Integer)
 
     def __init__(self, observation_info):
         self._id = observation_info['_id']
@@ -53,7 +61,7 @@ class Observation(ObservationAbstract, db.Model):
         self.difficulty = -1
         self.filter_tag = -1
 
-        self.state = 'pending'
+        self.state = State.PENDING
 
     def __str__(self):
         parse = DATA_TAG + ' Observation (id={})\n'.format(self._id)
@@ -75,7 +83,7 @@ class Observation(ObservationAbstract, db.Model):
             "votes": self.votes.serialize(),
             "puntuation": self.puntuation.serialize(),
             "position": self.position.serialize(),
-            "state": self.state,
+            "state": self.state.value,
             "users_who_voted": [user.serialize(only_id=True)
                                 for user in self.users_who_voted]
             }
@@ -92,12 +100,12 @@ class Observation(ObservationAbstract, db.Model):
     def change_state(self, approved):
         ''' Changes the state of the observation based on the approved parameter\n
         approved=True => approved \n approved=False => denyed '''
-        self.state = 'approved' if approved else 'denyed'
+        self.state = State.APPROVED if approved else State.DENYED
         print_info('OBS{}'.format(self._id), 'state changed to \'{}\''.format(self.state))
 
     def get_notified(self):
         ''' Returns if this observation has  '''
-        return 'pending' not in self.state
+        return State.PENDING != self.state
 
     def repeated_vote(self, user):
         ''' Detects if the user passed has already voted this observation '''
