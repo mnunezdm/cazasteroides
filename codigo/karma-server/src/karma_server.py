@@ -14,7 +14,7 @@ class KarmaServer:
     def __init__(self):
         self.karma_level_provider = KarmaLevelProvider(MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION)
         self.validation_provider = ValidationProvider(MINIMUM_VOTES, MAXIMUM_VOTES, LOWER_LIMIT,
-                                                      UPPER_LIMIT, database=None)
+                                                      UPPER_LIMIT)
 
     def get_karma_for_points(self, user_points):
         ''' Gets karma data for the user_points passed '''
@@ -37,9 +37,11 @@ class KarmaServer:
 
         vote_info = observation_data['vote_info']
 
-        self.validation_provider.set_points(observation, user, vote_info)
-        update(observation)
-        return observation
+        if not observation.repeated_vote(user):
+            self.validation_provider.set_points(observation, user, vote_info)
+            update(observation)
+            return observation
+        # If false => user already voted this observation
 
     @staticmethod
     def get_observation_data(observation_id):

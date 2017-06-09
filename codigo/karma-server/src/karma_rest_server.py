@@ -38,6 +38,8 @@ def __end_time(response):
     print('Request time {}ns'.format(int(round(elapsed))))
     return response
 
+
+############################################################################
 # API Endpoints
 # localhost:5000/v1/karma/<int:user_points>
 @app.route('/v1/karma/<int:user_points>', methods=['GET'])
@@ -57,11 +59,12 @@ def get_general_info():
 def post_vote():
     ''' Updates the info for the observation passed '''
     request_data = request.get_json()
-    if request_data:
-        result = SERVER.post_vote(request_data)
-        if result:
-            return jsonify(result.serialize())
-    abort(400)
+    if not request_data:
+        abort(400, 'Empty request')
+    result = SERVER.post_vote(request_data)
+    if not result:
+        abort(400, 'Repeated votation for this user')
+    return jsonify(result.serialize())
 
 # localhost:5000/v1/validate/id>
 @app.route('/v1/validate/<string:observation_id>', methods=['GET'])
@@ -69,30 +72,41 @@ def get_observation(observation_id):
     ''' Returns the information for the id passed '''
     observation = SERVER.get_observation_data(observation_id)
     if not observation:
-        abort(404)
+        abort(404, 'Observation {} not found'.format(observation_id))
     return jsonify(SERVER.get_observation_data(observation_id).serialize())
-
+    
+############################################################################
 # Error Handlers
 @app.errorhandler(400)
-def bad_request(_):
+def bad_request(error):
     ''' Bad Request Handler '''
-    return make_response(jsonify({'code':400, 'error': 'Bad Request'}), 400)
+    return make_response(serialize_response(400, 'Bad Request', error.description), 400)
 
 @app.errorhandler(404)
-def not_found(_):
+def not_found(error):
     ''' Not Found Handler '''
-    return make_response(jsonify({'code':404, 'error': 'Not found'}), 404)
+    return make_response(serialize_response(404, 'Not Found', error.description), 404)
 
 @app.errorhandler(405)
-def not_allowed(_):
+def not_allowed(error):
     ''' Not Allowed Handler '''
-    return make_response(jsonify({'code':405, 'error':'Method not Allowed'}), 404)
+    return make_response(serialize_response(405, 'Method not allowed', error.description), 405)
 
-def initiate_server():
+def serialize_response(code, status, description, payload=None):
+    ''' Generate serialized responses '''
+    response = {'code': code, 'status': status, 'description': description}
+    if payload:
+        response['payload'] = payload
+    return jsonify(response)
+
+
+# Intializing server methods
+def instantiate_server():
+    ''' Instantiate the server '''
     server = KarmaServer()
     print_info('INFO', 'Starting REST Server')
     return server
 
 # Main Method
 if len(argv) > 1 and 'runserver' in argv[1]:
-    SERVER = initiate_server()
+    SERVER = instantiate_server()

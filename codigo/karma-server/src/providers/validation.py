@@ -9,12 +9,11 @@ class ValidationProviderAbstract:
 
 class ValidationProvider(ValidationProviderAbstract):
     ''' Karma Level Provider Implementation, has the methods to validate and notify '''
-    def __init__(self, minimum_votes, maximum_votes, lower_limit, upper_limit, database=None):
+    def __init__(self, minimum_votes, maximum_votes, lower_limit, upper_limit):
         self.minimum_votes = minimum_votes
         self.maximum_votes = maximum_votes
         self.lower_limit = lower_limit
         self.upper_limit = upper_limit
-        self.database = database
         self.__print_info()
 
     def __print_info(self):
@@ -25,12 +24,11 @@ class ValidationProvider(ValidationProviderAbstract):
         print_list('{} upper limit'.format(self.upper_limit))
 
     def set_points(self, observation, user, vote_info):
-        if not observation.repeated_vote(user):
-            number_of_votes, certainty = observation.add_vote(vote_info, user)
-            change, approved = self.__check_if_change(observation, certainty, number_of_votes)
-            if change:
-                observation.change_state(approved=approved)
-            return True
+        number_of_votes, certainty = observation.add_vote(vote_info, user)
+        change, approved = self.__check_if_change(observation, certainty, number_of_votes)
+        if change:
+            observation.change_state(approved=approved)
+        return True
 
     def __check_if_change(self, observation, certainty, number_of_votes):
         ''' Checks if the observation can change its status, returns True if change\n
