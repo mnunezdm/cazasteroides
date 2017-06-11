@@ -10,9 +10,16 @@ class Image(db.Model):
     probability = db.Column(db.Integer)
     fwhm = db.Column(db.Integer)
 
-    def __init__(self, _id, x_size, y_size):
-        self._id = _id
-        self.x_size = x_size
-        self.y_size = y_size
-        self.probability = 0
-        self.fwhm = 0
+    def __init__(self, image_info):
+        self.observations = []
+        self._id = image_info['_id']
+        self.x_size = image_info['x_size']
+        self.y_size = image_info['y_size']
+        self.probability = image_info['probability']
+        self.fwhm = image_info['fwhm']
+
+    def __eq__(self, image):
+        if isinstance(image, type(self)):
+            return self._id == image._id
+        if isinstance(image, type(self._id)):
+            return image == self._id

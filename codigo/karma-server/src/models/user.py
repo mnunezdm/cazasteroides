@@ -8,6 +8,15 @@ class User(db.Model):
     def __init__(self, user_info):
         self._id = user_info['_id']
 
+    def __str__(self):
+        return str(self._id)
+
+    def __eq__(self, user):
+        if isinstance(user, User):
+            return self._id is user._id
+        if isinstance(user, str):
+            return user == str(self._id)
+
     def serialize(self, only_id=True):
         ''' Serializes the object, has two modes:\n
         only_id = True => serializes only the id\n

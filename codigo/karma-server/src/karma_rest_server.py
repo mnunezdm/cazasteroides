@@ -12,16 +12,16 @@ from models import db
 from models.image import Image
 from models.user import User
 import time
+import json
 
 init_terminal_colors()
 
-if __name__ == '__main__':
-    print_error('Run from manage.py')
-    exit(1)
+# if __name__ == '__main__':
+#     print_error('Run from manage.py')
+#     exit(1)
 
 app = Flask(__name__)
 app.config.from_object('config')
-manager = Manager(app)
 db.init_app(app)
 migrate = Migrate(app, db)
 
@@ -35,7 +35,11 @@ def __end_time(response):
     global time_start
     time_end = time.clock()*1000000
     elapsed = time_end - time_start
-    print('Request time {}ns'.format(int(round(elapsed))))
+    rounded = int(round(elapsed))
+    print('Request time {}ns'.format(rounded))
+    data = json.loads(response.get_data())
+    data['time'] = rounded
+    response.set_data(json.dumps(data))
     return response
 
 
@@ -68,13 +72,22 @@ def post_vote():
 
 # localhost:5000/v1/validate/id>
 @app.route('/v1/validate/<string:observation_id>', methods=['GET'])
-def get_observation(observation_id):
+def get_observation_info(observation_id):
     ''' Returns the information for the id passed '''
     observation = SERVER.get_observation_data(observation_id)
     if not observation:
         abort(404, 'Observation {} not found'.format(observation_id))
     return jsonify(SERVER.get_observation_data(observation_id).serialize())
-    
+
+@app.route('/v1/selection', methods=['GET'])
+def get_new_observation():
+    ''' Returns the information for the id passed '''
+    user_id = request.args.get('user')
+    karma_level = request.args.get('karma')
+    if user_id and karma_level:
+        return jsonify(SERVER.get_new_observation(user_id, karma_level))
+    abort(404, 'You have to pass user and karma as url params')
+
 ############################################################################
 # Error Handlers
 @app.errorhandler(400)
@@ -101,12 +114,12 @@ def serialize_response(code, status, description, payload=None):
 
 
 # Intializing server methods
-def instantiate_server():
+def instantiate_server(app, db):
     ''' Instantiate the server '''
-    server = KarmaServer()
+    server = KarmaServer(app, db)
     print_info('INFO', 'Starting REST Server')
     return server
 
 # Main Method
 if len(argv) > 1 and 'runserver' in argv[1]:
-    SERVER = instantiate_server()
+    SERVER = instantiate_server(app, db)

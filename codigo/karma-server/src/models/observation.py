@@ -28,7 +28,7 @@ class ObservationAbstract:
     def get_notified(self):
         ''' Returns if the Astronomer has been notified '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
-    def serialize(self, only_id=False):
+    def serialize(self, only_id=False, difficulty=False, id_position=False):    
         ''' Serializes the object, has two modes:\n
         only_id = True => serializes only the id\n
         only_id = False => serializes all the object'''
@@ -46,13 +46,16 @@ class Observation(ObservationAbstract, db.Model):
     puntuation = db.relationship('Puntuation', uselist=False, lazy='joined')
 
     users_who_voted = db.relationship('User', secondary=user_observations,
-                                      backref='Observation')
+                                      backref='Observation', lazy='joined')
 
     brightness = db.Column(db.Integer)
+    difficulty = db.Column(db.Integer)
+    filter_tag = db.Column(db.Integer)
 
     def __init__(self, observation_info):
         self._id = observation_info['_id']
-        self.image_id = observation_info['image_id']
+        self.image_id = observation_info['image']['_id']
+        self.brightness = observation_info['brightness']
 
         self.votes = Votes(observation_info['votes'])
         self.position = Position(observation_info['position'])
@@ -60,6 +63,7 @@ class Observation(ObservationAbstract, db.Model):
 
         self.difficulty = -1
         self.filter_tag = -1
+        self.certainty = 0
 
         self.state = State.PENDING
 
@@ -71,12 +75,30 @@ class Observation(ObservationAbstract, db.Model):
         parse = parse + to_string_list('state', self.state)
         return parse
 
-    def serialize(self, only_id=False):
+    def __eq__(self, passed_id):
+        return self._id == passed_id
+
+    def __repr__(self):
+        return '<{}, {}, {}>'.format(Observation.__name__, self._id,
+                                     self.puntuation.calculate_certainty())
+
+    def serialize(self, only_id=False, difficulty=False, id_position=False):
         ''' Serializes the object, has two modes:\n
         only_id = True => serializes only the id\n
         only_id = False => serializes all the object'''
         if only_id:
             return {"_id": self._id}
+        if id_position:
+            return {
+                "observation_id": self._id,
+                "image_id": self.image_id,
+                "position": self.position.serialize()
+            }
+        if difficulty:
+            return {
+                "_id": self._id,
+                "difficulty": self.difficulty
+            }
         return {
             "_id": self._id,
             "image_id": self.image_id,
@@ -112,3 +134,8 @@ class Observation(ObservationAbstract, db.Model):
         for user_who_voted in self.users_who_voted:
             if user == user_who_voted:
                 return True
+
+    def get_certainty(self):
+        if self.get_certainty:
+            return self.get_certainty
+        return self.puntuation.get_certainty()
