@@ -3,13 +3,13 @@ from math import exp
 
 from models.observation import State
 
-class ImageEvaluatorAbstract:
-    ''' Abstract class for Image Evaluator '''
+class ObservationEvaluatorAbstract:
+    ''' Abstract class for Observation Evaluator '''
     def evaluate(self, observation_list):
-        ''' Evaluate the images passed '''
+        ''' Evaluate the observations passed '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
-class ImageEvaluator(ImageEvaluatorAbstract):
+class ObservationEvaluator(ObservationEvaluatorAbstract):
     ''' Implementation of the Evaluator class '''
     # def __init__(self, fwhm_multiplier):
     #     self.fwhm_multiplier = fwhm_multiplier

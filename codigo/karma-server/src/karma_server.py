@@ -4,8 +4,10 @@ from configuration_params import (LOWER_LIMIT, MAX_KARMA_LEVEL, MAXIMUM_VOTES,
                                   UPPER_LIMIT)
 from providers.validation import ValidationProvider
 from providers.level import KarmaLevelProvider
-from providers.imageselection import ImageSelectionProvider
-from content_resolver import StaticContentResolver, CachedContentResolver, ThreadedUpdateContentResolver
+from providers.observation import ObservationSelectionProvider
+# from content_resolver import ThreadedUpdateContentResolver
+# from content_resolver import CachedContentResolver
+from content_resolver import StaticContentResolver
 
 from models.observation import Observation
 from models.user import User
@@ -17,10 +19,10 @@ class KarmaServer:
         self.karma_level_provider = KarmaLevelProvider(MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION)
         self.validation_provider = ValidationProvider(MINIMUM_VOTES, MAXIMUM_VOTES, LOWER_LIMIT,
                                                       UPPER_LIMIT)
-        self.image_selection = ImageSelectionProvider()
+        self.observation_selection = ObservationSelectionProvider()
         # self.content_resolver = CachedContentResolver(app, db, Observation, User)
         self.content_resolver = StaticContentResolver(db)
-        #self.content_resolver = ThreadedUpdateContentResolver(db)        
+        #self.content_resolver = ThreadedUpdateContentResolver(db)
 
     def get_karma_for_points(self, user_points):
         ''' Gets karma data for the user_points passed '''
@@ -60,4 +62,4 @@ class KarmaServer:
     def get_new_observation(self, user_id, karma_level=1):
         ''' Returns an observation for the user passed '''
         observation_list = self.content_resolver.get(Observation)
-        return self.image_selection.get_image(observation_list, user_id, karma_level)
+        return self.observation_selection.get_observation(observation_list, user_id, karma_level)

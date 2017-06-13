@@ -27,3 +27,4 @@ codigo/karma-server/src/app\.db
 
 codigo/karma-server/src/migrations/
 TODOs.txt
+codigo/karma-server/src/providers/observation/__pycache__/
