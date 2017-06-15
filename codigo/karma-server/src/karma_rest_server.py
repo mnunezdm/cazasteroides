@@ -46,14 +46,14 @@ def __end_time(response):
 ############################################################################
 # API Endpoints
 # localhost:5000/v1/karma/<int:user_points>
-@app.route('/v1/karma/<int:user_points>', methods=['GET'])
+@app.route('/v1/level/<int:user_points>', methods=['GET'])
 def get_user_info(user_points):
     ''' Returns karma info for the points passed'''
     result = SERVER.get_karma_for_points(user_points)
     return jsonify(result)
 
 # localhost:5000/v1/karma/info>
-@app.route('/v1/karma/info', methods=['GET'])
+@app.route('/v1/level/info', methods=['GET'])
 def get_general_info():
     ''' Returns all karma info '''
     return jsonify(SERVER.get_karma_general_info())
@@ -85,8 +85,12 @@ def get_new_observation():
     user_id = request.args.get('user')
     karma_level = request.args.get('karma')
     if user_id and karma_level:
-        return jsonify(SERVER.get_new_observation(user_id, karma_level))
-    abort(404, 'You have to pass user and karma as url params')
+        try:
+            karma_level = int(karma_level)
+            return jsonify(SERVER.get_new_observation(user_id, karma_level))
+        except ValueError:
+            abort(400, 'Karma must be a number')
+    abort(400, 'You have to pass user and karma as url params')
 
 ############################################################################
 # Error Handlers
