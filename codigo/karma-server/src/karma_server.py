@@ -34,7 +34,7 @@ class KarmaServer:
 
     def get_karma_general_info(self):
         ''' Gets info for the karma '''
-        return self.karma_level_provider.get_general_info()
+        return {'karma_info':self.karma_level_provider.get_general_info()}
 
     def post_vote(self, observation_data):
         ''' Updates the observation with the data passed, returns the observation updated '''

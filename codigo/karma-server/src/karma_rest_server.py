@@ -1,18 +1,19 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
+import json
+import time
 from sys import argv
 
 from flask import Flask, abort, jsonify, make_response, request
 from flask_migrate import Migrate
 from flask_script import Manager
 
-from debugger import init_terminal_colors, print_error, print_info
+from debugger import (init_terminal_colors, print_error, print_info,
+                      start_timer, stop_timer)
 from karma_server import KarmaServer
 from models import db
 from models.image import Image
 from models.user import User
-import time
-import json
 
 init_terminal_colors()
 
@@ -28,17 +29,14 @@ migrate = Migrate(app, db)
 @app.before_request
 def __start_timer():
     global time_start
-    time_start = time.clock()*1000000
+    time_start = start_timer()
 
 @app.after_request
 def __end_time(response):
     global time_start
-    time_end = time.clock()*1000000
-    elapsed = time_end - time_start
-    rounded = round(elapsed)
-    print('Request time {}ns'.format(rounded))
+    elapsed = stop_timer(time_start, 'FULL REQUEST')
     data = json.loads(response.get_data())
-    data['time'] = rounded
+    data['time'] = elapsed
     response.set_data(json.dumps(data))
     return response
 
