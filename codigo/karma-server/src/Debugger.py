@@ -1,5 +1,6 @@
 ''' Helper for printing debug trace '''
 from colorama import Fore, init
+import time
 
 def init_terminal_colors():
     ''' Necessary for coloring terminal in windows '''
@@ -22,3 +23,10 @@ def to_string_list(type_name, content):
     return '\t- ' + Fore.CYAN + '{}'.format(type_name) + Fore.RESET + ':\t {} \n'.format(content)
 
 DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET
+
+def start_timer():
+    return time.clock() * 1000000
+
+def stop_timer(time_start, method):
+    time_stop = time.clock() * 1000000
+    print_info('INFO', 'Elapsed time in {} is {}ns'.format(method, round(time_stop - time_start)))

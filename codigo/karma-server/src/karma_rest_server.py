@@ -35,7 +35,7 @@ def __end_time(response):
     global time_start
     time_end = time.clock()*1000000
     elapsed = time_end - time_start
-    rounded = int(round(elapsed))
+    rounded = round(elapsed)
     print('Request time {}ns'.format(rounded))
     data = json.loads(response.get_data())
     data['time'] = rounded

@@ -4,7 +4,7 @@ from models import db
 
 # class Puntuation:
 class Puntuation(db.Model):
-    observation_id = db.Column(db.Integer, db.ForeignKey('observation._id'), primary_key=True)
+    observation_id = db.Column(db.String(64), db.ForeignKey('observation._id'), primary_key=True)
     positive = db.Column(db.Integer)
     negative = db.Column(db.Integer)
     ''' Puntuation class '''

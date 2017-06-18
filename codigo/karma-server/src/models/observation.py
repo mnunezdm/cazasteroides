@@ -45,12 +45,9 @@ class Observation(ObservationAbstract, db.Model):
     position = db.relationship('Position', uselist=False, lazy='joined')
     puntuation = db.relationship('Puntuation', uselist=False, lazy='joined')
 
-    users_who_voted = db.relationship('User', secondary=user_observations,
-                                      backref='Observation', lazy='joined')
+    users_who_voted = db.relationship('User', secondary=user_observations, lazy='joined')
 
     brightness = db.Column(db.Integer)
-    difficulty = db.Column(db.Integer)
-    filter_tag = db.Column(db.Integer)
 
     def __init__(self, observation_info):
         self._id = observation_info['_id']
@@ -62,7 +59,6 @@ class Observation(ObservationAbstract, db.Model):
         self.puntuation = Puntuation(self.votes)
 
         self.difficulty = -1
-        self.filter_tag = -1
         self.certainty = 0
 
         self.state = State.PENDING
@@ -75,8 +71,8 @@ class Observation(ObservationAbstract, db.Model):
         parse = parse + to_string_list('state', self.state)
         return parse
 
-    def __eq__(self, passed_id):
-        return self._id == passed_id
+    def __eq__(self, observation):
+        return observation == self._id
 
     def __repr__(self):
         return '<{}, {}, {}>'.format(Observation.__name__, self._id,
@@ -139,3 +135,8 @@ class Observation(ObservationAbstract, db.Model):
         if self.get_certainty:
             return self.get_certainty
         return self.puntuation.get_certainty()
+
+    def user_has_voted(self, current_user):
+        for user in self.users_who_voted:
+            if user == current_user:
+                return True

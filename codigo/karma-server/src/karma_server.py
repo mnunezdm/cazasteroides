@@ -2,6 +2,7 @@
 from configuration_params import (LOWER_LIMIT, MAX_KARMA_LEVEL, MAXIMUM_VOTES,
                                   MINIMUM_VOTES, POINTS_PER_OBSERVATION,
                                   UPPER_LIMIT)
+from debugger import start_timer, stop_timer
 from providers.validation import ValidationProvider
 from providers.level import KarmaLevelProvider
 from providers.observation import ObservationSelectionProvider
@@ -20,7 +21,7 @@ class KarmaServer:
         self.validation_provider = ValidationProvider(MINIMUM_VOTES, MAXIMUM_VOTES, LOWER_LIMIT,
                                                       UPPER_LIMIT)
         self.observation_selection = ObservationSelectionProvider()
-        # self.content_resolver = CachedContentResolver(app, db, Observation, User)
+        # self.content_resolver = CachedContentResolver(app, db, Observation, User, Image)
         self.content_resolver = StaticContentResolver(db)
         #self.content_resolver = ThreadedUpdateContentResolver(db)
 
@@ -37,19 +38,27 @@ class KarmaServer:
 
     def post_vote(self, observation_data):
         ''' Updates the observation with the data passed, returns the observation updated '''
-        observation_info = observation_data['observation_info']
-        observation = self.content_resolver.get_or_create_it(Observation, observation_info)
-
+        time = start_timer()
         user_info = observation_data['user_info']
-        user = self.content_resolver.get_or_create_it(User, user_info)
+        user, created = self.content_resolver.get_or_create_it(User, user_info)
+        stop_timer(time, 'GET User ({})'.format('created' if created else 'fetched'))
 
-        image_info = observation_info['image']
-        image = self.content_resolver.get_or_create_it(Image, image_info)
-        self.content_resolver.update(image)
+        time = start_timer()
+        observation_info = observation_data['observation_info']
+        observation, created = self.content_resolver.get_or_create_it(Observation,
+                                                                      observation_info)
+        stop_timer(time, 'GET Observation ({})'.format('created' if created else 'fetched'))
 
-        vote_info = observation_data['vote_info']
+        if not observation.user_has_voted(user):
+            time = start_timer()
+            image_info = observation_info['image']
+            image, created = self.content_resolver.get_or_create_it(Image, image_info)
+            if created:
+                self.content_resolver.update(image)
+            stop_timer(time, 'GET Image')
 
-        if not observation.repeated_vote(user):
+            vote_info = observation_data['vote_info']
+            time = start_timer()
             self.validation_provider.set_points(observation, user, vote_info)
             self.content_resolver.update(observation)
             return observation
@@ -61,5 +70,7 @@ class KarmaServer:
 
     def get_new_observation(self, user_id, karma_level=1):
         ''' Returns an observation for the user passed '''
+        time = start_timer()
         observation_list = self.content_resolver.get(Observation)
+        stop_timer(time, 'retrive observations')
         return self.observation_selection.get_observation(observation_list, user_id, karma_level)

@@ -3,8 +3,8 @@ from models import db
 
 class Image(db.Model):
     ''' Image class '''
-    _id = db.Column(db.Integer, primary_key=True)
-    observations = db.relationship('Observation', backref='image', lazy='joined')
+    _id = db.Column(db.String(64), primary_key=True)
+    observations = db.relationship('Observation', backref=db.backref('image', lazy='joined'))
     x_size = db.Column(db.Integer)
     y_size = db.Column(db.Integer)
     probability = db.Column(db.Integer)
@@ -19,7 +19,5 @@ class Image(db.Model):
         self.fwhm = image_info['fwhm']
 
     def __eq__(self, image):
-        if isinstance(image, type(self)):
-            return self._id == image._id
-        if isinstance(image, type(self._id)):
-            return image == self._id
+        return image == self._id
+        

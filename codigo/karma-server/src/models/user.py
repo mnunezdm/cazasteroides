@@ -2,8 +2,9 @@
 from models import db, user_observations
 class User(db.Model):
     ''' User class '''
-    _id = db.Column(db.Integer, primary_key=True)
-    observations = db.relationship('Observation', secondary=user_observations, backref='User')
+    _id = db.Column(db.String(64), primary_key=True)
+    observations = db.relationship('Observation', secondary=user_observations, lazy='joined',
+                                   backref=db.backref('user', lazy='joined'))
 
     def __init__(self, user_info):
         self._id = user_info['_id']
@@ -12,10 +13,7 @@ class User(db.Model):
         return str(self._id)
 
     def __eq__(self, user):
-        if isinstance(user, User):
-            return self._id is user._id
-        if isinstance(user, str):
-            return user == str(self._id)
+        return user == self._id
 
     def serialize(self, only_id=True):
         ''' Serializes the object, has two modes:\n
@@ -30,3 +28,8 @@ class User(db.Model):
             'observations': [observation.serialize(only_id=True)
                              for observation in self.observations]
         }
+
+    def has_voted(self, observation_id):
+        for observation in self.observations:
+            if observation_id == observation:
+                return True
