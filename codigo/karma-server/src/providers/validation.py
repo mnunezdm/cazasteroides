@@ -3,7 +3,7 @@ from debugger import print_info, print_list
 
 class ValidationProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to validate and notify '''
-    def set_points(self, observation, user, vote_info):
+    def set_points(self, observation, user_info, vote_info):
         ''' Updates observation data with the new vote '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 

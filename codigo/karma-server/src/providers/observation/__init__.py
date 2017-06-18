@@ -3,7 +3,7 @@ from providers.observation.evaluator import ObservationEvaluator
 from providers.observation.filter import ObservationFilter
 from providers.observation.eraser import ObservationEraser
 from providers.observation.selector import ObservationSelector
-from debugger import print_info
+from debugger import print_info, start_timer, stop_timer
 
 class ObservationSelectionProviderAbstract:
     ''' Abstract class of the EFES Provider class '''
@@ -21,12 +21,21 @@ class ObservationSelectionProvider(ObservationSelectionProviderAbstract):
         self.selector = ObservationSelector()
 
     def get_observation(self, observation_list, user_id, karma_level):
+        time_start = start_timer()
         evaluated_observations = self.evaluator.evaluate(observation_list)
+        stop_timer(time_start, 'evaluate')
+        time_start = start_timer()
         observations_for_level = self.filter.get_observations_for_level(evaluated_observations,
                                                                         karma_level)
+        stop_timer(time_start, 'filter')
+        time_start = start_timer()
         erased__observations = self.eraser.erase(observations_for_level, user_id)
+        stop_timer(time_start, 'erase')
+        time_start = start_timer()
         if erased__observations:
+            time_start = start_timer()
             selected__observation = self.selector.select(erased__observations)
+            stop_timer(time_start, 'select')
             return selected__observation.serialize(id_position=True)
         else:
             return {

@@ -8,7 +8,5 @@ class ObservationEraserAbstract:
 class ObservationEraser(ObservationEraserAbstract):
     ''' Implementation of ObservationEraserAbastract, erases every repeated observation '''
     def erase(self, observation_list, user_id):
-        processed_list = [observation for observation in observation_list
-                          if str(user_id) not in observation.users_who_voted]
-        print('processed', processed_list, len(processed_list))
-        return processed_list
+        return [observation for observation in observation_list
+                if user_id not in observation.users_who_voted]
