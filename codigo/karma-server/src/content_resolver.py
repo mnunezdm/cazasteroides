@@ -20,6 +20,7 @@ class ContentResolverAbstract:
         raise NotImplementedError
 
 class StaticContentResolver(ContentResolverAbstract):
+    ''' Simple Content Resolver '''
     def __init__(self, db):
         self.db = db
 

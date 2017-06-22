@@ -1,8 +1,6 @@
 ''' Filter of the EFES Algorithm '''
 import math
-import time
 from models.observation import State
-from debugger import print_info, start_timer, stop_timer
 
 class ObservationFilterAbstract:
     ''' Abstract class for observation Filter '''
@@ -13,26 +11,25 @@ class ObservationFilterAbstract:
 
 class ObservationFilter(ObservationFilterAbstract):
     ''' Implementation of the Filter class '''
-
-    def __init__(self, number_of_karma_levels=50, number_of_humhum_levels=5):
-        self.karma_per_humhum = number_of_karma_levels / number_of_humhum_levels
+    def __init__(self, number_of_karma_levels, number_of_filter_levels):
+        self.karma_per_filter = number_of_karma_levels / number_of_filter_levels
 
     def get_observations_for_level(self, observation_list, karma_level):
-        humhum_level = self.__get_humhum_level(karma_level)
+        filter_level = self.__get_filter_level(karma_level)
         filtered_observations = self.__filter_observations(observation_list)
-        return self.__get__specific_observations(filtered_observations, humhum_level)
+        return self.__get__specific_observations(filtered_observations, filter_level)
 
-    def __get__specific_observations(self, filtered_observations, humhum_level):
-        magic_number = math.floor(humhum_level / 2) - 1
-        if humhum_level % 2 == 0:
+    def __get__specific_observations(self, filtered_observations, filter_level):
+        magic_number = math.floor(filter_level / 2) - 1
+        if filter_level % 2 == 0:
             return filtered_observations[magic_number] + filtered_observations[magic_number + 1]
         return filtered_observations[magic_number]
 
-    def __get_humhum_level(self, karma_level):
-        humhum_level = math.ceil(karma_level / self.karma_per_humhum)
+    def __get_filter_level(self, karma_level):
+        filter_level = math.ceil(karma_level / self.karma_per_filter)
         # in case of karma_level 0, return 1
-        humhum_level = 1 if humhum_level == 0 else humhum_level
-        return humhum_level
+        filter_level = 1 if filter_level == 0 else filter_level
+        return filter_level
 
     def __chunkify(self, list_, number_of_groups):
         return [list_[i::number_of_groups] for i in range(number_of_groups)]

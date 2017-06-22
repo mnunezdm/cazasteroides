@@ -1,7 +1,7 @@
 ''' KarmaServerImplementation '''
 from configuration_params import (LOWER_LIMIT, MAX_KARMA_LEVEL, MAXIMUM_VOTES,
                                   MINIMUM_VOTES, POINTS_PER_OBSERVATION,
-                                  UPPER_LIMIT)
+                                  UPPER_LIMIT, MAX_FILTER_LEVEL)
 from debugger import start_timer, stop_timer
 from providers.validation import ValidationProvider
 from providers.level import KarmaLevelProvider
@@ -16,11 +16,12 @@ from models.image import Image
 
 class KarmaServer:
     ''' Class for Server '''
-    def __init__(self, app, db):
+    # def __init__(self, app, db):
+    def __init__(self, db):
         self.karma_level_provider = KarmaLevelProvider(MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION)
         self.validation_provider = ValidationProvider(MINIMUM_VOTES, MAXIMUM_VOTES, LOWER_LIMIT,
                                                       UPPER_LIMIT)
-        self.observation_selection = ObservationSelectionProvider()
+        self.observation_selection = ObservationSelectionProvider(MAX_KARMA_LEVEL, MAX_FILTER_LEVEL)
         # self.content_resolver = CachedContentResolver(app, db, Observation, User, Image)
         self.content_resolver = StaticContentResolver(db)
         #self.content_resolver = ThreadedUpdateContentResolver(db)
@@ -68,7 +69,7 @@ class KarmaServer:
         ''' Returns the observation or nothing '''
         return self.content_resolver.get(Observation, _id=observation_id).first()
 
-    def get_new_observation(self, user_id, karma_level=1):
+    def get_new_observation(self, user_id, karma_level):
         ''' Returns an observation for the user passed '''
         time = start_timer()
         observation_list = self.content_resolver.get(Observation)

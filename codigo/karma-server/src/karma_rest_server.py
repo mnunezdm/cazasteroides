@@ -1,12 +1,11 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
 import json
-import time
+import logging
 from sys import argv
 
 from flask import Flask, abort, jsonify, make_response, request
 from flask_migrate import Migrate
-from flask_script import Manager
 
 from debugger import (init_terminal_colors, print_error, print_info,
                       start_timer, stop_timer)
@@ -17,14 +16,15 @@ from models.user import User
 
 init_terminal_colors()
 
-# if __name__ == '__main__':
-#     print_error('Run from manage.py')
-#     exit(1)
+if __name__ == '__main__':
+    print_error('Run from manage.py')
+    exit(1)
 
 app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
 migrate = Migrate(app, db)
+
 
 @app.before_request
 def __start_timer():
@@ -116,12 +116,12 @@ def serialize_response(code, status, description, payload=None):
 
 
 # Intializing server methods
-def instantiate_server(app, db):
+def instantiate_server(db):
     ''' Instantiate the server '''
-    server = KarmaServer(app, db)
+    server = KarmaServer(db)
     print_info('INFO', 'Starting REST Server')
     return server
 
 # Main Method
 if len(argv) > 1 and 'runserver' in argv[1]:
-    SERVER = instantiate_server(app, db)
+    SERVER = instantiate_server(db)

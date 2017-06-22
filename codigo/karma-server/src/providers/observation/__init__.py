@@ -3,7 +3,7 @@ from providers.observation.evaluator import ObservationEvaluator
 from providers.observation.filter import ObservationFilter
 from providers.observation.eraser import ObservationEraser
 from providers.observation.selector import ObservationSelector
-from debugger import print_info, start_timer, stop_timer
+from debugger import print_info, print_list, start_timer, stop_timer
 
 class ObservationSelectionProviderAbstract:
     ''' Abstract class of the EFES Provider class '''
@@ -13,10 +13,11 @@ class ObservationSelectionProviderAbstract:
 
 class ObservationSelectionProvider(ObservationSelectionProviderAbstract):
     ''' Implementation of the EFES Provider class '''
-    def __init__(self):
+    def __init__(self, number_of_karma_levels, number_of_filter_levels):
         print_info('INFO', 'Initializing Observation Selection Provider')
+        print_list('{} maximum filter level'.format(number_of_filter_levels))
         self.evaluator = ObservationEvaluator()
-        self.filter = ObservationFilter()
+        self.filter = ObservationFilter(number_of_karma_levels, number_of_filter_levels)
         self.eraser = ObservationEraser()
         self.selector = ObservationSelector()
 
