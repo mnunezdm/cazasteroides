@@ -1,17 +1,24 @@
 {
     "user_info": {
-        "_id": 2
+        "_id": "prueba7"
     },
     "vote_info": {
-        "karma_level": 10,
-        "vote_type": false
+        "karma_level": 3,
+        "vote_type": true
     },
     "observation_info": {
-        "_id": "6",
-        "image_id": "1",
+        "_id": "prueba11",
+        "brightness": 5,
+        "image": {
+            "_id": "prueba11",
+            "fwhm": 1,
+            "probability": 60,
+            "x_size": 100,
+            "y_size": 100         
+        },
         "votes": {
-            "upvotes":1,
-            "downvotes":1
+            "upvotes":0,
+            "downvotes":0
         },
         "position": {
             "x": 12,

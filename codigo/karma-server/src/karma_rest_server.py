@@ -1,7 +1,6 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
 import json
-import logging
 from sys import argv
 
 from flask import Flask, abort, jsonify, make_response, request
@@ -11,8 +10,8 @@ from debugger import (init_terminal_colors, print_error, print_info,
                       start_timer, stop_timer)
 from karma_server import KarmaServer
 from models import db
-from models.image import Image
-from models.user import User
+from models.image import Image  # necessary for migrate tool detect this table
+from models.user import User    # necessary for migrate tool detect this table
 
 init_terminal_colors()
 
@@ -24,7 +23,6 @@ app = Flask(__name__)
 app.config.from_object('config')
 db.init_app(app)
 migrate = Migrate(app, db)
-
 
 @app.before_request
 def __start_timer():
@@ -39,7 +37,6 @@ def __end_time(response):
     data['time'] = elapsed
     response.set_data(json.dumps(data))
     return response
-
 
 ############################################################################
 # API Endpoints
@@ -106,7 +103,7 @@ def not_found(error):
 def not_allowed(error):
     ''' Not Allowed Handler '''
     return make_response(serialize_response(405, 'Method not allowed', error.description), 405)
-
+############################################################################
 def serialize_response(code, status, description, payload=None):
     ''' Generate serialized responses '''
     response = {'code': code, 'status': status, 'description': description}
@@ -116,9 +113,9 @@ def serialize_response(code, status, description, payload=None):
 
 
 # Intializing server methods
-def instantiate_server(db):
+def instantiate_server(database):
     ''' Instantiate the server '''
-    server = KarmaServer(db)
+    server = KarmaServer(database)
     print_info('INFO', 'Starting REST Server')
     return server
 

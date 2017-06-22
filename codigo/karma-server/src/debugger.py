@@ -16,9 +16,32 @@ def print_error(message):
     ''' Prints error message with type in red '''
     print(Fore.RED + '[ERROR] ' + Fore.RESET + message)
 
+def print_success(message):
+    ''' Prints sucess message with type in green '''
+    print(Fore.GREEN + '[SUCCESS] ' + Fore.RESET + message)
+
 def print_list(message):
     ''' Prints message in a list '''
     print('\t- ' + message)
+
+def print_test_info(test_type):
+    ''' Prints test info message '''
+    print('{}[INFO]{} Starting {}:'.format(Fore.YELLOW, Fore.RESET,
+                                           Fore.CYAN + test_type + Fore.RESET))
+
+def print_test_list(test_name, success, message):
+    ''' Prints message in a list '''
+    test_name = __get_formated_test(test_name)
+    test_result = __get_formated_test_result(success)
+    print('\t-{}: {} {}'.format(test_name, test_result, message))
+
+def __get_formated_test(test_name):
+    return Fore.CYAN + test_name + Fore.RESET
+
+def __get_formated_test_result(success):
+    if success:
+        return Fore.GREEN + 'OK' + Fore.RESET
+    return Fore.RED + 'ERROR' + Fore.RESET
 
 def to_string_list(type_name, content):
     ''' Returns a string with the type and content properly formated '''

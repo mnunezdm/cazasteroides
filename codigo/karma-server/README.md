@@ -6,42 +6,42 @@ TODO
 
 ## Instalación
 
-### Prerequisitos
+### Prerrequisitos
 
-Sera necesario tener Python3 instalado. No se asegura el correcto funcionamiento sobre Python2. Para la instalar se puede realizar directamente desde la pagina web de [Python](https://www.python.org/downloads/)
+Sera necesario tener Python3 instalado. No se asegura el correcto funcionamiento sobre Python2. Para la instalar se puede realizar directamente desde la página web de [Python](https://www.python.org/downloads/)
 
-Además, sera necesario tener instalado pip para descargar todos los modulos necesarios, este paquete se instala por defecto al instalar cualquier version de Python por encima de 2.7.8 y por encima de 3.3 (no inclusive).
+Además, será necesario tener instalado pip para descargar todos los módulos necesarios, este paquete se instala por defecto al instalar cualquier versión de Python por encima de 2.7.8 y por encima de 3.3 (no inclusive).
 
-Por ultimo es recomendable utiliar virtualenv para evitar que modulos no necesarios interfieran.
+Por último, es recomendable utilizar virtualenv para evitar que módulos no necesarios interfieran.
 
-### Instalacion
+### Instalación
 
-Habra que descargarse la ultima version del servidor desde este repositorio Git, para ello lo podemos hacer utilizando el siguiente mandato.
+Habrá que descargarse la última versión del servidor desde este repositorio Git, para ello lo podemos hacer utilizando el siguiente mandato.
 
 ```
 git clone https://github.com/mnunezdm/cazasteroides.git
 ```
 
-Con esto activado habra que navegar hasta la carpeta donde esta el servidor, esta es:
+Con esto activado habrá que navegar hasta la carpeta donde está el servidor, esta es:
 
 ```
-cd cazasteroides/codigo/karma-server
+cd cazasteroides/código/karma-server
 ```
 
-Ahora, si se quiere utilizar un virtualenv habra que inicilizarlo y activarlo.
+Ahora, si se quiere utilizar un virtualenv habrá que inicializarlo y activarlo.
 
 ```
 virtualenv .
 Scripts/activate
 ```
 
-Ahora, habra que instalar todos los modulos necesarios, para ello, simplemente lanzaremos el mandato
+Ahora, habrá que instalar todos los módulos necesarios, para ello, simplemente lanzaremos el mandato
 
 ```
 pip install -r requirements.txt
 ```
 
-Por ultimo, tendremos que inicializar la base de datos.
+Por último, tendremos que inicializar la base de datos.
 
 Para ello, dentro de la carpeta src, lanzaremos los tres siguientes mandatos.
 
@@ -55,6 +55,8 @@ Con esto ya tendremos nuestro sistema preparado para poder ejecutar el servidor.
 
 ## Probar Servidor
 
+Se ha preparado una batería de test para probar todos los módulos de este servidor, para ello, tendremos que lanzar el siguiente mandato:
+
 ```
-TODO
+python manage.py runtests
 ```
