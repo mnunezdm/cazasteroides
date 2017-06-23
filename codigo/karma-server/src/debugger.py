@@ -3,6 +3,7 @@ import time
 
 from colorama import Fore, init
 
+DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET
 
 def init_terminal_colors():
     ''' Necessary for coloring terminal in windows '''
@@ -47,8 +48,6 @@ def to_string_list(type_name, content):
     ''' Returns a string with the type and content properly formated '''
     return '\t- ' + Fore.CYAN + '{}'.format(type_name) + Fore.RESET + ':\t {} \n'.format(content)
 
-DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET
-
 def start_timer():
     ''' Returns the time in ns '''
     return time.clock() * 1000000
@@ -60,4 +59,3 @@ def stop_timer(time_start, method):
     elapsed = round(time_stop - time_start)
     print_info('INFO', 'Elapsed time in {} is {}ns'.format(method, elapsed))
     return elapsed
-    

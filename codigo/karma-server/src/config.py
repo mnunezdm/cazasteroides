@@ -7,4 +7,4 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(BASEDIR, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-ENDPOINT = 'http://localhost:5000/v1'
+ENDPOINT = 'http://localhost:5000/'

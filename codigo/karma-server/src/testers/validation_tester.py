@@ -86,7 +86,7 @@ class DoubleUserObservation(Tester):
 
 def _call_server(dictionary):
     try:
-        jsoned = requests.post('{}/validate'.format(ENDPOINT),
+        jsoned = requests.post('{}validation/vote'.format(ENDPOINT),
                                json=dictionary).json()
         return True, jsoned
     except requests.exceptions.ConnectionError:

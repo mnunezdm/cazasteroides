@@ -5,27 +5,12 @@ codigo/karma-server/Lib/
 
 codigo/karma-server/Scripts/
 
-codigo/karma-server/src/__pycache__/
-
 codigo/karma-server/pip-selfcheck\.json
 
-codigo/karma-server/src/Level/__pycache__/
-
-codigo/karma-server/src/ImageSelection/__pycache__/
-
 \.vscode/
-
-codigo/karma-server/src/Validation/__pycache__/
-
-codigo/karma-server/src/models/__pycache__/
-
-codigo/karma-server/src/providers/__pycache__/
-
-codigo/karma-server/src/providers/imageselection/__pycache__/
 
 codigo/karma-server/src/app\.db
 
 codigo/karma-server/src/migrations/
 TODOs.txt
-codigo/karma-server/src/providers/observation/__pycache__/
-codigo/karma-server/src/testers/__pycache__/
+*.pyc

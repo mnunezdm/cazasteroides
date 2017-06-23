@@ -1,9 +1,11 @@
 ''' EFES Provider module '''
-from providers.observation.evaluator import ObservationEvaluator
-from providers.observation.filter import ObservationFilter
-from providers.observation.eraser import ObservationEraser
-from providers.observation.selector import ObservationSelector
+from modules.selection.provider.evaluator import ObservationEvaluator
+from modules.selection.provider.filter import ObservationFilter
+from modules.selection.provider.eraser import ObservationEraser
+from modules.selection.provider.selector import ObservationSelector
 from debugger import print_info, print_list, start_timer, stop_timer
+from content_resolver import content_resolver
+from models.observation import Observation
 
 class ObservationSelectionProviderAbstract:
     ''' Abstract class of the EFES Provider class '''
@@ -21,22 +23,18 @@ class ObservationSelectionProvider(ObservationSelectionProviderAbstract):
         self.eraser = ObservationEraser()
         self.selector = ObservationSelector()
 
-    def get_observation(self, observation_list, user_id, karma_level):
-        time_start = start_timer()
+    def get_new_observation(self, user_id, karma_level):
+        ''' Returns an observation for the user passed '''
+        observation_list = content_resolver.get(Observation)
+        return self.__get_observation(observation_list, user_id, karma_level)
+
+    def __get_observation(self, observation_list, user_id, karma_level):
         evaluated_observations = self.evaluator.evaluate(observation_list)
-        stop_timer(time_start, 'evaluate')
-        time_start = start_timer()
         observations_for_level = self.filter.get_observations_for_level(evaluated_observations,
                                                                         karma_level)
-        stop_timer(time_start, 'filter')
-        time_start = start_timer()
         erased__observations = self.eraser.erase(observations_for_level, user_id)
-        stop_timer(time_start, 'erase')
-        time_start = start_timer()
         if erased__observations:
-            time_start = start_timer()
             selected__observation = self.selector.select(erased__observations)
-            stop_timer(time_start, 'select')
             return selected__observation.serialize(id_position=True)
         else:
             return {
