@@ -1,20 +1,92 @@
-from flask import Blueprint, jsonify
-from configuration_params import MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION
+''' Level Module '''
+
+from flask import Blueprint, jsonify, request, json
+from utils import serialize_response
+from utils.validate import is_number
 from modules.level.provider import KarmaLevelProvider
+from models.policy import InvalidFormulaException, PolicyNotExistsException
+from sqlalchemy.exc import IntegrityError
 
 level = Blueprint('level', __name__,
                   url_prefix='/level')
-LEVEL_PROVIDER = KarmaLevelProvider(MAX_KARMA_LEVEL, POINTS_PER_OBSERVATION)
+LEVEL_PROVIDER = KarmaLevelProvider()
 
-# localhost:5000/karma/info>
-@level.route('/<int:user_points>', methods=['GET'])
-def get_user_info(user_points):
+
+# localhost:5000/level/<policy>/<points>
+@level.route('/<policy>/<int:user_points>', methods=['GET'])
+def get_level(policy, user_points):
     ''' Returns karma info for the points passed'''
-    result = LEVEL_PROVIDER.get_level_for_points(user_points)
-    return jsonify(result)
+    try:
+        result = LEVEL_PROVIDER.get_level(policy, user_points)
+        return serialize_response(200, 'OK', 'Correct', result)
+    except PolicyNotExistsException:
+        return serialize_response(404, 'NOT FOUND', f'Policy {policy} could not be found')
 
-# localhost:5000/karma/info>
-@level.route('/info', methods=['GET'])
-def get_general_info():
+
+# localhost:5000/level/<policy>
+@level.route('/<policy>', methods=['GET'])
+def get_levels(policy):
     ''' Returns all karma info '''
-    return jsonify(LEVEL_PROVIDER.get_general_info())
+    try:
+        result = LEVEL_PROVIDER.get_levels(policy)
+        return serialize_response(200, 'OK', 'Correct', result)
+    except PolicyNotExistsException:
+        return serialize_response(404, 'NOT FOUND', f'Policy {policy} could not be found')
+
+
+# localhost:5000/level/<policy>
+@level.route('/<policy_id>', methods=['POST'])
+def create_policy(policy_id):
+    ''' Returns all karma info '''
+    formula, max_level, errors = __check_request_data(request.get_json())
+    if errors:
+        return serialize_response(400, 'BAD REQUEST', errors)
+    try:
+        LEVEL_PROVIDER.create_policy(policy_id, formula, max_level)
+        return serialize_response(201, 'CREATED', 'Policy Created Successfully')
+    except InvalidFormulaException as exception:
+        return serialize_response(400, 'BAD REQUEST', 'Malformed Formula',
+                                  json.loads(str(exception))['errors'])
+    except IntegrityError:
+        return serialize_response(400, 'BAD REQUEST', f'Policy {policy_id} Already Exists')
+
+# localhost:5000/level/<policy>
+@level.route('/<policy_id>', methods=['PUT'])
+def update_policy(policy_id):
+    ''' Returns all karma info '''
+    formula, max_level, errors = __check_request_data(request.get_json(), update=True)
+    if errors:
+        return serialize_response(400, 'BAD REQUEST', errors)
+    try:
+        LEVEL_PROVIDER.update_policy(policy_id, formula=formula, max_level=max_level)
+        return serialize_response(200, 'UPDATED', f'Updated policy {policy_id}')
+    except PolicyNotExistsException:
+        return serialize_response(404, 'NOT FOUND', f'Policy {policy_id} could not be found')
+    except InvalidFormulaException as exception:
+        return serialize_response(400, 'BAD REQUEST', 'Malformed Formula',
+                                  json.loads(str(exception))['errors'])
+
+
+# localhost:5000/level/<policy>
+@level.route('/<policy_id>', methods=['DELETE'])
+def delete_policy(policy_id):
+    ''' Returns all karma info '''
+    try:
+        LEVEL_PROVIDER.delete_policy(policy_id)
+        return serialize_response(200, 'DELETED', f'Deleted policy {policy_id}')
+    except PolicyNotExistsException:
+        return serialize_response(404, 'NOT FOUND', f'Policy {policy_id} could not be found')
+
+def __check_request_data(request_data, update=False):
+    if not request_data:
+        return None, None, 'Empty Request'
+    formula = request_data.get('formula')
+    max_level = request_data.get('max_level')
+    if update and not formula and not max_level:
+        return None, None, 'Must unless one of formula or max_level'
+    if not update and (not formula or not max_level):
+        return None, None, 'Must provide formula and max_level'
+    if max_level and not is_number(max_level):
+        return None, None, 'max_level must be a number'
+    return formula, max_level, None
+    

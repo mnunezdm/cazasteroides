@@ -15,6 +15,10 @@ class ContentResolverAbstract:
     def update(self, instance):
         ''' Updates the instance passed in the database '''
         raise NotImplementedError
+    
+    def delete(self, instance):
+        ''' Updates the instance passed in the database '''
+        raise NotImplementedError
 
 class StaticContentResolver(ContentResolverAbstract):
     ''' Simple Content Resolver '''
@@ -34,6 +38,11 @@ class StaticContentResolver(ContentResolverAbstract):
 
     def update(self, instance):
         db.session.add(instance)
+        db.session.commit()
+
+    def delete(self, instance):
+        ''' Updates the instance passed in the database '''
+        db.session.delete(instance)
         db.session.commit()
 
 content_resolver = StaticContentResolver()

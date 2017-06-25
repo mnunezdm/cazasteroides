@@ -1,35 +1,51 @@
 ''' This is the REST implementation of the server,
     has all the REST methods and a Karma Server instance'''
-from flask import Flask, jsonify, make_response, json
+
+import logging
+
+from flask import Flask, json, jsonify, make_response, request
 from flask_migrate import Migrate
 
-from debugger import (init_terminal_colors, print_error, print_info,
-                      start_timer, stop_timer)
+from utils import start_timer, stop_timer
+import utils.print as print_
+from utils import serialize_response
 from models import db
 from models.image import Image
-from models.user import User
 from models.observation import Observation
-from models.puntuation import Puntuation
 from models.position import Position
+from models.puntuation import Puntuation
+from models.user import User
 from models.votes import Votes
+from models.policy import Policy
+
 
 def create_app():
-    init_terminal_colors()
+    ''' App Factory '''
     app = Flask(__name__)
+
     app.config.from_object('config')
     set_error_handlers(app)
-    set_timer(app)
+    set_pre_post_requests(app)
+    logging.getLogger('werkzeug').disabled = True
+
     db.init_app(app)
     Migrate(app, db)
     return app
 
-def start_server(app):
+
+def start_server(app, host='localhost', port=5000):
+    ''' Starts the application passed as parameter '''
+    print_.title("Launching Modules")
     import modules
     for module in modules.get_all_modules():
         app.register_blueprint(module)
-    app.run()
+    print_.title("Starting Server")
+    print_.info('INFO', f'Starting Server at {host}:{port}')
+    app.run(host=host, port=port)
+
 
 def set_error_handlers(app):
+    ''' Sets error handlers for the app passed '''
     @app.errorhandler(400)
     def bad_request(error):
         ''' Bad Request Handler '''
@@ -48,24 +64,16 @@ def set_error_handlers(app):
         return make_response(serialize_response(405, 'Method not allowed',
                                                 error.description), 405)
 
-    def serialize_response(code, status, description, payload=None):
-        ''' Generate serialized responses '''
-        response = {'code': code, 'status': status, 'description': description}
-        if payload:
-            response['payload'] = payload
-        return jsonify(response)
-
-def set_timer(app):
+def set_pre_post_requests(app):
     @app.before_request
     def __start_timer():
-        global time_start
-        time_start = start_timer()
+        request.time_start = start_timer()
 
     @app.after_request
     def __end_time(response):
-        global time_start
-        elapsed = stop_timer(time_start, 'FULL REQUEST')
+        elapsed = stop_timer(request.time_start)
         data = json.loads(response.get_data())
-        data['time'] = elapsed
-        response.set_data(json.dumps(data))
+        print_.http(request.method, request.path, data['code'], data['status'],
+                    data['description'], elapsed)
+        response.headers["Request-Time"] = f'{elapsed} ns'
         return response
