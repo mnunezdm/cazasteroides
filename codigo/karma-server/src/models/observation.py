@@ -1,7 +1,7 @@
 ''' Observation module '''
 from enum import Enum
 
-from debugger import DATA_TAG, print_info, to_string_list
+from utils.print import DATA_TAG, info, to_string_list
 from models import db, user_observations
 from models.position import Position
 from models.puntuation import Puntuation
@@ -28,7 +28,7 @@ class ObservationAbstract:
     def get_notified(self):
         ''' Returns if the Astronomer has been notified '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
-    def serialize(self, only_id=False, difficulty=False, id_position=False):    
+    def serialize(self, only_id=False, difficulty=False, id_position=False):
         ''' Serializes the object, has two modes:\n
         only_id = True => serializes only the id\n
         only_id = False => serializes all the object'''
@@ -64,7 +64,7 @@ class Observation(ObservationAbstract, db.Model):
         self.state = State.PENDING
 
     def __str__(self):
-        parse = DATA_TAG + ' Observation (id={})\n'.format(self._id)
+        parse = DATA_TAG + f' Observation (id={self._id})\n'
         parse = parse + to_string_list('votes', self.votes)
         parse = parse + to_string_list('puntuation', self.puntuation)
         parse = parse + to_string_list('position', self.position)
@@ -75,8 +75,7 @@ class Observation(ObservationAbstract, db.Model):
         return observation == self._id
 
     def __repr__(self):
-        return '<{}, {}, {}>'.format(Observation.__name__, self._id,
-                                     self.puntuation.calculate_certainty())
+        return f'<{Observation.__name__}, {self._id}, {self.puntuation.calculate_certainty()}>'
 
     def serialize(self, only_id=False, difficulty=False, id_position=False):
         ''' Serializes the object, has two modes:\n
@@ -119,7 +118,7 @@ class Observation(ObservationAbstract, db.Model):
         ''' Changes the state of the observation based on the approved parameter\n
         approved=True => approved \n approved=False => denyed '''
         self.state = State.APPROVED if approved else State.DENYED
-        print_info('OBS{}'.format(self._id), 'state changed to \'{}\''.format(self.state))
+        info(f'OBS{self._id}', f'state changed to \'{self.state}\'')
 
     def get_notified(self):
         ''' Returns if this observation has  '''

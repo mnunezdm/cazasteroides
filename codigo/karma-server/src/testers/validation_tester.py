@@ -15,7 +15,7 @@ class CreateRandomObservationTest(Tester):
         self.error_message = ''
 
     def run(self):
-        status, response = _call_server(self.dictionary)
+        status, response, _ = _call_server(self.dictionary)
         if not status:
             self.error_message = response
         return status
@@ -50,17 +50,16 @@ class StressValidationTest(Tester):
         if self.error_message:
             return self.error_message
         elapsed = floor(sum(self.result)/len(self.result))
-        return '(Average request time {} ns)'.format(elapsed)
+        return f'(Average request time {elapsed} ns)'
 
     def __run(self, number_of_requests):
         cont = 1
         while cont < number_of_requests:
             dictionary = _generate_observation()
-            status, response = _call_server(dictionary)
+            status, response, time = _call_server(dictionary)
             if not status:
                 self.error_message = response
                 return
-            time = response['time']
             self.result.append(time)
             cont = cont + 1
         if cont != number_of_requests:
@@ -74,7 +73,7 @@ class DoubleUserObservation(Tester):
 
     def run(self):
         _call_server(self.dictionary)
-        status, response = _call_server(self.dictionary)
+        status, response, _ = _call_server(self.dictionary)
         if not status:
             self.error_message = response
         return status and response['code'] == 400
@@ -86,11 +85,12 @@ class DoubleUserObservation(Tester):
 
 def _call_server(dictionary):
     try:
-        jsoned = requests.post('{}validation/vote'.format(ENDPOINT),
-                               json=dictionary).json()
-        return True, jsoned
+        response = requests.post(f'{ENDPOINT}validation/vote',
+                                 json=dictionary)
+        time = float(response.headers['Request-Time'].replace(" ns", ""))
+        return True, response.json(), time
     except requests.exceptions.ConnectionError:
-        return False, 'Could not connect to the server'
+        return False, 'Could not connect to the server', None
 
 def _generate_observation():
     dictionary = {

@@ -21,7 +21,7 @@ def error(message):
 
 def success(message):
     ''' Prints sucess message with type in green '''
-    print(Fore.GREEN + '[was_SUCCESS] ' + Fore.RESET + message)
+    print(Fore.GREEN + '[SUCCESS] ' + Fore.RESET + message)
 
 
 def key_value_list(key, value):

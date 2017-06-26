@@ -19,7 +19,7 @@ class Position(db.Model):
             self.y_position = y_position
 
     def __str__(self):
-        return 'x:{}\ty:{}'.format(self.x_position, self.y_position)
+        return f'x:{self.x_position}\ty:{self.y_position}'
 
     def serialize(self):
         ''' Serializes object '''

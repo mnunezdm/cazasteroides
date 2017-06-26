@@ -1,5 +1,5 @@
 ''' Validation module for karma implementations '''
-from debugger import print_info, print_list
+import utils.print as print_
 from content_resolver import content_resolver
 from models.observation import Observation
 from models.image import Image
@@ -15,6 +15,10 @@ class ValidationProviderAbstract:
         ''' Returns the observation or nothing '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
+    def print_info(self):
+        ''' Prints the Provider Configuration '''
+        raise NotImplementedError('Abstract class, this method should have been implemented')
+
 class ValidationProvider(ValidationProviderAbstract):
     ''' Karma Level Provider Implementation, has the methods to validate and notify '''
     def __init__(self, minimum_votes, maximum_votes, lower_limit, upper_limit):
@@ -22,14 +26,14 @@ class ValidationProvider(ValidationProviderAbstract):
         self.maximum_votes = maximum_votes
         self.lower_limit = lower_limit
         self.upper_limit = upper_limit
-        self.__print_info()
+        self.print_info()
 
-    def __print_info(self):
-        print_info('INFO', 'Initiating ValidationProvider with:')
-        print_list('{} minimum votes'.format(self.minimum_votes))
-        print_list('{} maximum votes'.format(self.maximum_votes))
-        print_list('{} lower limit'.format(self.lower_limit))
-        print_list('{} upper limit'.format(self.upper_limit))
+    def print_info(self):
+        print_.info('INFO', 'Initiating ValidationProvider with:')
+        print_.key_value_list('Minimum Votes', self.minimum_votes)
+        print_.key_value_list('Maximum Votes', self.maximum_votes)
+        print_.key_value_list('Lower Limit', self.lower_limit)
+        print_.key_value_list('Upper Limit', self.upper_limit)
 
     def post_vote(self, observation_data):
         ''' Updates the observation with the data passed, returns the observation updated '''
@@ -47,15 +51,16 @@ class ValidationProvider(ValidationProviderAbstract):
             if created:
                 content_resolver.update(image)
 
-
             vote_info = observation_data['vote_info']
 
             self.__set_points(observation, user, vote_info)
             content_resolver.update(observation)
             return observation
         # If false => user already voted this observation
+
     def get_observation_data(self, observation_id):
-        return content_resolver.get(Observation, _id=observation_id).first()
+        return _get_observation_or_raise(observation_id)
+
     def __set_points(self, observation, user, vote_info):
         number_of_votes, certainty = observation.add_vote(vote_info, user)
         change, approved = self.__check_if_change(observation, certainty, number_of_votes)
@@ -78,3 +83,12 @@ class ValidationProvider(ValidationProviderAbstract):
             elif certainty > self.upper_limit:
                 return True, True
         return None, None
+
+def _get_observation_or_raise(observation_id):
+    observation = content_resolver.get(Observation, _id=observation_id)
+    if not observation:
+        raise ObservationNotFoundException
+    return observation
+
+class ObservationNotFoundException(Exception):
+    pass

@@ -4,7 +4,7 @@ import testers.level_tester as level
 import testers.selection_tester as selection
 import testers.validation_tester as validation
 
-from debugger import print_test_info, print_test_list, print_error, print_success
+import utils.print as print_
 
 def run_all_tests():
     ''' Runs all the test of the system '''
@@ -17,14 +17,12 @@ def __run_tests(test_list, bundle_test_name):
     if test_list:
         success = 0
         number_of_tests = len(test_list)
-        print_test_info(bundle_test_name)
+        print_.test_info(bundle_test_name)
         for test in test_list:
             result = test.run()
             success = success + 1 if result else success
-            print_test_list(type(test).__name__, result, test.get_result())
+            print_.test_list(type(test).__name__, result, test.get_result())
         if success != number_of_tests:
-            print_error('{}/{} completed successfully'.format(success, number_of_tests))
+            print_.error(f'{success}/{number_of_tests} completed successfully')
         else:
-            print_success('All test were completed succesfully ({}/{})'.format(success,
-                                                                               number_of_tests))
-        
+            print_.success(f'All test were completed successfully ({success}/{number_of_tests})')

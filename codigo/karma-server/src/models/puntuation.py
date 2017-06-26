@@ -13,11 +13,9 @@ class Puntuation(db.Model):
         self.negative = votes.downvotes
 
     def __str__(self):
-        parse = Fore.GREEN + '+' + str(self.positive) + Fore.RED + ' -' + str(self.negative)
-        parse = parse + Fore.RESET + ' ({}%)'.format(self.calculate_certainty()*100)
-        string = Fore.GREEN + '+' + str(self.positive) + Fore.RED + ' -'
-        string = string + str(self.negative) + Fore.RESET
-        return string
+        positive = Fore.GREEN + '+' + str(self.positive) + Fore.RESET
+        negative = Fore.RED + '-' + str(self.negative) + Fore.RESET
+        return f'{positive}\t{negative}\t{self.calculate_certainty()*100}%'
 
     def serialize(self):
         ''' Serializes object '''

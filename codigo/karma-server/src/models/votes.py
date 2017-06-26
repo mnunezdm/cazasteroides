@@ -5,7 +5,7 @@ from models import db
 # class Votes:
 class Votes(db.Model):
     observation_id = db.Column(db.String(64), db.ForeignKey('observation._id'),
-                                                            primary_key=True)
+                               primary_key=True)
     upvotes = db.Column(db.Integer)
     downvotes = db.Column(db.Integer)
 
@@ -15,9 +15,9 @@ class Votes(db.Model):
         self.downvotes = json['downvotes']
 
     def __str__(self):
-        string = Fore.GREEN + '+' + str(self.upvotes) + Fore.RED + ' -'
-        string = string + str(self.downvotes) + Fore.RESET
-        return string
+        positive = Fore.GREEN + '+' + str(self.upvotes) + Fore.RESET
+        negative = Fore.RED + '-' + str(self.downvotes) + Fore.RESET
+        return f'{positive}\t{negative}'
 
     def add_vote(self, vote_type):
         ''' Adds a new vote, returns the number of votes '''

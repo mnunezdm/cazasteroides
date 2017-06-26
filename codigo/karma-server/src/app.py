@@ -47,24 +47,25 @@ def start_server(app, host='localhost', port=5000):
 def set_error_handlers(app):
     ''' Sets error handlers for the app passed '''
     @app.errorhandler(400)
-    def bad_request(error):
+    def __bad_request(error):
         ''' Bad Request Handler '''
         return make_response(serialize_response(400, 'Bad Request',
                                                 error.description), 400)
 
     @app.errorhandler(404)
-    def not_found(error):
+    def __not_found(error):
         ''' Not Found Handler '''
         return make_response(serialize_response(404, 'Not Found',
                                                 error.description), 404)
 
     @app.errorhandler(405)
-    def not_allowed(error):
+    def __not_allowed(error):
         ''' Not Allowed Handler '''
         return make_response(serialize_response(405, 'Method not allowed',
                                                 error.description), 405)
 
 def set_pre_post_requests(app):
+    ''' Sets the functionality for the pre and post request handling '''
     @app.before_request
     def __start_timer():
         request.time_start = start_timer()
