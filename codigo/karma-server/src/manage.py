@@ -16,7 +16,7 @@ manager.add_command("db", MigrateCommand)
 @manager.command
 def runtests():
     ''' Runs all the configured tests '''
-    from testers import run_all_tests
+    from tests import run_all_tests
     run_all_tests()
 
 @manager.command

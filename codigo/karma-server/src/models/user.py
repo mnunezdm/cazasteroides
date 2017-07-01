@@ -29,7 +29,6 @@ class User(db.Model):
                              for observation in self.observations]
         }
 
-    def has_voted(self, observation_id):
-        for observation in self.observations:
-            if observation_id == observation:
-                return True
+    def get_id(self):
+        ''' Returns user id '''
+        return self._id

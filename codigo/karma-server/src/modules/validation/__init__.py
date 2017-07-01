@@ -1,14 +1,18 @@
 ''' Validation Module '''
 
-from flask import Blueprint, jsonify, abort, request
-from config import MINIMUM_VOTES, MAXIMUM_VOTES, LOWER_LIMIT, UPPER_LIMIT
-from modules.validation.provider import ValidationProvider, ObservationNotFoundException
+from flask import Blueprint, abort, jsonify, request
+
+from config import (CERTAINTY_LOWER_LIMIT, CERTAINTY_UPPER_LIMIT,
+                    MINIMUM_VOTES, VOTES_TO_DISPUTED,
+                    VOTES_TO_MINIMUM_CERTAINTY)
+from modules.validation.provider import (ObservationNotFoundException,
+                                         ValidationProvider)
 from utils import serialize_response
 
 validation = Blueprint('validation', __name__,
                        url_prefix='/validation')
-VALIDATION_PROVIDER = ValidationProvider(MINIMUM_VOTES, MAXIMUM_VOTES, LOWER_LIMIT,
-                                         UPPER_LIMIT)
+VALIDATION_PROVIDER = ValidationProvider(MINIMUM_VOTES, VOTES_TO_DISPUTED, CERTAINTY_UPPER_LIMIT,
+                                         CERTAINTY_LOWER_LIMIT, VOTES_TO_MINIMUM_CERTAINTY)
 
 @validation.route('/vote', methods=['POST'])
 def post_vote():

@@ -1,7 +1,8 @@
 ''' Helper for printing debug trace '''
-from colorama import Fore, init, Style
 import os
 import sys
+
+from colorama import Fore, init
 
 DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET
 
@@ -25,7 +26,9 @@ def success(message):
     ''' Prints sucess message with type in green '''
     print(Fore.GREEN + '[SUCCESS] ' + Fore.RESET + message)
 
-def initialize_info(module, has_with):
+def initialize_info(module, has_with=False):
+    ''' Prints an INFO tag in yellow, the module name in blue and if has with is passed to true,
+        prints a ' with:' after module name '''
     with_ = ' with:' if has_with else ''
     print(f'{Fore.YELLOW}[INFO]{Fore.RESET} Intializing {Fore.CYAN + module + Fore.RESET}{with_}')
 
@@ -62,10 +65,19 @@ def __clear():
 
 def title(message):
     ''' Prints title '''
-    print(Fore.GREEN + "#" * 80)
-    print("#" * 15, "\t"*2, message, "\t"*2, "#" * 15)
-    print("#" * 80 + Fore.RESET)
+    line_length = 80
+    side_hashtags = 15
 
+    print(Fore.GREEN + "#" * line_length)
+    print(__center_middle_line(line_length, side_hashtags, message))
+    print("#" * line_length + Fore.RESET)
+
+def __center_middle_line(line_length, side_hashtags, message):
+    rest = (line_length - 2 * side_hashtags - len(message)) / 2
+    kicker = '' if (rest == int(rest)) else ' '
+    rest = int(rest)
+    line = f'{"#"*side_hashtags}{" " * rest}{message}{" " * rest}{kicker}{side_hashtags * "#"}'
+    return line
 
 def test_info(test_type):
     ''' Prints test info message '''
@@ -100,7 +112,7 @@ def http(method, path, code, status, description, elapsed):
     method = __color_http(method)
     color_status = __color_status(code)
 
-    message = f'{method} {path} {color_status}{code} {status} - {description} '
+    message = f'{method}\t{path} {color_status}{code}\t{status} - {description}\t'
     message += f'{Fore.RESET}({elapsed} ns)'
     print(message)
 

@@ -1,6 +1,6 @@
-''' Tester module '''
+''' Test module '''
 
-class Tester:
+class TestAbstract:
     ''' Test class '''
     def run(self):
         ''' Runs the test class '''
@@ -9,4 +9,3 @@ class Tester:
     def get_result(self):
         ''' Prints the result of the test class '''
         raise NotImplementedError('Abstract method')
-        

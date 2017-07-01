@@ -1,11 +1,14 @@
 ''' Observation module '''
 from enum import Enum
 
-from utils.print import DATA_TAG, info, to_string_list
+from colorama import Fore
+
 from models import db, user_observations
 from models.position import Position
 from models.puntuation import Puntuation
 from models.votes import Votes
+from utils.print import DATA_TAG, info, to_string_list
+
 
 class State(Enum):
     ''' Enum class for states, observations can be in 3 states,
@@ -13,6 +16,7 @@ class State(Enum):
     DENYED = 'denyed'
     APPROVED = 'approved'
     PENDING = 'pending'
+    DISPUTED = 'disputed'
 
 # class ObservationAbstract(db.Model):
 class ObservationAbstract:
@@ -21,13 +25,14 @@ class ObservationAbstract:
         ''' Inserts the new vote and returns the new number of votes and the certainty '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
-    def change_state(self, approved):
+    def change_state(self, change_to):
         ''' Changes the state of the observation and notifies the Astronomer '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
     def get_notified(self):
         ''' Returns if the Astronomer has been notified '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
+
     def serialize(self, only_id=False, difficulty=False, id_position=False):
         ''' Serializes the object, has two modes:\n
         only_id = True => serializes only the id\n
@@ -101,8 +106,7 @@ class Observation(ObservationAbstract, db.Model):
             "puntuation": self.puntuation.serialize(),
             "position": self.position.serialize(),
             "state": self.state.value,
-            "users_who_voted": [user.serialize(only_id=True)
-                                for user in self.users_who_voted]
+            "users_who_voted": [user.get_id() for user in self.users_who_voted]
             }
 
     def add_vote(self, vote_info, user):
@@ -114,15 +118,16 @@ class Observation(ObservationAbstract, db.Model):
         self.users_who_voted.append(user)
         return number_of_votes, certainty
 
-    def change_state(self, approved):
+    def change_state(self, change_to):
         ''' Changes the state of the observation based on the approved parameter\n
         approved=True => approved \n approved=False => denyed '''
-        self.state = State.APPROVED if approved else State.DENYED
-        info(f'OBS{self._id}', f'state changed to \'{self.state}\'')
+        if self.state != change_to:
+            self.state = change_to
+            info(f'OBS-{self._id}', f'state changed to {Fore.CYAN}\'{self.state.value}\'{Fore.RESET}')
 
     def get_notified(self):
         ''' Returns if this observation has  '''
-        return State.PENDING != self.state
+        return State.APPROVED == self.state or State.DENYED == self.state
 
     def repeated_vote(self, user):
         ''' Detects if the user passed has already voted this observation '''
@@ -131,11 +136,13 @@ class Observation(ObservationAbstract, db.Model):
                 return True
 
     def get_certainty(self):
+        ''' Calculates the certainty of this image '''
         if self.get_certainty:
             return self.get_certainty
         return self.puntuation.get_certainty()
 
     def user_has_voted(self, current_user):
+        ''' Detects if the user passed has already voted '''
         for user in self.users_who_voted:
             if user == current_user:
                 return True
