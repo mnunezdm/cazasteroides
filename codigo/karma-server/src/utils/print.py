@@ -1,5 +1,7 @@
 ''' Helper for printing debug trace '''
-from colorama import Fore, init
+from colorama import Fore, init, Style
+import os
+import sys
 
 DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET
 
@@ -23,11 +25,40 @@ def success(message):
     ''' Prints sucess message with type in green '''
     print(Fore.GREEN + '[SUCCESS] ' + Fore.RESET + message)
 
+def initialize_info(module, has_with):
+    with_ = ' with:' if has_with else ''
+    print(f'{Fore.YELLOW}[INFO]{Fore.RESET} Intializing {Fore.CYAN + module + Fore.RESET}{with_}')
 
 def key_value_list(key, value):
     ''' Prints message in a list '''
     print(to_string_list(key, value))
 
+
+def launch_server():
+    ''' Prints title and version '''
+    __clear()
+    sys.stdout.write(Fore.YELLOW)
+    __main_title()
+    sys.stdout.write(Fore.RESET)
+
+def __main_title():
+    print('\n')
+    print('                                 _                       _      _            ')
+    print('                                | |                     (_)    | |           ')
+    print('    ___   __ _  ____  __ _  ___ | |_   ___  _ __   ___   _   __| |  ___  ___ ')
+    print('   / __| / _  ||_  / / _  |/ __|| __| / _ \\| \'__| / _ \\ | | / _  | / _ \\/ __|')
+    print('  | (__ | (_| | / / | (_| |\\__ \\| |_ |  __/| |   | (_) || || (_| ||  __/\\__ \\')
+    print('   \\___| \\__,_|/___| \\__,_||___/ \\__| \\___||_|    \\___/ |_| \\__,_| \\___||___/')
+    print('    with ❤ mnunezdm                                     Karma-Server   v0.1')
+    print('\n\n')
+
+
+def __clear():
+    if os.name == 'posix':
+        os.system('clear')
+
+    elif os.name in ('ce', 'nt', 'dos'):
+        os.system('cls')
 
 def title(message):
     ''' Prints title '''

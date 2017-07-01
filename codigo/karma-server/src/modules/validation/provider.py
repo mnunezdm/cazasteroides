@@ -29,7 +29,7 @@ class ValidationProvider(ValidationProviderAbstract):
         self.print_info()
 
     def print_info(self):
-        print_.info('INFO', 'Initiating ValidationProvider with:')
+        print_.initialize_info(self.__class__.__name__, True)
         print_.key_value_list('Minimum Votes', self.minimum_votes)
         print_.key_value_list('Maximum Votes', self.maximum_votes)
         print_.key_value_list('Lower Limit', self.lower_limit)

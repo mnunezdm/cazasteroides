@@ -29,7 +29,7 @@ class KarmaLevelProvider(KarmaLevelProviderAbstract):
         self.print_info()
 
     def print_info(self):
-        print_.info('INFO', 'Initializing KarmaLevelProvider')
+        print_.initialize_info(self.__class__.__name__, False)
 
     def get_level(self, policy_id, points):
         policy = self.__get_policy_or_raise(policy_id)

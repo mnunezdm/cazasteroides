@@ -2,10 +2,11 @@
 from flask_migrate import MigrateCommand
 from flask_script import Manager, Shell
 
-from utils.print import init_terminal_colors
+import utils.print as print_
 from app import create_app, start_server
 
-init_terminal_colors()
+print_.init_terminal_colors()
+print_.launch_server()
 app = create_app()
 manager = Manager(app)
 manager.add_command("shell", Shell())
