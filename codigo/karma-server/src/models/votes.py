@@ -2,7 +2,7 @@
 from colorama import Fore
 from models import db
 
-# class Votes:
+
 class Votes(db.Model):
     observation_id = db.Column(db.String(64), db.ForeignKey('observation._id'),
                                primary_key=True)

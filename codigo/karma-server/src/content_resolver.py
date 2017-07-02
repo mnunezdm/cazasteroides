@@ -1,6 +1,7 @@
 ''' Content resolver, provides the interaction with the database '''
 from models import db
 
+
 class ContentResolverAbstract:
     ''' Abstract class for Content Resolvers '''
     def get_or_create_it(self, model, model_info):
@@ -15,10 +16,11 @@ class ContentResolverAbstract:
     def update(self, instance):
         ''' Updates the instance passed in the database '''
         raise NotImplementedError
-    
+
     def delete(self, instance):
         ''' Updates the instance passed in the database '''
         raise NotImplementedError
+
 
 class StaticContentResolver(ContentResolverAbstract):
     ''' Simple Content Resolver '''
@@ -44,5 +46,6 @@ class StaticContentResolver(ContentResolverAbstract):
         ''' Updates the instance passed in the database '''
         db.session.delete(instance)
         db.session.commit()
+
 
 content_resolver = StaticContentResolver()

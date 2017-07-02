@@ -26,11 +26,13 @@ def success(message):
     ''' Prints sucess message with type in green '''
     print(Fore.GREEN + '[SUCCESS] ' + Fore.RESET + message)
 
+
 def initialize_info(module, has_with=False):
     ''' Prints an INFO tag in yellow, the module name in blue and if has with is passed to true,
         prints a ' with:' after module name '''
     with_ = ' with:' if has_with else ''
     print(f'{Fore.YELLOW}[INFO]{Fore.RESET} Intializing {Fore.CYAN + module + Fore.RESET}{with_}')
+
 
 def key_value_list(key, value):
     ''' Prints message in a list '''
@@ -43,6 +45,7 @@ def launch_server():
     sys.stdout.write(Fore.YELLOW)
     __main_title()
     sys.stdout.write(Fore.RESET)
+
 
 def __main_title():
     print('\n')
@@ -63,6 +66,7 @@ def __clear():
     elif os.name in ('ce', 'nt', 'dos'):
         os.system('cls')
 
+
 def title(message):
     ''' Prints title '''
     line_length = 80
@@ -78,6 +82,7 @@ def __center_middle_line(line_length, side_hashtags, message):
     rest = int(rest)
     line = f'{"#"*side_hashtags}{" " * rest}{message}{" " * rest}{kicker}{side_hashtags * "#"}'
     return line
+
 
 def test_info(test_type):
     ''' Prints test info message '''

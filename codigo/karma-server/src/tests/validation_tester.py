@@ -1,13 +1,14 @@
 ''' Tester module for testing Validation Provider '''
 import threading
+import time
 from math import floor
 from random import random
-from config import ENDPOINT
-import time
 
 import requests
 
+from config import ENDPOINT
 from tests.test import TestAbstract
+
 
 class CreateRandomObservationTest(TestAbstract):
     ''' Creates one Observation '''
@@ -169,4 +170,3 @@ def _generate_observation(user_id=None, karma_level=None, vote_type=None, obs_id
         }
     }
     return dictionary
-

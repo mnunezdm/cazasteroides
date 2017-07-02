@@ -3,6 +3,7 @@ import utils.print as print_
 from content_resolver import content_resolver
 from models.policy import Policy, PolicyNotExistsException
 
+
 class KarmaLevelProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to calculate the karma
         levels and to classify user for its points '''
@@ -22,6 +23,15 @@ class KarmaLevelProviderAbstract:
     def create_policy(self, policy_id, formula, max_level):
         ''' Creates new policy '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
+
+    def update_policy(self, policy_id, formula=None, max_level=None):
+        ''' Updates an existing policy '''
+        raise NotImplementedError('Abstract class, this method should have been implemented')
+
+    def delete_policy(self, policy_id):
+        ''' Deletes an existing policy '''
+        raise NotImplementedError('Abstract class, this method should have been implemented')
+
 
 class KarmaLevelProvider(KarmaLevelProviderAbstract):
     ''' Implementation of Karma Level Provider '''
@@ -55,7 +65,8 @@ class KarmaLevelProvider(KarmaLevelProviderAbstract):
         policy = self.__get_policy_or_raise(policy_id)
         content_resolver.delete(policy)
 
-    def __get_policy_or_raise(self, policy_id):
+    @staticmethod
+    def __get_policy_or_raise(policy_id):
         policy = content_resolver.get(Policy, _id=policy_id)
         if not policy:
             raise PolicyNotExistsException(f'Policy = {policy_id}')

@@ -2,6 +2,7 @@
 from random import random
 from models import db
 
+
 class Position(db.Model):
     ''' Observation Position implementation '''
     observation_id = db.Column(db.String(64), db.ForeignKey('observation._id'),

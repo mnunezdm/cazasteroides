@@ -1,6 +1,7 @@
 ''' Image module '''
 from models import db
 
+
 class Image(db.Model):
     ''' Image class '''
     _id = db.Column(db.String(64), primary_key=True)

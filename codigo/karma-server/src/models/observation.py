@@ -18,7 +18,7 @@ class State(Enum):
     PENDING = 'pending'
     DISPUTED = 'disputed'
 
-# class ObservationAbstract(db.Model):
+
 class ObservationAbstract:
     ''' Abstract class for Observations '''
     def add_vote(self, vote_info, user):
@@ -39,7 +39,7 @@ class ObservationAbstract:
         only_id = False => serializes all the object'''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
-# class Observation(ObservationAbstract):
+
 class Observation(ObservationAbstract, db.Model):
     ''' Implementation of the Observation '''
     _id = db.Column(db.String(64), primary_key=True)
@@ -123,7 +123,8 @@ class Observation(ObservationAbstract, db.Model):
         approved=True => approved \n approved=False => denyed '''
         if self.state != change_to:
             self.state = change_to
-            info(f'OBS-{self._id}', f'state changed to {Fore.CYAN}\'{self.state.value}\'{Fore.RESET}')
+            colored_state = f'{Fore.CYAN}\'{self.state.value}\'{Fore.RESET}'
+            info(f'OBS-{self._id}', f'state changed to {colored_state}')
 
     def get_notified(self):
         ''' Returns if this observation has  '''

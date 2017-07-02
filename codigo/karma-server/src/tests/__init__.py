@@ -9,6 +9,7 @@ import tests.validation_tester as validation
 
 import utils.print as print_
 
+
 def run_all_tests():
     ''' Runs all the test of the system '''
     print_.title('Starting Test Module')
@@ -16,6 +17,7 @@ def run_all_tests():
     # __run_tests(level.get_all_tests(), 'Level')
     # __run_tests(selection.get_all_tests(), 'Selection')
     __run_test_bundle(validation, 'ValidationTests')
+
 
 def __run_test_bundle(module, bundle_test_name):
     test_list = inspect.getmembers(sys.modules[module.__name__], inspect.isclass)

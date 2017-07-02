@@ -14,6 +14,7 @@ validation = Blueprint('validation', __name__,
 VALIDATION_PROVIDER = ValidationProvider(MINIMUM_VOTES, VOTES_TO_DISPUTED, CERTAINTY_UPPER_LIMIT,
                                          CERTAINTY_LOWER_LIMIT, VOTES_TO_MINIMUM_CERTAINTY)
 
+
 @validation.route('/vote', methods=['POST'])
 def post_vote():
     ''' Updates the info for the observation passed '''
@@ -24,6 +25,7 @@ def post_vote():
     if not result:
         return serialize_response(400, 'BAD REQUEST', 'Repeated vote for user')
     return serialize_response(200, 'OK', 'Vote added', result.serialize())
+
 
 # localhost:5000/v1/validate/id>
 @validation.route('/<observation_id>', methods=['GET'])

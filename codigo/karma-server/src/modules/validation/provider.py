@@ -5,6 +5,7 @@ from models.observation import Observation, State
 from models.image import Image
 from models.user import User
 
+
 class ValidationProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to validate and notify '''
     def post_vote(self, observation_data):
@@ -18,6 +19,7 @@ class ValidationProviderAbstract:
     def print_info(self):
         ''' Prints the Provider Configuration '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
+
 
 class ValidationProvider(ValidationProviderAbstract):
     ''' Karma Level Provider Implementation, has the methods to validate and notify '''
@@ -105,4 +107,5 @@ def _get_observation_or_raise(observation_id):
 
 
 class ObservationNotFoundException(Exception):
+    ''' Exception launched when a requested observation does not exists in the server '''
     pass

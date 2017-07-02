@@ -3,6 +3,7 @@ import time
 from flask import jsonify
 import utils.print as print_
 
+
 def start_timer():
     ''' Returns the time in ns '''
     return time.clock() * 1000000

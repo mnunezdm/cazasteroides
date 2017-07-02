@@ -56,16 +56,20 @@ class Policy(db.Model):
         value = eval(self.__formula)
         return _round_in_hundreds(value)
 
+
 def _serialize_points(level, points):
     return {"level": level, "points": points}
+
 
 def _round_in_hundreds(value):
     value = round(value) / 1000
     value = round(value, 1) * 1000
     return round(value)
 
+
 class InvalidFormulaException(Exception):
     pass
+
 
 class PolicyNotExistsException(Exception):
     pass

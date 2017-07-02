@@ -1,7 +1,9 @@
 ''' Models module '''
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
+
 
 user_observations = (
     db.Table('user_observations',

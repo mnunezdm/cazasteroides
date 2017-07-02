@@ -1,5 +1,7 @@
 ''' module for user class '''
 from models import db, user_observations
+
+
 class User(db.Model):
     ''' User class '''
     _id = db.Column(db.String(64), primary_key=True)

@@ -19,9 +19,11 @@ def runtests():
     from tests import run_all_tests
     run_all_tests()
 
+
 @manager.command
 def runserver():
     ''' Runs server with default configuration '''
     start_server(app)
+
 
 manager.run()

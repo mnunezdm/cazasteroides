@@ -12,7 +12,6 @@ level = Blueprint('level', __name__,
 LEVEL_PROVIDER = KarmaLevelProvider()
 
 
-# localhost:5000/level/<policy>/<points>
 @level.route('/<policy>/<int:user_points>', methods=['GET'])
 def get_level(policy, user_points):
     ''' Returns karma info for the points passed'''
@@ -23,7 +22,6 @@ def get_level(policy, user_points):
         return serialize_response(404, 'NOT FOUND', f'Policy {policy} could not be found')
 
 
-# localhost:5000/level/<policy>
 @level.route('/<policy>', methods=['GET'])
 def get_levels(policy):
     ''' Returns all karma info '''
@@ -34,7 +32,6 @@ def get_levels(policy):
         return serialize_response(404, 'NOT FOUND', f'Policy {policy} could not be found')
 
 
-# localhost:5000/level/<policy>
 @level.route('/<policy_id>', methods=['POST'])
 def create_policy(policy_id):
     ''' Returns all karma info '''
@@ -50,7 +47,7 @@ def create_policy(policy_id):
     except IntegrityError:
         return serialize_response(400, 'BAD REQUEST', f'Policy {policy_id} Already Exists')
 
-# localhost:5000/level/<policy>
+
 @level.route('/<policy_id>', methods=['PUT'])
 def update_policy(policy_id):
     ''' Returns all karma info '''
@@ -67,7 +64,6 @@ def update_policy(policy_id):
                                   json.loads(str(exception))['errors'])
 
 
-# localhost:5000/level/<policy>
 @level.route('/<policy_id>', methods=['DELETE'])
 def delete_policy(policy_id):
     ''' Returns all karma info '''
@@ -76,6 +72,7 @@ def delete_policy(policy_id):
         return serialize_response(200, 'DELETED', f'Deleted policy {policy_id}')
     except PolicyNotExistsException:
         return serialize_response(404, 'NOT FOUND', f'Policy {policy_id} could not be found')
+
 
 def __check_request_data(request_data, update=False):
     if not request_data:
