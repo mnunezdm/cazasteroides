@@ -5,6 +5,7 @@ class ObservationEraserAbstract:
         ''' Erase the observations not valid for the user passed, returns the processed list '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
+
 class ObservationEraser(ObservationEraserAbstract):
     ''' Implementation of ObservationEraserAbastract, erases every repeated observation '''
     def erase(self, observation_list, user_id):

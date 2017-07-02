@@ -2,7 +2,7 @@
 from math import exp
 
 from models.observation import State
-from debugger import start_timer, stop_timer
+
 
 class ObservationEvaluatorAbstract:
     ''' Abstract class for Observation Evaluator '''
@@ -10,11 +10,9 @@ class ObservationEvaluatorAbstract:
         ''' Evaluate the observations passed '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
+
 class ObservationEvaluator(ObservationEvaluatorAbstract):
     ''' Implementation of the Evaluator class '''
-    # def __init__(self, fwhm_multiplier):
-    #     self.fwhm_multiplier = fwhm_multiplier
-
     def evaluate(self, observation_list):
         for observation in observation_list:
             observation.difficulty = self.__evaluate_observation(observation)
@@ -44,6 +42,8 @@ class ObservationEvaluator(ObservationEvaluatorAbstract):
             return 1
         if State.DENYED == state:
             return 0.1
+        if State.DISPUTED == state:
+            return 1
 
     @staticmethod
     def __calculate_probability(probability):
