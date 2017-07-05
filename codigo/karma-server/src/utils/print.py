@@ -19,12 +19,12 @@ def info(message_type, message):
 
 def error(message):
     ''' Prints error message with type in red '''
-    print(Fore.RED + '[ERROR] ' + Fore.RESET + message)
+    print(Fore.RED + '[ERROR] ' + message + Fore.RESET)
 
 
 def success(message):
     ''' Prints sucess message with type in green '''
-    print(Fore.GREEN + '[SUCCESS] ' + Fore.RESET + message)
+    print(Fore.GREEN + '[SUCCESS] ' + message + Fore.RESET)
 
 
 def initialize_info(module, has_with=False):
@@ -93,7 +93,7 @@ def test_list(test_name, was_success, message):
     ''' Prints message in a list '''
     test_name = __get_formatted_test(test_name)
     test_result = __get_formated_test_result(was_success)
-    print(f'\t - {test_name}: {test_result} {message}')
+    print(f'\t - {test_name}: {test_result} {message}{Fore.RESET}')
 
 
 def __get_formatted_test(test_name):
@@ -103,7 +103,7 @@ def __get_formatted_test(test_name):
 def __get_formated_test_result(was_success):
     if was_success:
         return Fore.GREEN + 'OK' + Fore.RESET
-    return Fore.RED + 'ERROR' + Fore.RESET
+    return Fore.RED + 'ERROR'
 
 
 def to_string_list(key, content):

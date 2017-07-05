@@ -2,7 +2,7 @@
 import threading
 import time
 from math import floor
-from random import random
+from random import random, randint
 
 import requests
 
@@ -134,13 +134,13 @@ def _call_server(dictionary):
 
 def _generate_observation(user_id=None, karma_level=None, vote_type=None, obs_id=None):
     if user_id is None:
-        user_id = floor(random() * 50 + 1)
+        user_id = randint(1, 1000)
     if vote_type is None:
         vote_type = random() < 0.75
     if karma_level is None:
-        karma_level = floor(random() * 50 + 1)
+        karma_level = randint(1, 1000)
     if obs_id is None:
-        obs_id = floor(random() * 50 + 1)
+        obs_id = randint(1, 1000)
     dictionary = {
         "user_info": {
             "_id": user_id

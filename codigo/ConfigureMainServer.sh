@@ -19,6 +19,20 @@ function error_handler {
     echo -e "\e[31mERROR!\e[39m"
 }
 
+function start {
+    echo -e "\e[33m\n"
+    echo "                                 _                       _      _            "
+    echo "                                | |                     (_)    | |           "
+    echo "    ___   __ _  ____  __ _  ___ | |_   ___  _ __   ___   _   __| |  ___  ___ "
+    echo "   / __| / _  ||_  / / _  |/ __|| __| / _ \\| \"__| / _ \\ | | / _  | / _ \\/ __|"
+    echo "  | (__ | (_| | / / | (_| |\\__ \\| |_ |  __/| |   | (_) || || (_| ||  __/\\__ \\"
+    echo "   \\___| \\__,_|/___| \\__,_||___/ \\__| \\___||_|    \\___/ |_| \\__,_| \\___||___/"
+    echo "    with ❤ mnunezdm                                       Main-Server   v0.1"
+    echo -e "\e[39m\n\n"
+}
+
+start
+
 # Checks if launched with ROOT permissions, if not, stops
 if [ "$EUID" -ne 0 ]
   then echo -e "\e[31m[ERROR]\e[39m Script must be launched with ROOT permissions (try sudo !!)"
