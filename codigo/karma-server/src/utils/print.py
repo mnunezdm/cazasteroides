@@ -117,7 +117,7 @@ def http(method, path, code, status, description, elapsed):
     method = __color_http(method)
     color_status = __color_status(code)
 
-    message = f'{method}\t{path} {color_status}{code}\t{status} - {description}\t'
+    message = f'{method}\t{path} {color_status}{code} {status} - {description}\t'
     message += f'{Fore.RESET}({elapsed} ns)'
     print(message)
 

@@ -1,4 +1,4 @@
 {
     "formula": "math.log ( ( level / 3 ) + 1 ) * 350",
-    "max_level": 5
+    "max_level": 25
 }

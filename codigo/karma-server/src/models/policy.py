@@ -37,16 +37,16 @@ class Policy(db.Model):
             total_points += self.__calculate_points(level)
             if user_points >= total_points:
                 return self.__get_level(user_points, total_points, level + 1)
-        return _serialize_points(level, total_points - user_points)
+        return self.__serialize_points(level, total_points - user_points)
 
     def get_levels(self):
         ''' Get all the levels of this policy '''
-        return {'policy': self._id, "levels": self.__get_levels([], 0, 1)}
+        return {'policy': self._id, 'formula': self.__formula, 'max_level':self.max_level, "levels": self.__get_levels([], 0, 1)}
 
     def __get_levels(self, points_list, total_points, level):
         if level <= self.max_level:
             points_to_next = self.__calculate_points(level)
-            points_list.append(_serialize_points(level, total_points))
+            points_list.append(self.__serialize_points(level, total_points))
             total_points += points_to_next
             return self.__get_levels(points_list, total_points, level + 1)
         return points_list
@@ -57,8 +57,10 @@ class Policy(db.Model):
         return _round_in_hundreds(value)
 
 
-def _serialize_points(level, points):
-    return {"level": level, "points": points}
+    def __serialize_points(self, level, points):
+        if self.max_level == level:
+            return {"level": level}
+        return {"level": level, "points_to_next": points}
 
 
 def _round_in_hundreds(value):

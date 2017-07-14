@@ -103,7 +103,7 @@ def _get_observation_or_raise(observation_id):
     observation = content_resolver.get(Observation, _id=observation_id)
     if not observation:
         raise ObservationNotFoundException
-    return observation
+    return observation[0]
 
 
 class ObservationNotFoundException(Exception):
