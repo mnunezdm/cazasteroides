@@ -125,7 +125,7 @@ class NoObservationTest(TestAbstract):
 
 def _call_server(dictionary):
     try:
-        response = requests.post(f'{ENDPOINT}validation/vote',
+        response = requests.post(f'{ENDPOINT}/validation/vote',
                                  json=dictionary)
         time_ = float(response.headers['Request-Time'].replace(" ns", ""))
         return True, response.json(), time_

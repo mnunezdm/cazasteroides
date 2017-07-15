@@ -2,7 +2,6 @@
 import sys
 import inspect
 
-import tests.server_tester as server
 import tests.level_tester as level
 import tests.selection_tester as selection
 import tests.validation_tester as validation
@@ -13,10 +12,19 @@ import utils.print as print_
 def run_all_tests():
     ''' Runs all the test of the system '''
     print_.title('Starting Test Module')
-    # __run_tests(server.get_all_tests(), 'Server')
-    # __run_tests(level.get_all_tests(), 'Level')
-    # __run_tests(selection.get_all_tests(), 'Selection')
-    __run_test_bundle(validation, 'ValidationTests')
+    success = [0] * 3
+    total = [0] * 3
+    success[0], total[0] = __run_test_bundle(level, 'LevelTests')
+    success[1], total[1] = __run_test_bundle(selection, 'SelectionTests')
+    success[2], total[2] = __run_test_bundle(validation, 'ValidationTests')
+    __check_results(sum(success), sum(total))
+
+
+def __check_results(success_total, tests_total):
+    if success_total != tests_total:
+        print_.error(f'{success_total}/{tests_total} completed successfully')
+    else:
+        print_.success(f'All test were completed successfully ({success_total}/{tests_total})')
 
 
 def __run_test_bundle(module, bundle_test_name):
@@ -32,7 +40,4 @@ def __run_test_bundle(module, bundle_test_name):
         result = test.run()
         success = success + 1 if result else success
         print_.test_list(test_name, result, test.get_result())
-    if success != number_of_tests:
-        print_.error(f'{success}/{number_of_tests} completed successfully')
-    else:
-        print_.success(f'All test were completed successfully ({success}/{number_of_tests})')
+    return success, number_of_tests
