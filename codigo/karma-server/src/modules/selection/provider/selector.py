@@ -1,7 +1,7 @@
 ''' Selector of the EFES Algorithm '''
 from random import randint
 
-from models.observation import State
+from data.models.observation import State
 
 
 class ObservationSelectorAbstract:

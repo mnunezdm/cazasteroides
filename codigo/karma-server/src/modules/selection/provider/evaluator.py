@@ -1,7 +1,7 @@
 ''' Evaluator of the EFES Algorithm '''
 from math import exp
 
-from models.observation import State
+from data.models.observation import State
 
 
 class ObservationEvaluatorAbstract:

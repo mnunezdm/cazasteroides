@@ -5,8 +5,8 @@ from modules.selection.provider.eraser import ObservationEraser
 from modules.selection.provider.selector import RandomObservationSelector
 import utils.print as print_
 from utils import start_timer, stop_timer
-from content_resolver import content_resolver
-from models.observation import Observation
+from data.content_resolver import content_resolver
+from data.models.observation import Observation
 
 
 class ObservationSelectionProviderAbstract:

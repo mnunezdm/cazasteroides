@@ -1,6 +1,6 @@
 ''' Votes Module '''
 from colorama import Fore
-from models import db
+from data.models import db
 
 
 class Votes(db.Model):

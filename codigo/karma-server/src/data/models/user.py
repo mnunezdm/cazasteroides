@@ -1,5 +1,5 @@
 ''' module for user class '''
-from models import db, user_observations
+from data.models import db, user_observations
 
 
 class User(db.Model):

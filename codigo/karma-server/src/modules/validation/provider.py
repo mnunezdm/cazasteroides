@@ -1,9 +1,9 @@
 ''' Validation module for karma implementations '''
 import utils.print as print_
-from content_resolver import content_resolver
-from models.observation import Observation, State
-from models.image import Image
-from models.user import User
+from data.content_resolver import content_resolver
+from data.models.observation import Observation, State
+from data.models.image import Image
+from data.models.user import User
 
 
 class ValidationProviderAbstract:

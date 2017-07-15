@@ -1,0 +1,3 @@
+{
+    "formula": "math.lo ( ( lvl / random() ) + 1 ) * test"
+}

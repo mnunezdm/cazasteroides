@@ -1,7 +1,7 @@
 import math
 
 import utils.validate as validate
-from models import db
+from data.models import db
 from flask import json
 
 
@@ -74,4 +74,8 @@ class InvalidFormulaException(Exception):
 
 
 class PolicyNotExistsException(Exception):
+    pass
+
+
+class PolicyExistsException(Exception):
     pass

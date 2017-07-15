@@ -1,5 +1,5 @@
 ''' Content resolver, provides the interaction with the database '''
-from models import db
+from data.models import db
 
 
 class ContentResolverAbstract:

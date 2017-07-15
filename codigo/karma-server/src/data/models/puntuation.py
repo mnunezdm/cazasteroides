@@ -1,6 +1,6 @@
 ''' Puntuation module '''
 from colorama import Fore
-from models import db
+from data.models import db
 
 
 class Puntuation(db.Model):

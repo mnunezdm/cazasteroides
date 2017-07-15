@@ -17,6 +17,11 @@ def info(message_type, message):
     print(Fore.YELLOW + f'[{message_type}] ' + Fore.RESET + message)
 
 
+def info_list(message):
+    ''' Prints a simple list item '''
+    print(f'\t- {message}')
+
+
 def error(message):
     ''' Prints error message with type in red '''
     print(Fore.RED + '[ERROR] ' + message + Fore.RESET)
@@ -47,6 +52,14 @@ def launch_server():
     sys.stdout.write(Fore.RESET)
 
 
+def __clear():
+    if os.name == 'posix':
+        os.system('clear')
+
+    elif os.name in ('ce', 'nt', 'dos'):
+        os.system('cls')
+
+
 def __main_title():
     print('\n')
     print('                                 _                       _      _            ')
@@ -57,14 +70,6 @@ def __main_title():
     print('   \\___| \\__,_|/___| \\__,_||___/ \\__| \\___||_|    \\___/ |_| \\__,_| \\___||___/')
     print('    with ❤ mnunezdm                                     Karma-Server   v0.1')
     print('\n\n')
-
-
-def __clear():
-    if os.name == 'posix':
-        os.system('clear')
-
-    elif os.name in ('ce', 'nt', 'dos'):
-        os.system('cls')
 
 
 def title(message):

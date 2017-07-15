@@ -1,5 +1,5 @@
 ''' Image module '''
-from models import db
+from data.models import db
 
 
 class Image(db.Model):

@@ -3,10 +3,10 @@ from enum import Enum
 
 from colorama import Fore
 
-from models import db, user_observations
-from models.position import Position
-from models.puntuation import Puntuation
-from models.votes import Votes
+from data.models import db, user_observations
+from data.models.position import Position
+from data.models.puntuation import Puntuation
+from data.models.votes import Votes
 from utils.print import DATA_TAG, info, to_string_list
 
 

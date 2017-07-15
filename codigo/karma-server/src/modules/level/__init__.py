@@ -4,8 +4,8 @@ from flask import Blueprint, jsonify, request, json
 from utils import serialize_response
 from utils.validate import is_number
 from modules.level.provider import KarmaLevelProvider
-from models.policy import InvalidFormulaException, PolicyNotExistsException
-from sqlalchemy.exc import IntegrityError
+from data.models.policy import InvalidFormulaException, PolicyNotExistsException, PolicyExistsException
+from sqlalchemy.exc import IntegrityError, InvalidRequestError
 
 level = Blueprint('level', __name__,
                   url_prefix='/level')
@@ -44,7 +44,7 @@ def create_policy(policy_id):
     except InvalidFormulaException as exception:
         return serialize_response(400, 'BAD REQUEST', 'Malformed Formula',
                                   json.loads(str(exception))['errors'])
-    except IntegrityError:
+    except PolicyExistsException:
         return serialize_response(400, 'BAD REQUEST', f'Policy {policy_id} Already Exists')
 
 

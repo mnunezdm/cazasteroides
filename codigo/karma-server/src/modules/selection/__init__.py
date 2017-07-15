@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify, abort, request
 from utils import serialize_response
 from config import MAX_KARMA_LEVEL, MAX_FILTER_LEVEL
 from modules.selection.provider import ObservationSelectionProvider
-from content_resolver import content_resolver
+from data.content_resolver import content_resolver
 
 selection = Blueprint('selection', __name__,
                       url_prefix='/selection')

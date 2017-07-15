@@ -9,14 +9,14 @@ from flask_migrate import Migrate
 from utils import start_timer, stop_timer
 import utils.print as print_
 from utils import serialize_response
-from models import db
-from models.image import Image
-from models.observation import Observation
-from models.position import Position
-from models.puntuation import Puntuation
-from models.user import User
-from models.votes import Votes
-from models.policy import Policy
+from data.models import db
+from data.models.image import Image
+from data.models.observation import Observation
+from data.models.position import Position
+from data.models.puntuation import Puntuation
+from data.models.user import User
+from data.models.votes import Votes
+from data.models.policy import Policy
 
 
 def create_app():

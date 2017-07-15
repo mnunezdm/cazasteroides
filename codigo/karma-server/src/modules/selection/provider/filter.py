@@ -1,6 +1,6 @@
 ''' Filter of the EFES Algorithm '''
 import math
-from models.observation import State
+from data.models.observation import State
 
 
 class ObservationFilterAbstract:

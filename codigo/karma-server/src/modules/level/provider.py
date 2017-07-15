@@ -1,14 +1,15 @@
 ''' Module for Karma Level Provider Class '''
 import utils.print as print_
-from content_resolver import content_resolver
-from models.policy import Policy, PolicyNotExistsException
+from data.content_resolver import content_resolver
+from data.models.policy import Policy, PolicyNotExistsException, PolicyExistsException
+from config import DEFAULT_FORMULA, MAX_KARMA_LEVEL
 
 
 class KarmaLevelProviderAbstract:
     ''' Karma Level Provider Abstract, has the methods to calculate the karma
         levels and to classify user for its points '''
 
-    def print_info(self):
+    def print_info(self, default_created):
         ''' Prints the Provider Configuration '''
         raise NotImplementedError('Abstract class, this method should have been implemented')
 
@@ -36,10 +37,13 @@ class KarmaLevelProviderAbstract:
 class KarmaLevelProvider(KarmaLevelProviderAbstract):
     ''' Implementation of Karma Level Provider '''
     def __init__(self):
-        self.print_info()
+        default_created = _create_default_policy_if_not()
+        self.print_info(default_created)
 
-    def print_info(self):
-        print_.initialize_info(self.__class__.__name__, False)
+    def print_info(self, default_created):
+        print_.initialize_info(self.__class__.__name__, default_created)
+        if default_created:
+            print_.info_list('default policy created')
 
     def get_level(self, policy_id, points):
         policy = self.__get_policy_or_raise(policy_id)
@@ -50,6 +54,7 @@ class KarmaLevelProvider(KarmaLevelProviderAbstract):
         return policy.get_levels()
 
     def create_policy(self, policy_id, formula, max_level):
+        _raise_if_exists(policy_id)
         policy = Policy(policy_id, formula, max_level)
         content_resolver.update(policy)
 
@@ -71,4 +76,17 @@ class KarmaLevelProvider(KarmaLevelProviderAbstract):
         if not policy:
             raise PolicyNotExistsException(f'Policy = {policy_id}')
         return policy[0]
-    
+
+
+def _create_default_policy_if_not():
+    policy = content_resolver.get(Policy, _id='default')
+    if not policy:
+        policy = Policy('default', DEFAULT_FORMULA, MAX_KARMA_LEVEL)
+        content_resolver.update(policy)
+        return True
+
+def _raise_if_exists(policy_id):
+    policy = content_resolver.get(Policy, _id=policy_id)
+    if policy:
+        raise PolicyExistsException
+        

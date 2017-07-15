@@ -1,6 +1,6 @@
 ''' Position module '''
 from random import random
-from models import db
+from data.models import db
 
 
 class Position(db.Model):

@@ -7,9 +7,10 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASEDIR, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(BASEDIR, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-ENDPOINT = 'http://localhost:5000/'
+ENDPOINT = 'http://localhost:5000'
 
-# Server Default Values
+# Level Default Values
+DEFAULT_FORMULA = 'math.log ( ( level / 3 ) + 1 ) * 350'
 MAX_KARMA_LEVEL = 10
 # Validation Values
 MINIMUM_VOTES = 6
