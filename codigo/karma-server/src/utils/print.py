@@ -14,7 +14,8 @@ def init_terminal_colors():
 
 def info(message_type, message):
     ''' Prints message with type in yellow '''
-    print(Fore.YELLOW + f'[{message_type}] ' + Fore.RESET + message)
+    spaces = __get_spaces(message_type)
+    print(Fore.YELLOW + f'[{message_type}]{spaces}' + Fore.RESET + message)
 
 
 def info_list(message):
@@ -119,10 +120,10 @@ def to_string_list(key, content):
 
 def http(method, path, code, status, description, elapsed):
     ''' Prints the http petition '''
+    spaces = __get_spaces(method)
     method = __color_http(method)
     color_status = __color_status(code)
-
-    message = f'{method}\t{path} {color_status}{code} {status} - {description}\t'
+    message = f'{method}{spaces}{path} {color_status}{code} {status} - {description}\t'
     message += f'{Fore.RESET}({elapsed} ns)'
     print(message)
 
@@ -133,3 +134,7 @@ def __color_http(method):
 
 def __color_status(code):
     return Fore.GREEN if code < 299 else Fore.RED
+
+
+def __get_spaces(tag):
+    return " " * (7 - len(tag))

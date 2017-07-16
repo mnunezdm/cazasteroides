@@ -1,16 +1,14 @@
 ''' Manage module, provides all the interaction with the server '''
-from flask_migrate import MigrateCommand
-from flask_script import Manager, Shell
+import os
 
 import utils.print as print_
-from app import create_app, start_server
+from flask_script import Manager
+from app import create_app, start_server, db
 
 print_.init_terminal_colors()
 print_.launch_server()
 app = create_app()
 manager = Manager(app)
-manager.add_command("shell", Shell())
-manager.add_command("db", MigrateCommand)
 
 
 @manager.command
@@ -23,7 +21,15 @@ def runtests():
 @manager.command
 def runserver():
     ''' Runs server with default configuration '''
+    if not os.path.isfile('app.db'):
+        initdb()
     start_server(app)
 
+
+@manager.command
+def initdb():
+    """Initializes the database."""
+    db.create_all()
+    print_.info('INFO', 'Database Created')
 
 manager.run()

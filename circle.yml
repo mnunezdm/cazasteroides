@@ -1,0 +1,10 @@
+general:
+  build_dir: codigo/karma-server/src
+
+machine:
+  python:
+    version: 3.6.1
+
+test:
+  override:
+    - python manage.py runtests

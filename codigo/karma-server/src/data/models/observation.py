@@ -92,6 +92,7 @@ class Observation(ObservationAbstract, db.Model):
             return {
                 "observation_id": self._id,
                 "image_id": self.image_id,
+                "state": self.state.value,
                 "position": self.position.serialize()
             }
         if difficulty:
@@ -124,7 +125,7 @@ class Observation(ObservationAbstract, db.Model):
         if self.state != change_to:
             self.state = change_to
             colored_state = f'{Fore.CYAN}\'{self.state.value}\'{Fore.RESET}'
-            info(f'OBS-{self._id}', f'state changed to {colored_state}')
+            info(f'OBSER', f'{self._id} state changed to {colored_state}')
 
     def get_notified(self):
         ''' Returns if this observation has  '''

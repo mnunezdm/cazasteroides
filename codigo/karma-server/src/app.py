@@ -4,7 +4,6 @@
 import logging
 
 from flask import Flask, json, make_response, request
-from flask_migrate import Migrate
 
 from utils import start_timer, stop_timer
 import utils.print as print_
@@ -29,7 +28,6 @@ def create_app():
     logging.getLogger('werkzeug').disabled = True
 
     db.init_app(app)
-    Migrate(app, db)
     return app
 
 
@@ -40,7 +38,6 @@ def start_server(app, host='localhost', port=5000):
     for module in modules.get_all_modules():
         app.register_blueprint(module)
     print_.title("Starting Server")
-    print_.info('INFO', 'Connected Correctly to Database')
     print_.info('INFO', f'Starting Server at {host}:{port}')
     app.run(host=host, port=port)
 
@@ -53,11 +50,13 @@ def set_error_handlers(app):
         return make_response(serialize_response(400, 'Bad Request',
                                                 error.description), 400)
 
+
     @app.errorhandler(404)
     def __not_found(error):
         ''' Not Found Handler '''
         return make_response(serialize_response(404, 'Not Found',
                                                 error.description), 404)
+
 
     @app.errorhandler(405)
     def __not_allowed(error):
@@ -65,10 +64,12 @@ def set_error_handlers(app):
         return make_response(serialize_response(405, 'Method not allowed',
                                                 error.description), 405)
 
+
     @app.errorhandler(Exception)
     def __exception(exception):
         return make_response(serialize_response(500, 'Internal Error',
                                                 str(exception)), 405)
+
 
 def set_pre_post_requests(app):
     ''' Sets the functionality for the pre and post request handling '''

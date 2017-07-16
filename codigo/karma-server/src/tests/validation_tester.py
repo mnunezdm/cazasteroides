@@ -27,6 +27,7 @@ class CreateRandomObservationTest(TestAbstract):
             return self.error_message
         return ''
 
+
 class StressValidationTest(TestAbstract):
     ''' Does 50 random validations '''
     def __init__(self):
@@ -67,6 +68,7 @@ class StressValidationTest(TestAbstract):
         if cont != number_of_requests:
             self.error_message = 'Exception in server'
 
+
 class DoubleUserObservationTest(TestAbstract):
     ''' Sends to repeated votation, must receive a Bad Request (400) in the second one '''
     def __init__(self):
@@ -84,6 +86,7 @@ class DoubleUserObservationTest(TestAbstract):
         if self.error_message:
             return self.error_message
         return ''
+
 
 class MultipleVotesInSameObservationTest(TestAbstract):
     ''' Sends multiple votations to the same observation but different users '''
@@ -106,6 +109,7 @@ class MultipleVotesInSameObservationTest(TestAbstract):
             return self.error_message
         return ''
 
+
 class NoObservationTest(TestAbstract):
     ''' Sends to repeated votation, must receive a Bad Request (400) in the second one '''
     def __init__(self):
@@ -122,6 +126,7 @@ class NoObservationTest(TestAbstract):
         if self.error_message:
             return self.error_message
         return ''
+
 
 def _call_server(dictionary):
     try:

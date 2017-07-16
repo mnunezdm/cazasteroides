@@ -28,7 +28,7 @@ def serialize_response(code, status, description, payload=None):
 
 
 def __get_time_in_ns():
-    return time.time() * pow(10, 7)
+    return time.clock() * pow(10, 6)
 
 
 def generate_test_name():
