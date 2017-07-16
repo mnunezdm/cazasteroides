@@ -11,7 +11,7 @@ dependencies:
 
 test:
   override:
-    - coverage manage.py runtests
+    - coverage run manage.py runtests
   post:
     - mkdir -p $CIRCLE_ARTIFACTS/coverage
     - mv .coverage $CIRCLE_ARTIFACTS/coverage/.coverage
