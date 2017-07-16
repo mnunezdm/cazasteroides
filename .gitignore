@@ -14,3 +14,5 @@ codigo/karma-server/src/app\.db
 codigo/karma-server/src/migrations/
 TODOs.txt
 *.pyc
+codigo/karma-server/src/htmlcov/
+*.coverage

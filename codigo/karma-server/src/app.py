@@ -21,25 +21,41 @@ from data.models.policy import Policy
 def create_app():
     ''' App Factory '''
     app = Flask(__name__)
-
     app.config.from_object('config')
-    set_error_handlers(app)
-    set_pre_post_requests(app)
-    logging.getLogger('werkzeug').disabled = True
-
     db.init_app(app)
     return app
 
 
-def start_server(app, host='localhost', port=5000):
+def start_server(app, no_stdout, condition=None, host='localhost', port=5000):
     ''' Starts the application passed as parameter '''
+    __custom_configuration(app, no_stdout)
     print_.title("Launching Modules")
     import modules
     for module in modules.get_all_modules():
         app.register_blueprint(module)
     print_.title("Starting Server")
     print_.info('INFO', f'Starting Server at {host}:{port}')
+    if condition:
+        condition.notify()
+        condition.release()
     app.run(host=host, port=port)
+
+def __shutdown(app):
+    @app.route('/shutdown')
+    def __shutdown():
+        ''' Shutdown the server '''
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError('Not running with the Werkzeug Server')
+        func()
+        return serialize_response(200, 'OK', 'Server Shutting Down')
+
+
+def __custom_configuration(app, no_stdout):
+    __shutdown(app)
+    logging.getLogger('werkzeug').disabled = True
+    set_error_handlers(app)
+    set_pre_post_requests(app, no_stdout)
 
 
 def set_error_handlers(app):
@@ -71,7 +87,7 @@ def set_error_handlers(app):
                                                 str(exception)), 405)
 
 
-def set_pre_post_requests(app):
+def set_pre_post_requests(app, no_stdout):
     ''' Sets the functionality for the pre and post request handling '''
     @app.before_request
     def __start_timer():
@@ -81,7 +97,8 @@ def set_pre_post_requests(app):
     def __end_time(response):
         elapsed = stop_timer(request.time_start)
         data = json.loads(response.get_data())
-        print_.http(request.method, request.path, data['code'], data['status'],
-                    data['description'], elapsed)
+        if not no_stdout:
+            print_.http(request.method, request.path, data['code'], data['status'],
+                        data['description'], elapsed)
         response.headers["Request-Time"] = f'{elapsed} ns'
         return response
