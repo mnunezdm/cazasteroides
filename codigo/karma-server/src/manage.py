@@ -6,6 +6,7 @@ import threading
 import utils.print as print_
 from flask_script import Manager
 from app import create_app, start_server, db
+from utils import check_if_server_up
 
 print_.init_terminal_colors()
 print_.launch_server()
@@ -16,12 +17,17 @@ manager = Manager(app)
 @manager.command
 def runtests():
     ''' Runs all the configured tests '''
-    condition = threading.Condition()
-    thread = ThreadWithReturnValue(target=__call_tests, args=(condition, ))
-    thread.start()
-    condition.acquire()
-    runserver(no_stdout=True, condition=condition)
-    result = thread.join()
+    if check_if_server_up('localhost', 5000):
+        print_.info('INFO', 'Server Already Up')
+        import tests
+        result = tests.run_all_tests()
+    else:
+        condition = threading.Condition()
+        thread = ThreadWithReturnValue(target=__call_tests, args=(condition, ))
+        thread.start()
+        condition.acquire()
+        runserver(no_stdout=True, condition=condition)
+        result = thread.join()
     if result:
         sys.exit(0)
     else:
@@ -30,8 +36,8 @@ def runtests():
 def __call_tests(condition):
     condition.acquire()
     condition.wait()
-    from tests import run_all_tests
-    result = run_all_tests()
+    import tests
+    result = tests.run_all_tests()
     condition.release()
     return result
 
@@ -39,6 +45,9 @@ def __call_tests(condition):
 @manager.command
 def runserver(no_stdout=False, condition=None):
     ''' Runs server with default configuration '''
+    if check_if_server_up('localhost', 5000):
+        print_.error('Server Already Running at port 5000')
+        sys.exit(-1)
     if not os.path.isfile('app.db'):
         initdb()
     start_server(app, no_stdout, condition)

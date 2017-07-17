@@ -1,5 +1,6 @@
 ''' Test module '''
 
+
 class TestAbstract:
     ''' Test class '''
     def run(self):

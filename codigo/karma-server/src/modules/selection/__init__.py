@@ -24,7 +24,7 @@ def get_observation_for_discovery():
 
 
 @selection.route('/vote', methods=['GET'])
-def get_new_observation():
+def get_observation_for_vote():
     ''' Returns the information for the id passed '''
     user_id, karma_level = __get_request_args_or_abort()
     observation = SELECTION_PROVIDER.select_observation_for_votation(user_id, karma_level)

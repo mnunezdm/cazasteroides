@@ -15,8 +15,8 @@ def run_all_tests():
     success = [0] * 4
     total = [0] * 4
     success[0], total[0] = __run_test_bundle(level, 'LevelTests')
-    success[1], total[1] = __run_test_bundle(selection, 'SelectionTests')
     success[2], total[2] = __run_test_bundle(validation, 'ValidationTests')
+    success[1], total[1] = __run_test_bundle(selection, 'SelectionTests')
     success[3], total[3] = __shutdown_server()
     return __check_results(sum(success), sum(total))
 
@@ -36,7 +36,7 @@ def __run_test_bundle(module, bundle_test_name):
     number_of_tests = len(test_list)
     print_.test_info(bundle_test_name)
     for test_name, test_class in test_list:
-        if 'Abstract' in test_name:
+        if 'Abstract' in test_name or 'State' == test_name:
             number_of_tests -= 1
             continue
         test = test_class()

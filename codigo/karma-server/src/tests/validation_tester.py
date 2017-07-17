@@ -4,11 +4,13 @@ import time
 from math import floor
 from random import random, randint
 
+
 import requests
 
-from config import ENDPOINT
+import utils
+from config import ENDPOINT, MINIMUM_VOTES, VOTES_TO_DISPUTED
 from tests.test import TestAbstract
-
+from data.models.observation import State
 
 class CreateRandomObservationTest(TestAbstract):
     ''' Creates one Observation '''
@@ -59,6 +61,150 @@ class StressValidationTest(TestAbstract):
         cont = 1
         while cont < number_of_requests:
             dictionary = _generate_observation()
+            status, response, time_ = _call_server(dictionary)
+            if not status:
+                self.error_message = response
+                return
+            self.result.append(time_)
+            cont = cont + 1
+        if cont != number_of_requests:
+            self.error_message = 'Exception in server'
+
+
+class ApproveObservationTest(TestAbstract):
+    ''' Does 50 random validations '''
+    def __init__(self):
+        self.result = []
+        self.obs_id = utils.generate_test_name()
+        self.error_message = None
+
+    def run(self):
+        threads = self.__get_thread_list()
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        observation = _generate_observation(obs_id=self.obs_id, vote_type=True)
+        status, response, _ = _call_server(observation)
+        code = response['code']
+        status = response['payload']['state']
+        return self.error_message is None and code == 200 and status == State.APPROVED.value
+
+    def __get_thread_list(self):
+        threads = []
+        number_of_requests = 2
+        number_of_threads = (MINIMUM_VOTES + 5) / number_of_requests
+        for _ in range(floor(number_of_threads)):
+            thread = threading.Thread(target=self.__run, args=(number_of_requests,))
+            threads.append(thread)
+        return threads
+
+    def get_result(self):
+        if self.error_message:
+            return self.error_message
+        elapsed = floor(sum(self.result)/len(self.result))
+        return f'(Average request time {elapsed} ns)'
+
+    def __run(self, number_of_requests):
+        cont = 1
+        while cont < number_of_requests:
+            dictionary = _generate_observation(obs_id=self.obs_id, vote_type=True)
+            status, response, time_ = _call_server(dictionary)
+            if not status:
+                self.error_message = response
+                return
+            self.result.append(time_)
+            cont = cont + 1
+        if cont != number_of_requests:
+            self.error_message = 'Exception in server'
+
+
+class DenyObservationTest(TestAbstract):
+    ''' Does 50 random validations '''
+    def __init__(self):
+        self.result = []
+        self.obs_id = utils.generate_test_name()
+        self.error_message = None
+
+    def run(self):
+        threads = self.__get_thread_list()
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        observation = _generate_observation(obs_id=self.obs_id, vote_type=False)
+        status, response, _ = _call_server(observation)
+        code = response['code']
+        status = response['payload']['state']
+        return self.error_message is None and code == 200 and status == State.DENYED.value
+
+    def __get_thread_list(self):
+        threads = []
+        number_of_requests = 2
+        number_of_threads = (MINIMUM_VOTES + 5) / number_of_requests
+        for _ in range(floor(number_of_threads)):
+            thread = threading.Thread(target=self.__run, args=(number_of_requests,))
+            threads.append(thread)
+        return threads
+
+    def get_result(self):
+        if self.error_message:
+            return self.error_message
+        elapsed = floor(sum(self.result)/len(self.result))
+        return f'(Average request time {elapsed} ns)'
+
+    def __run(self, number_of_requests):
+        cont = 1
+        while cont < number_of_requests:
+            dictionary = _generate_observation(obs_id=self.obs_id, vote_type=False)
+            status, response, time_ = _call_server(dictionary)
+            if not status:
+                self.error_message = response
+                return
+            self.result.append(time_)
+            cont = cont + 1
+        if cont != number_of_requests:
+            self.error_message = 'Exception in server'
+
+
+class DisputeObservationTest(TestAbstract):
+    ''' Does 50 random validations '''
+    def __init__(self):
+        self.result = []
+        self.obs_id = utils.generate_test_name()
+        self.error_message = None
+
+    def run(self):
+        threads = self.__get_thread_list()
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        observation = _generate_observation(obs_id=self.obs_id, karma_level=1)
+        status, response, _ = _call_server(observation)
+        code = response['code']
+        status = response['payload']['state']
+        return self.error_message is None and code == 200 and status == State.DISPUTED.value
+
+    def __get_thread_list(self):
+        threads = []
+        number_of_requests = (VOTES_TO_DISPUTED)
+        for _ in range(2):
+            thread = threading.Thread(target=self.__run, args=(number_of_requests,))
+            threads.append(thread)
+        return threads
+
+    def get_result(self):
+        if self.error_message:
+            return self.error_message
+        elapsed = floor(sum(self.result)/len(self.result))
+        return f'(Average request time {elapsed} ns)'
+
+    def __run(self, number_of_requests):
+        cont = 1
+        while cont < number_of_requests:
+            vote_type = (cont % 2) == 0
+            dictionary = _generate_observation(obs_id=self.obs_id, vote_type=vote_type, karma_level=1)
             status, response, time_ = _call_server(dictionary)
             if not status:
                 self.error_message = response
@@ -158,7 +304,7 @@ def _generate_observation(user_id=None, karma_level=None, vote_type=None, obs_id
             "_id": obs_id,
             "brightness": floor(random() * 20 + 5),
             "image": {
-                "_id": floor(random() * 10 - 5),
+                "_id": obs_id,
                 "fwhm": floor(random() * 10 - 5),
                 "probability": floor(random() * 100),
                 "x_size": 100,

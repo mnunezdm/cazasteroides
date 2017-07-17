@@ -2,6 +2,13 @@
 import time
 from flask import jsonify
 import utils.print as print_
+import socket
+
+
+def check_if_server_up(hostname, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex((hostname, port))
+    return result == 0
 
 
 def start_timer():
