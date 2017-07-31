@@ -4,7 +4,7 @@ from math import exp
 from data.models.observation import State
 
 
-class ObservationEvaluatorAbstract:
+class ObservationEvaluatorAbstract: # pragma: no cover
     ''' Abstract class for Observation Evaluator '''
     def evaluate(self, observation_list):
         ''' Evaluate the observations passed '''

@@ -3,9 +3,8 @@ import math
 from data.models.observation import State
 
 
-class ObservationFilterAbstract:
+class ObservationFilterAbstract: # pragma: no cover
     ''' Abstract class for observation Filter '''
-
     def observations(self, observation_list, karma_level):
         ''' Gets the observations for the karma level passed '''
         raise NotImplementedError('Abstract class, this method should have been implemented')

@@ -1,5 +1,5 @@
 ''' Eraser of the EFES Algorithm '''
-class ObservationEraserAbstract:
+class ObservationEraserAbstract: # pragma: no cover
     ''' Abstract class for the Eraser '''
     def erase(self, observation_list, user_id):
         ''' Erase the observations not valid for the user passed, returns the processed list '''

@@ -6,7 +6,7 @@ from data.models.image import Image
 from data.models.user import User
 
 
-class ValidationProviderAbstract:
+class ValidationProviderAbstract: # pragma: no cover
     ''' Karma Level Provider Abstract, has the methods to validate and notify '''
     def post_vote(self, observation_data):
         ''' Updates observation data with the new vote '''

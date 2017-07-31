@@ -4,7 +4,7 @@ from random import randint
 from data.models.observation import State
 
 
-class ObservationSelectorAbstract:
+class ObservationSelectorAbstract: # pragma: no cover
     ''' Abstract class for the Selector '''
     def select(self, observation_list):
         ''' Selects an observation from the list '''

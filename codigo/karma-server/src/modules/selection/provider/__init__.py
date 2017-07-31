@@ -9,7 +9,7 @@ from data.content_resolver import content_resolver
 from data.models.observation import Observation
 
 
-class ObservationSelectionProviderAbstract:
+class ObservationSelectionProviderAbstract: # pragma: no cover
     ''' Abstract class of the EFES Provider class '''
     def select_observation_for_discover(self, user_id, karma_level):
         ''' Returns the Observation based on the karma_level and the user_id '''

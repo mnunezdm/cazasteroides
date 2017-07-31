@@ -19,7 +19,7 @@ class State(Enum):
     DISPUTED = 'disputed'
 
 
-class ObservationAbstract:
+class ObservationAbstract: # pragma: no cover
     ''' Abstract class for Observations '''
     def add_vote(self, vote_info, user):
         ''' Inserts the new vote and returns the new number of votes and the certainty '''
@@ -79,10 +79,10 @@ class Observation(ObservationAbstract, db.Model):
     def __eq__(self, observation):
         return observation == self._id
 
-    def __repr__(self):
+    def __repr__(self): # pragma: no cover
         return f'<{Observation.__name__}, {self._id}, {self.puntuation.calculate_certainty()}>'
 
-    def serialize(self, only_id=False, difficulty=False, id_position=False):
+    def serialize(self, only_id=False, difficulty=False, id_position=False): # pragma: no cover
         ''' Serializes the object, has two modes:\n
         only_id = True => serializes only the id\n
         only_id = False => serializes all the object'''

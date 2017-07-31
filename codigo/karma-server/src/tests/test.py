@@ -1,7 +1,7 @@
 ''' Test module '''
 
 
-class TestAbstract:
+class TestAbstract: # pragma: no cover
     ''' Test class '''
     def run(self):
         ''' Runs the test class '''

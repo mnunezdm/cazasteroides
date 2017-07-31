@@ -5,7 +5,7 @@ from data.models.policy import Policy, PolicyNotExistsException, PolicyExistsExc
 from config import DEFAULT_FORMULA, MAX_KARMA_LEVEL
 
 
-class KarmaLevelProviderAbstract:
+class KarmaLevelProviderAbstract: # pragma: no cover
     ''' Karma Level Provider Abstract, has the methods to calculate the karma
         levels and to classify user for its points '''
 
