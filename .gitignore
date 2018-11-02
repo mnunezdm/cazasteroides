@@ -1,10 +1,5 @@
 
-codigo/karma-server/Include/
-
-codigo/karma-server/Lib/
-
-codigo/karma-server/Scripts/
-
+codigo/karma-server/.direnv
 codigo/karma-server/pip-selfcheck\.json
 
 \.vscode/
