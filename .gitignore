@@ -1,13 +1,13 @@
 
-codigo/karma-server/.direnv
-codigo/karma-server/pip-selfcheck\.json
+.direnv
+pip-selfcheck.json
 
-\.vscode/
+.vscode/
 
-codigo/karma-server/src/app\.db
+src/app.db
 
-codigo/karma-server/src/migrations/
+src/migrations/
 TODOs.txt
 *.pyc
-codigo/karma-server/src/htmlcov/
+src/htmlcov/
 *.coverage
