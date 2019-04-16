@@ -4,23 +4,24 @@
 import logging
 
 from flask import Flask, json, make_response, request
-from karmaserver.modules.data.models import db
+from karmaserver.data.models import db
 
-from karmaserver.modules.data.models.image import Image
-from karmaserver.modules.data.models.observation import Observation
-from karmaserver.modules.data.models.policy import Policy
-from karmaserver.modules.data.models.position import Position
-from karmaserver.modules.data.models.puntuation import Puntuation
-from karmaserver.modules.data.models.user import User
-from karmaserver.modules.data.models.votes import Votes
+from karmaserver.data.models.image import Image
+from karmaserver.data.models.observation import Observation
+from karmaserver.data.models.policy import Policy
+from karmaserver.data.models.position import Position
+from karmaserver.data.models.puntuation import Puntuation
+from karmaserver.data.models.user import User
+from karmaserver.data.models.votes import Votes
 from karmaserver.utils import serialize_response, start_timer, stop_timer
 import karmaserver.utils.print as print_
+import karmaserver.modules
 
 
 def create_app():
     ''' App Factory '''
     app = Flask(__name__)
-    app.config.from_object('config')
+    app.config.from_object('karmaserver.constants')
     db.init_app(app)
     return app
 
@@ -29,8 +30,7 @@ def start_server(app, no_stdout, condition=None, host='localhost', port=5000):
     ''' Starts the application passed as parameter '''
     __custom_configuration(app, no_stdout)
     print_.title("Launching Modules")
-    import modules
-    for module in modules.get_all_modules():
+    for module in karmaserver.modules.get_all_modules():
         app.register_blueprint(module)
     print_.title("Starting Server")
     print_.info('INFO', f'Starting Server at {host}:{port}')

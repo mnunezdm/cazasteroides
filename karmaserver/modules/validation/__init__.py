@@ -2,12 +2,13 @@
 
 from flask import Blueprint, abort, jsonify, request
 
-from config import (CERTAINTY_LOWER_LIMIT, CERTAINTY_UPPER_LIMIT,
+from karmaserver.constants import (CERTAINTY_LOWER_LIMIT, CERTAINTY_UPPER_LIMIT,
                     MINIMUM_VOTES, VOTES_TO_DISPUTED,
                     VOTES_TO_MINIMUM_CERTAINTY)
 from karmaserver.modules.validation.provider import (ObservationNotFoundException,
-                                         ValidationProvider)
+                                                     ValidationProvider)
 from karmaserver.utils import serialize_response
+
 
 validation = Blueprint('validation', __name__,
                        url_prefix='/validation')

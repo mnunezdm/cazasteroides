@@ -2,7 +2,7 @@
 import karmaserver.utils.print as print_
 from karmaserver.data.content_resolver import content_resolver
 from karmaserver.data.models.policy import Policy, PolicyNotExistsException, PolicyExistsException
-from karmaserver.config import DEFAULT_FORMULA, MAX_KARMA_LEVEL
+from karmaserver.constants import DEFAULT_FORMULA, MAX_KARMA_LEVEL
 
 
 class KarmaLevelProviderAbstract: # pragma: no cover
@@ -37,8 +37,9 @@ class KarmaLevelProviderAbstract: # pragma: no cover
 class KarmaLevelProvider(KarmaLevelProviderAbstract):
     ''' Implementation of Karma Level Provider '''
     def __init__(self):
-        default_created = _create_default_policy_if_not()
-        self.print_info(default_created)
+        pass
+        # default_created = _create_default_policy_if_not()
+        # self.print_info(default_created)
 
     def print_info(self, default_created):
         print_.initialize_info(self.__class__.__name__, default_created)

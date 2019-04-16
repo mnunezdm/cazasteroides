@@ -7,9 +7,9 @@ from random import random, randint
 
 import requests
 
-import karmaserver.utils
-from config import ENDPOINT, MINIMUM_VOTES, VOTES_TO_DISPUTED
-from tests.test import TestAbstract
+import karmaserver.utils as utils
+from karmaserver.constants import ENDPOINT, MINIMUM_VOTES, VOTES_TO_DISPUTED
+from karmaserver.tests.test import TestAbstract
 from karmaserver.data.models.observation import State
 
 class CreateRandomObservationTest(TestAbstract):

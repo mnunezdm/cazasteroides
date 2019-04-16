@@ -4,7 +4,7 @@ pip-selfcheck.json
 
 .vscode/
 
-src/app.db
+**/app.db
 
 src/migrations/
 TODOs.txt

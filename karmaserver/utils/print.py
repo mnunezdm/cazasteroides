@@ -3,6 +3,7 @@ import os
 import sys
 
 from colorama import Fore, init
+init()
 
 DATA_TAG = Fore.CYAN + '[DATA]' + Fore.RESET
 

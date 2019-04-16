@@ -3,8 +3,8 @@ import json
 
 import requests
 
-from config import ENDPOINT
-from tests.test import TestAbstract
+from karmaserver.constants import ENDPOINT
+from karmaserver.tests.test import TestAbstract
 from karmaserver.utils import generate_test_name
 
 

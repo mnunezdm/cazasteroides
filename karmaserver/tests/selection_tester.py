@@ -6,8 +6,8 @@ from random import random, randint
 
 import requests
 
-from config import ENDPOINT
-from tests.test import TestAbstract
+from karmaserver.constants import ENDPOINT
+from karmaserver.tests.test import TestAbstract
 from karmaserver.data.models.observation import State
 from karmaserver.utils import generate_test_name
 

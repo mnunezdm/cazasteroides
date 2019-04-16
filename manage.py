@@ -8,6 +8,7 @@ from flask_script import Manager
 import karmaserver.utils.print as print_
 from karmaserver import create_app, db, start_server
 from karmaserver.utils import check_if_server_up
+import karmaserver.tests
 
 print_.init_terminal_colors()
 print_.launch_server()
@@ -37,8 +38,7 @@ def runtests():
 def __call_tests(condition):
     condition.acquire()
     condition.wait()
-    import tests
-    result = tests.run_all_tests()
+    result = karmaserver.tests.run_all_tests()
     condition.release()
     return result
 

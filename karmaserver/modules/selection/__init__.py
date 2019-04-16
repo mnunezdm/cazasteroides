@@ -1,10 +1,11 @@
 ''' Selection Module '''
 
 from flask import Blueprint, jsonify, abort, request
-from karmaserver.utils import serialize_response
-from config import MAX_KARMA_LEVEL, MAX_FILTER_LEVEL
-from karmaserver.modules.selection.provider import ObservationSelectionProvider
+
+from karmaserver.constants import MAX_KARMA_LEVEL, MAX_FILTER_LEVEL
 from karmaserver.data.content_resolver import content_resolver
+from karmaserver.modules.selection.provider import ObservationSelectionProvider
+from karmaserver.utils import serialize_response
 
 selection = Blueprint('selection', __name__,
                       url_prefix='/selection')

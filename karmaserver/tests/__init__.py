@@ -2,12 +2,12 @@
 import sys
 import inspect
 
-import tests.level_tester as level
-import tests.selection_tester as selection
-import tests.validation_tester as validation
+import karmaserver.tests.level_tester as level
+import karmaserver.tests.selection_tester as selection
+import karmaserver.tests.validation_tester as validation
 
 import karmaserver.utils.print as print_
-from config import ENDPOINT
+from karmaserver.constants import ENDPOINT
 
 
 def run_all_tests():
