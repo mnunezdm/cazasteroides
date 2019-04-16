@@ -21,11 +21,11 @@ def runtests():
     ''' Runs all the configured tests '''
     if check_if_server_up('localhost', 5000):
         print_.info('INFO', 'Server Already Up')
-        import tests
-        result = tests.run_all_tests()
+        result = karmaserver.tests.run_all_tests()
     else:
         condition = threading.Condition()
-        thread = ThreadWithReturnValue(target=__call_tests, args=(condition, ))
+        thread = ThreadWithReturnValue(target=__call_tests,
+                                       args=(condition, ))
         thread.start()
         condition.acquire()
         runserver(no_stdout=True, condition=condition)
