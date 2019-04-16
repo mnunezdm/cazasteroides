@@ -3,11 +3,13 @@ import os
 import sys
 import threading
 
+import requests
 from flask_script import Manager
 
 import karmaserver.utils.print as print_
 from karmaserver import create_app, db, start_server
 from karmaserver.utils import check_if_server_up
+from karmaserver.constants import ENDPOINT
 import karmaserver.tests
 
 print_.init_terminal_colors()
@@ -23,12 +25,12 @@ def runtests():
         print_.info('INFO', 'Server Already Up')
         result = karmaserver.tests.run_all_tests()
     else:
-        condition = threading.Condition()
+        # condition = threading.Condition()
         thread = ThreadWithReturnValue(target=__call_tests,
-                                       args=(condition, ))
+                                       args=(None, ))
         thread.start()
-        condition.acquire()
-        runserver(no_stdout=True, condition=condition)
+        # condition.acquire()
+        runserver(no_stdout=True, condition=None)
         result = thread.join()
     if result:
         sys.exit(0)
@@ -36,12 +38,23 @@ def runtests():
         sys.exit(-1)
 
 def __call_tests(condition):
-    condition.acquire()
-    condition.wait()
+    wait_until_serverup()
+    # condition.acquire()
+    # condition.wait()
     result = karmaserver.tests.run_all_tests()
-    condition.release()
+    # condition.release()
     return result
 
+
+def wait_until_serverup():
+    while True:
+        try:
+            requests.get(ENDPOINT)
+            print('ok')
+            break
+        except requests.exceptions.ConnectionError:
+            print('E')
+            pass
 
 @manager.command
 def runserver(no_stdout=False, condition=None):

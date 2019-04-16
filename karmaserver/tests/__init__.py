@@ -2,6 +2,8 @@
 import sys
 import inspect
 
+import requests
+
 import karmaserver.tests.level_tester as level
 import karmaserver.tests.selection_tester as selection
 import karmaserver.tests.validation_tester as validation
@@ -49,7 +51,6 @@ def __run_test_bundle(module, bundle_test_name):
 
 def __shutdown_server():
     print_.info('INFO', 'Shutting Down Server')
-    import requests
     response = requests.get(f'{ENDPOINT}/shutdown').json()
     if response['code'] == 200:
         return 1, 1
